@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Informe de Líderes</title>
+    <link href="style.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <div class="button-group">
+            <button onclick="mostrarSeccion('llenar')"><i class="fas fa-edit"></i> Llenar Informe</button>
+            <button onclick="mostrarSeccion('ver')"><i class="fas fa-list"></i> Ver Informes</button>
+        </div>
+        
+        <h1>Informe Semanal de Líderes</h1>
+        
+        <form id="informeForm">
+            <div class="form-section">
+                <div class="form-group">
+                    <label for="lider">Nombre del Líder:</label>
+                    <select id="lider" onchange="cargarDiscipulos()" required>
+                        <option value="">Seleccione un líder</option>
+                        <option value="Akemi">Akemi</option>
+                        <option value="Fede">Fede</option>
+                        <option value="Milena">Milena</option>
+                        <option value="Tania">Tania</option>
+                        <option value="C&amp;R">C&amp;R</option>
+                        <option value="Isa">Isa</option>
+                        <option value="Neftali">Neftali</option>
+                        <option value="George">George</option>
+                        <option value="Miguel">Miguel</option>
+                        <option value="Jossuel">Jossuel</option>
+                        <option value="Jorge">Jorge</option>
+                        <option value="Eliecer">Eliecer</option>
+                        <option value="Gezer">Gezer</option>
+                        <option value="Eduardo">Eduardo</option>
+                        <option value="Disham">Disham</option>
+                        <option value="Joyce">Joyce</option>
+                        <option value="Ana P">Ana P</option>
+                        <option value="Genesis B">Genesis B</option>
+                        <option value="Dayana">Dayana</option>
+                        <option value="Cristy">Cristy</option>
+                        <option value="Nicole">Nicole</option>
+                        <option value="Milagros">Milagros</option>
+                        <option value="Yare">Yare</option>
+                        <option value="Ruth">Ruth</option>
+                        <option value="Andrea">Andrea</option>
+                        <option value="Daniel Santos">Daniel Santos</option>
+                        <option value="Daniel Burgos">Daniel Burgos</option>
+                        <option value="Victor">Victor</option>
+                        <option value="Lucas">Lucas</option>
+                        <option value="Jose C">Jose C</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="coordinacion">Coordinación:</label>
+                    <select id="coordinacion" required>
+                        <option value="">Seleccione una coordinación</option>
+                        <option value="Akemi">Akemi</option>
+                        <option value="Fede">Fede</option>
+                        <option value="Milena">Milena</option>
+                        <option value="Tania">Tania</option>
+                        <option value="C&amp;R">C&amp;R</option>
+                        <option value="Isa">Isa</option>
+                        <option value="Neftali">Neftali</option>
+                        <option value="George">George</option>
+                        <option value="Miguel">Miguel</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="fecha">Fecha del Informe:</label>
+                    <input id="fecha" required type="date"/>
+                </div>
+            </div>
+            
+            <h3>Asistencia de Discípulos</h3>
+            <div class="table-container">
+                <table id="tablaDiscipulos">
+                    <thead>
+                        <tr>
+                            <th>Nombre</th>
+                            <th>Doulos</th>
+                            <th>Miércoles</th>
+                            <th>Viernes</th>
+                            <th>Sábado</th>
+                            <th>Domingo</th>
+                            <th>Santa Cena</th>
+                            <th>Contactado</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+            
+            <div class="form-section">
+                <div class="form-group">
+                    <h3>Asistencia a Redes</h3>
+                    <label>Discípulos: <input id="redDiscipulos" required type="number" min="0"/></label>
+                    <label>Nuevos: <input id="redNuevos" required type="number" min="0"/></label>
+                    <label>Ofrenda: <input id="redOfrenda" required type="number" step="0.01" min="0" placeholder="0.00"/></label>
+                </div>
+                
+                <div class="form-group">
+                    <h3>Asistencia a Iglesia</h3>
+                    <label>Miércoles: <input id="iglesiaMiercoles" required type="number" min="0"/></label>
+                    <label>Viernes: <input id="iglesiaViernes" required type="number" min="0"/></label>
+                    <label>Sábado: <input id="iglesiaSabado" required type="number" min="0"/></label>
+                    <label>Domingo: <input id="iglesiaDomingo" required type="number" min="0"/></label>
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <h3>Nuevos Discípulos</h3>
+                <textarea id="nuevosDiscipulos" placeholder="Ingrese nombres separados por coma"></textarea>
+            </div>
+            
+            <button type="submit" class="btn-primary"><i class="fas fa-save"></i> Guardar Informe</button>
+        </form>
+
+        <div id="seccionVer" style="display:none;">
+            <h2><i class="fas fa-list-alt"></i> Ver Informes</h2>
+            <div class="form-group">
+                <label for="filtroCoordinacion">Filtrar por Coordinación:</label>
+                <select id="filtroCoordinacion" onchange="filtrarInformes()">
+                    <option value="todas">Todas</option>
+                    <option value="sin_informe">Quién no llenó su informe</option>
+                </select>
+            </div>
+            <div id="contenedorInformes"></div>
+            <div id="totalesInformes" class="totales-container"></div>
+            <div class="button-group">
+                <button onclick="exportarExcel()" class="btn-success"><i class="fas fa-file-excel"></i> Exportar a Excel</button>
+                <button onclick="borrarInformes()" class="btn-danger"><i class="fas fa-trash-alt"></i> Borrar Todos</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+    <script>
+    // Funciones mínimas necesarias en el HTML
+    function mostrarSeccion(seccion) {
+        document.getElementById("informeForm").style.display = (seccion === 'llenar') ? "block" : "none";
+        document.getElementById("seccionVer").style.display = (seccion === 'ver') ? "block" : "none";
+        if (seccion === 'ver') cargarInformes();
+    }
+    
+    // Mejorar experiencia táctil
+    document.querySelectorAll('button').forEach(btn => {
+        btn.addEventListener('touchstart', function() {
+            this.classList.add('button-touch');
+        });
+        btn.addEventListener('touchend', function() {
+            this.classList.remove('button-touch');
+        });
+    });
+    </script>
+</body>
+</html>
