@@ -1,51 +1,86 @@
-// CONSTANTES GLOBALES
-const TODOS_LIDERES = [
-  // Coordinadores
-  "Akemi", "Fede", "Milena", "Tania", "C&R", "Isa", "Neftali", "George", "Miguel",
-  // Líderes adicionales
-  "Jossuel", "Jorge", "Eliecer", "Gezer", "Eduardo", "Disham",
-  "Joyce", "Ana P", "Genesis B", "Dayana", "Cristy", "Nicole",
-  "Milagros", "Yare", "Ruth", "Andrea", "Daniel Santos", 
-  "Daniel Burgos", "Victor", "Lucas", "Jose C"
-];
-
-const discipulosPorLider = {
-  "Akemi": ["Ana B"],
-  "Fede": ["Jossuel", "Jorge", "Eliecer", "Gezer", "Eduardo", "Disham"],
-  "Milena": ["Joyce", "Ana P", "Genesis B"],
-  "Tania": ["Dayana", "Cristy", "Nicole"],
-  "C&R": ["Milagros", "Yare", "Ruth"],
-  "Isa": ["Andrea"],
-  "Neftali": ["Daniel Santos", "Daniel Burgos", "Victor"],
-  "George": ["Lucas", "Jose C"],
-  "Miguel": []
+// ESTRUCTURA ACTUALIZADA DE COORDINACIONES Y LÍDERES
+const ESTRUCTURA = {
+  // COORDINACIONES Y SUS LÍDERES DIRECTOS
+  COORDINACIONES: {
+    "R&H": ["R&H"],
+    "Akemi": ["Akemi B", "Ana B"],
+    "Fede": ["Fede", "Jossuel", "Jorge", "Eliecer", "Gezer", "Eduardo", "Disham"],
+    "Milena": ["Milena", "Joyce", "Ana P", "Genesis B"],
+    "Tania": ["Tania"],
+    "C&R": ["C&R"],
+    "Isa": ["Isa"],
+    "Neftali": ["Neftali"],
+    "George": ["George", "Lucas"],
+    "Miguel": ["Miguel"],
+    "Gery": ["Gery"]
+  },
+  
+  // DISCÍPULOS POR LÍDER
+  DISCIPULOS: {
+    "R&H": ["Akemi", "Isa", "Fede", "George", "Miguel", "Nef Apache", "Rocio", "Cesar", "Tania", "Gery", "Milena"],
+    "Akemi B": ["Ana B"],
+    "Fede": ["Jossuel", "Jorge", "Eliecer", "Gezer", "Eduardo", "Disham"],
+    "Milena": ["Joyce", "Ana P", "Genesis B", "Evelyn"],
+    "Tania": ["Dayana"],
+    "C&R": ["Milagros", "Josue", "Yare", "Ismael", "Julia", "Ruth"],
+    "Isa": ["Andy"],
+    "Neftali": ["Daniel B", "Jaffet", "Daniel S", "Victor"],
+    "George": ["Jose C", "Eduardo", "Lucas"],
+    "Miguel": [],
+    "Gery": ["Crysti", "Nicole"]
+  }
 };
+
+// LISTA COMPLETA DE TODOS LOS LÍDERES QUE PUEDEN LLENAR INFORMES
+const TODOS_LIDERES = [
+  "R&H", "Akemi B", "Ana B", "Fede", "Jossuel", "Jorge", "Eliecer", "Gezer", 
+  "Eduardo", "Disham", "Milena", "Joyce", "Ana P", "Genesis B", "Tania", 
+  "C&R", "Isa", "Neftali", "George", "Lucas", "Miguel", "Gery",
+  "Nef Apache"
+].filter((v, i, a) => a.indexOf(v) === i);
+
+// Función para obtener coordinación de un líder
+function obtenerCoordinacion(lider) {
+  for (const [coordinacion, lideres] of Object.entries(ESTRUCTURA.COORDINACIONES)) {
+    if (lideres.includes(lider)) {
+      return coordinacion;
+    }
+  }
+  return "";
+}
 
 // Función para cargar discípulos
 function cargarDiscipulos() {
-    const lider = document.getElementById("lider").value;
-    const tbody = document.querySelector("#tablaDiscipulos tbody");
-    tbody.innerHTML = "";
+  const lider = document.getElementById("lider").value;
+  const tbody = document.querySelector("#tablaDiscipulos tbody");
+  tbody.innerHTML = "";
 
-    if (lider && discipulosPorLider[lider]) {
-        discipulosPorLider[lider].forEach(nombre => {
-            const row = document.createElement("tr");
-            row.innerHTML = `
-                <td>${nombre}</td>
-                <td><input type="checkbox" data-asistencia="Doulos"></td>
-                <td><input type="checkbox" data-asistencia="Miércoles"></td>
-                <td><input type="checkbox" data-asistencia="Viernes"></td>
-                <td><input type="checkbox" data-asistencia="Sábado"></td>
-                <td><input type="checkbox" data-asistencia="Domingo"></td>
-                <td><input type="checkbox" data-asistencia="Santa Cena"></td>
-                <td><input type="checkbox" data-asistencia="Contactado"></td>
-            `;
-            tbody.appendChild(row);
-        });
-    }
+  const coordinacion = obtenerCoordinacion(lider);
+  if (coordinacion) {
+    document.getElementById("coordinacion").value = coordinacion;
+  }
+
+  if (lider && ESTRUCTURA.DISCIPULOS[lider]) {
+    ESTRUCTURA.DISCIPULOS[lider].forEach(nombre => {
+      if (nombre.trim() !== "") {
+        const row = document.createElement("tr");
+        row.innerHTML = `
+          <td>${nombre}</td>
+          <td><input type="checkbox" data-asistencia="Doulos"></td>
+          <td><input type="checkbox" data-asistencia="Miércoles"></td>
+          <td><input type="checkbox" data-asistencia="Viernes"></td>
+          <td><input type="checkbox" data-asistencia="Sábado"></td>
+          <td><input type="checkbox" data-asistencia="Domingo"></td>
+          <td><input type="checkbox" data-asistencia="Santa Cena"></td>
+          <td><input type="checkbox" data-asistencia="Contactado"></td>
+        `;
+        tbody.appendChild(row);
+      }
+    });
+  }
 }
 
-// Función para manejar el envío del formulario
+// Función para manejar el envío del formulario (CORRECCIÓN PRINCIPAL)
 document.getElementById("informeForm").addEventListener("submit", function(e) {
     e.preventDefault();
 
@@ -55,17 +90,18 @@ document.getElementById("informeForm").addEventListener("submit", function(e) {
         fecha: document.getElementById("fecha").value,
         discipulos: [],
         asistenciaRedes: {
-            discipulos: document.getElementById("redDiscipulos").value,
-            nuevos: document.getElementById("redNuevos").value,
-            ofrenda: parseFloat(document.getElementById("redOfrenda").value).toFixed(2)
+            discipulos: parseInt(document.getElementById("redDiscipulos").value) || 0,
+            nuevos: parseInt(document.getElementById("redNuevos").value) || 0,
+            ofrenda: parseFloat(document.getElementById("redOfrenda").value) || 0
         },
         asistenciaIglesia: {
-            miercoles: document.getElementById("iglesiaMiercoles").value,
-            viernes: document.getElementById("iglesiaViernes").value,
-            sabado: document.getElementById("iglesiaSabado").value,
-            domingo: document.getElementById("iglesiaDomingo").value
+            miercoles: parseInt(document.getElementById("iglesiaMiercoles").value) || 0,
+            viernes: parseInt(document.getElementById("iglesiaViernes").value) || 0,
+            sabado: parseInt(document.getElementById("iglesiaSabado").value) || 0,
+            domingo: parseInt(document.getElementById("iglesiaDomingo").value) || 0
         },
-        nuevosDiscipulos: document.getElementById("nuevosDiscipulos").value.split(',').map(n => n.trim())
+        nuevosDiscipulos: document.getElementById("nuevosDiscipulos").value.trim() === "" ? [] : 
+                         document.getElementById("nuevosDiscipulos").value.split(',').map(n => n.trim()).filter(n => n !== "")
     };
 
     const rows = document.querySelectorAll("#tablaDiscipulos tbody tr");
@@ -83,8 +119,7 @@ document.getElementById("informeForm").addEventListener("submit", function(e) {
     informes.push(data);
     localStorage.setItem("informes", JSON.stringify(informes));
     
-    // Mostrar notificación
-    mostrarNotificacion("Informe guardado correctamente", "success");
+    mostrarNotificacion("WAAOOO Líder! Informe guardado correctamente", "success");
     
     this.reset();
     document.querySelector("#tablaDiscipulos tbody").innerHTML = "";
@@ -166,7 +201,6 @@ function mostrarInformes(informes) {
     const lideresSinInforme = TODOS_LIDERES.filter(lider => !lideresConInforme.includes(lider));
 
     informes.forEach((inf) => {
-        // Calcular totales de asistencia de discípulos
         const totalesDiscipulos = {
             Doulos: 0,
             Miércoles: 0,
@@ -183,12 +217,10 @@ function mostrarInformes(informes) {
             });
         });
 
-        // Calcular total redes para este líder
         const discipulosRedes = parseInt(inf.asistenciaRedes.discipulos || 0);
         const nuevosRedes = parseInt(inf.asistenciaRedes.nuevos || 0);
         const totalRedesLider = discipulosRedes + nuevosRedes;
 
-        // Acumular totales generales
         totalRedDiscipulos += discipulosRedes;
         totalRedNuevos += nuevosRedes;
         totalRed = totalRedDiscipulos + totalRedNuevos;
@@ -319,7 +351,6 @@ function mostrarInformes(informes) {
 function exportarExcel() {
     const informes = JSON.parse(localStorage.getItem("informes") || "[]");
     
-    // Encabezados mejorados
     const headers = [
         "No.", "Líder", "Coordinación", "Fecha",
         "Discípulos en Redes", "Nuevos en Redes", "Total Redes (D+N)", "Ofrenda ($)",
@@ -330,16 +361,13 @@ function exportarExcel() {
         "Total Contactados", "Nuevos Discípulos"
     ];
 
-    // Variables para totales
     let totalRedDiscipulos = 0, totalRedNuevos = 0, totalRed = 0,
         totalMiercoles = 0, totalViernes = 0, totalSabado = 0, 
         totalDomingo = 0, totalNuevos = 0, totalOfrenda = 0,
         totalDoulos = 0, totalMiercolesD = 0, totalViernesD = 0,
         totalSabadoD = 0, totalDomingoD = 0, totalSantaCena = 0, totalContactados = 0;
 
-    // Procesar datos
     const rows = informes.map((inf, index) => {
-        // Calcular totales de asistencia
         const totales = {
             Doulos: 0,
             Miércoles: 0,
@@ -356,10 +384,8 @@ function exportarExcel() {
             });
         });
 
-        // Calcular total redes (discípulos + nuevos)
         const totalRedesLider = parseInt(inf.asistenciaRedes.discipulos || 0) + parseInt(inf.asistenciaRedes.nuevos || 0);
 
-        // Acumular totales generales
         totalRedDiscipulos += parseInt(inf.asistenciaRedes.discipulos || 0);
         totalRedNuevos += parseInt(inf.asistenciaRedes.nuevos || 0);
         totalRed = totalRedDiscipulos + totalRedNuevos;
@@ -377,7 +403,6 @@ function exportarExcel() {
         totalContactados += totales.Contactado;
         totalNuevos += inf.nuevosDiscipulos.length;
 
-        // Formatear valores para Excel
         return [
             index + 1,
             `"${inf.lider}"`,
@@ -402,7 +427,6 @@ function exportarExcel() {
         ];
     });
 
-    // Crear fila de totales
     const totalesRow = [
         "TOTALES",
         "", "", "",
@@ -424,11 +448,10 @@ function exportarExcel() {
         `"${totalNuevos} nuevos en total"`
     ];
 
-    // Crear contenido CSV compatible con Excel
     let csvContent = [
         headers.join(","),
         ...rows.map(row => row.join(",")),
-        "", // Línea en blanco
+        "",
         "Resumen General,,,", 
         `Total Redes (Discípulos + Nuevos),${totalRed}`,
         `Total Ofrenda,$${totalOfrenda.toFixed(2)}`,
@@ -439,7 +462,6 @@ function exportarExcel() {
         `Total Nuevos Discípulos,${totalNuevos}`
     ].join("\r\n");
 
-    // Descargar archivo
     const blob = new Blob(["\uFEFF" + csvContent], { type: "text/csv;charset=utf-8;" });
     const link = document.createElement("a");
     link.href = URL.createObjectURL(blob);
@@ -490,9 +512,30 @@ function mostrarNotificacion(mensaje, tipo = "info") {
 
 // Inicialización
 document.addEventListener('DOMContentLoaded', function() {
-    // Establecer fecha actual por defecto
-    const hoy = new Date().toISOString().split('T')[0];
-    document.getElementById('fecha').value = hoy;
+    // Llenar select de líderes
+    const selectLider = document.getElementById("lider");
+    selectLider.innerHTML = '<option value="">Seleccione un líder</option>';
+    
+    TODOS_LIDERES.forEach(lider => {
+        const option = document.createElement("option");
+        option.value = lider;
+        option.textContent = lider;
+        selectLider.appendChild(option);
+    });
+
+    // Llenar select de coordinaciones
+    const selectCoordinacion = document.getElementById("coordinacion");
+    selectCoordinacion.innerHTML = '<option value="">Seleccione una coordinación</option>';
+    
+    Object.keys(ESTRUCTURA.COORDINACIONES).forEach(coordinacion => {
+        const option = document.createElement("option");
+        option.value = coordinacion;
+        option.textContent = coordinacion;
+        selectCoordinacion.appendChild(option);
+    });
+
+    // Establecer fecha actual
+    document.getElementById('fecha').value = new Date().toISOString().split('T')[0];
     
     // Mejorar selects en móviles
     if ('ontouchstart' in window) {

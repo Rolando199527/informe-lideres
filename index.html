@@ -22,36 +22,6 @@
                     <label for="lider">Nombre del Líder:</label>
                     <select id="lider" onchange="cargarDiscipulos()" required>
                         <option value="">Seleccione un líder</option>
-                        <option value="Akemi">Akemi</option>
-                        <option value="Fede">Fede</option>
-                        <option value="Milena">Milena</option>
-                        <option value="Tania">Tania</option>
-                        <option value="C&amp;R">C&amp;R</option>
-                        <option value="Isa">Isa</option>
-                        <option value="Neftali">Neftali</option>
-                        <option value="George">George</option>
-                        <option value="Miguel">Miguel</option>
-                        <option value="Jossuel">Jossuel</option>
-                        <option value="Jorge">Jorge</option>
-                        <option value="Eliecer">Eliecer</option>
-                        <option value="Gezer">Gezer</option>
-                        <option value="Eduardo">Eduardo</option>
-                        <option value="Disham">Disham</option>
-                        <option value="Joyce">Joyce</option>
-                        <option value="Ana P">Ana P</option>
-                        <option value="Genesis B">Genesis B</option>
-                        <option value="Dayana">Dayana</option>
-                        <option value="Cristy">Cristy</option>
-                        <option value="Nicole">Nicole</option>
-                        <option value="Milagros">Milagros</option>
-                        <option value="Yare">Yare</option>
-                        <option value="Ruth">Ruth</option>
-                        <option value="Andrea">Andrea</option>
-                        <option value="Daniel Santos">Daniel Santos</option>
-                        <option value="Daniel Burgos">Daniel Burgos</option>
-                        <option value="Victor">Victor</option>
-                        <option value="Lucas">Lucas</option>
-                        <option value="Jose C">Jose C</option>
                     </select>
                 </div>
                 
@@ -59,15 +29,6 @@
                     <label for="coordinacion">Coordinación:</label>
                     <select id="coordinacion" required>
                         <option value="">Seleccione una coordinación</option>
-                        <option value="Akemi">Akemi</option>
-                        <option value="Fede">Fede</option>
-                        <option value="Milena">Milena</option>
-                        <option value="Tania">Tania</option>
-                        <option value="C&amp;R">C&amp;R</option>
-                        <option value="Isa">Isa</option>
-                        <option value="Neftali">Neftali</option>
-                        <option value="George">George</option>
-                        <option value="Miguel">Miguel</option>
                     </select>
                 </div>
                 
@@ -141,14 +102,12 @@
 
     <script src="script.js"></script>
     <script>
-    // Funciones mínimas necesarias en el HTML
     function mostrarSeccion(seccion) {
         document.getElementById("informeForm").style.display = (seccion === 'llenar') ? "block" : "none";
         document.getElementById("seccionVer").style.display = (seccion === 'ver') ? "block" : "none";
         if (seccion === 'ver') cargarInformes();
     }
     
-    // Mejorar experiencia táctil
     document.querySelectorAll('button').forEach(btn => {
         btn.addEventListener('touchstart', function() {
             this.classList.add('button-touch');
