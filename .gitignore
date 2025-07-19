@@ -1,0 +1,17 @@
+# Backend
+/backend/node_modules/
+backend/.env
+
+# Logs
+*.log
+
+# Sistema
+.DS_Store
+
+# Editor configs
+.vscode/
+.idea/
+
+# Entornos
+.env
+.env.*
