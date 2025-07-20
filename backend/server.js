@@ -36,19 +36,10 @@ app.get("/coordinadores", async (req, res) => {
     res.status(500).json({ error: "Error al conectar a la base de datos" });
   }
 });
-app.get("/lideres", async (req, res) => {
-  try {
-    const result = await db.query("SELECT * FROM lideres ORDER BY name ASC");
-    console.log("Lideres:", result.rows);
-    res.json({
-      message: "Conexión exitosa a la base de datos",
-      result: result.rows,
-    });
-  } catch (error) {
-    console.error("Error al conectar a la base de datos:", error);
-    res.status(500).json({ error: "Error al conectar a la base de datos" });
-  }
-});
+const lideresRoutes = require('./routes/lideres');
+app.use('/api/lideres', lideresRoutes);
+
+
 app.get("/discipulos", async (req, res) => {
   try {
     const result = await db.query("SELECT * FROM discipulos ORDER BY name ASC");

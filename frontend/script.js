@@ -1,13 +1,27 @@
 // ESTRUCTURA ACTUALIZADA DE COORDINACIONES Y LÍDERES
+  async function cargarLideres() {
 try {
-  const res = await fetch("http://localhost:5432//coordinaciones");
+  const res = await fetch("http://localhost:5432/api/lideres");
   const data = await res.json();
-} catch (e) {
+  // Función para cargar lideres en el select
+
+    const select = document.getElementById("lider");
+    select.innerHTML = '<option value="">Seleccione un lider</option>';
+    forEach((lideres) => {
+      const option = document.createElement("option");
+      option.value = coordinacion;
+      option.textContent = coordinacion;
+      select.appendChild(option);
+    });
+  }
+ catch (e) {
   console.error(
     "Error al cargar la estructura de coordinaciones y líderes:",
     e
   );
 }
+  }
+
 
 const ESTRUCTURA = {
   // COORDINACIONES Y SUS LÍDERES DIRECTOS
