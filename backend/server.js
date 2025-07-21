@@ -22,14 +22,14 @@ app.get("/diaconados", async (req, res) => {
   }
 });
 
-const coordinadoresRoutes = require('./routes/diaconoCoordinador');
-app.use('/api', coordinadoresRoutes);
+const superiorRoutes = require('./routes/superior');
+app.use('/api', superiorRoutes);
 
 const lideresRoutes = require('./routes/lideres');
 app.use('/api/lideres', lideresRoutes);
 
-const discipulosRoutes = require('./routes/discipulos');
-app.use('/api', discipulosRoutes);
+const subordinadosRoutes = require('./routes/subordinados');
+app.use('/api', subordinadosRoutes);
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {

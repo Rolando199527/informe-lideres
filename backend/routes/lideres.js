@@ -4,7 +4,7 @@ const db = require('../db/connection');
 
 router.get("/", async (req, res) => {
   try {
-    const result = await db.query('SELECT "nombreLider" FROM coordinadoresLideres ORDER BY "nombreLider" ASC');
+    const result = await db.query('SELECT * FROM obtener_coordinadores_lideres();');
     console.log("Lideres:", result.rows);
     res.json({
       message: "Conexión exitosa a la base de datos",

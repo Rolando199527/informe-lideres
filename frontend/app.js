@@ -10,12 +10,18 @@
     },
     bindEvents() {
       App.methods.cargarNombreLideres();
-      App.html.lideres.addEventListener("change", () => {
-        App.methods.cargarCoordinadoresDiacono();
-        App.methods.cargarDiscipulos();
-      });
+      App.handlers.cargarCoordinadoresDiaconoDiscipulos();
+      
     },
-    handlers: {},
+    handlers: {
+      // Aquí puedes agregar más manejadores de eventos si es necesario
+      cargarCoordinadoresDiaconoDiscipulos(){
+        App.html.lideres.addEventListener("change", () => {
+        App.methods.cargarSuperior();
+        App.methods.cargarSubordinados();
+      });
+      }
+    },
     methods: {
       async cargarNombreLideres() {
         try {
@@ -32,57 +38,55 @@
         }
       },
 
-      async cargarCoordinadoresDiacono() {
+      async cargarSuperior() {
         let liderSelected = App.html.lideres.value;
         try {
           const res = await fetch(
-            "http://localhost:6543/api/diaconoCoordinador?name=" + liderSelected
+            "http://localhost:6543/api/superior?id=" + liderSelected
           );
-          let coordinadores = await res.json();
-          App.renderDiaconoCoordinador(coordinadores);
+          let superior = await res.json();
+          App.renderSuperior(superior);
         } catch (e) {
           console.error("Error al cargar coordinadores y diacono:", e);
         }
       },
-      async cargarDiscipulos() {
+      async cargarSubordinados() {
         let liderSelected = App.html.lideres.value;
         try {
           const res = await fetch(
-            "http://localhost:6543/api/discipulos?lider=" + liderSelected
+            "http://localhost:6543/api/subordinados/" + liderSelected
           );
-          let discipulos = await res.json();
-          discipulos = discipulos.result;
-          console.log("Discipulos obtenidos:", discipulos);
-          App.renderTablaDiscipulos(discipulos);
+          let subordinados = await res.json();
+          subordinados = subordinados.result;
+          App.renderTablaSubordinados(subordinados);
         } catch (e) {
           console.error("Error al cargar discípulos:", e);
         }
       },
     },
     renderNombreLideres(lideres) {
-      console.log("Lideres a renderizar:", lideres);
       App.html.lideres.innerHTML =
         '<option value="">Seleccione un lider</option>';
       lideres.forEach((lider) => {
         const option = document.createElement("option");
-        option.value = lider.nombreLider;
-        option.textContent = lider.nombreLider;
+        option.value = lider.id;
+        option.textContent = lider.nombre;
         App.html.lideres.appendChild(option);
       });
     },
-    renderDiaconoCoordinador(diaconoCoordinadorNombre) {
+    renderSuperior(superiorNombre) {      
       App.html.diaconoCoordinador.textContent =
-        diaconoCoordinadorNombre.result[0].diaconoCoordinador;
+        superiorNombre.result.nombre_superior;
       ("No hay coordinador disponible");
     },
-    renderTablaDiscipulos(discipulos){
-      tablaDiscipulosRow = App.html.tablaDisciupulos
-      tablaDiscipulosRow = tablaDiscipulosRow.querySelector("tbody");
-      tablaDiscipulosRow.innerHTML = ""; // Limpiar la tabla antes de agregar nuevos datos
-      discipulos.forEach((datosDiscipulos) => {
+    renderTablaSubordinados(subordinados){
+      tablaSubordinadosRow = App.html.tablaDisciupulos
+      tablaSubordinadosRow = tablaSubordinadosRow.querySelector("tbody");
+      tablaSubordinadosRow.innerHTML = ""; // Limpiar la tabla antes de agregar nuevos datos
+      subordinados.forEach((datosSubordinados) => {
         const tr = document.createElement("tr");
         tr.innerHTML = `
-          <td>${datosDiscipulos.name}</td>
+          <td>${datosSubordinados.nombre}</td>
           <td><input type="checkbox" data-asistencia="Doulos"></td>
           <td><input type="checkbox" data-asistencia="Miércoles"></td>
           <td><input type="checkbox" data-asistencia="Viernes"></td>
@@ -91,7 +95,7 @@
           <td><input type="checkbox" data-asistencia="Santa Cena"></td>
           <td><input type="checkbox" data-asistencia="Contactado"></td>
         `;
-        tablaDiscipulosRow.appendChild(tr);
+        tablaSubordinadosRow.appendChild(tr);
       }
       );
     }
