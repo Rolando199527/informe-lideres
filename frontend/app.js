@@ -2,7 +2,7 @@
   const App = {
     html: {
       lideres: document.getElementById("lider"),
-      coordinacion: document.getElementById("diaconoCoordinador"),
+      diaconoCoordinador: document.getElementById("diaconoCoordinador"),
     },
     init() {
       App.bindEvents();
@@ -58,8 +58,9 @@
         App.html.lideres.appendChild(option);
       });
     },
-    renderDiaconoCoordinador(coordinadores) {
-     App.html.coordinacion.textContent = coordinadores.result[0].diaconoCoordinador || "No hay coordinador disponible";
+    renderDiaconoCoordinador(diaconoCoordinadorNombre) {
+      App.html.diaconoCoordinador.textContent = diaconoCoordinadorNombre.result[0].diaconoCoordinador
+        "No hay coordinador disponible";
     },
   };
   App.init();
