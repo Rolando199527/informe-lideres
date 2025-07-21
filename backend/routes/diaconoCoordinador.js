@@ -4,31 +4,36 @@ const db = require("../db/connection");
 
 router.get("/diaconoCoordinador", async (req, res) => {
   const { name } = req.query;
-  console.log("Lider seleccionado:", name);
 
   try {
-    let result;
-
     if (name) {
-      if (name) {
-        const result = await db.query(
-          'SELECT "diaconoCoordinador" FROM coordinadoreslideres WHERE "nombreLider" ILIKE $1',[name]);
-        res.json({
-          message: "Conexión exitosa a la base de datos",
-          result: result.rows,
-        });
-      }
-    } else {
-      result = await db.query("SELECT * FROM coordinador ORDER BY name ASC");
-    }
+      const result = await db.query(
+        'SELECT "diaconoCoordinador" FROM coordinadoreslideres WHERE "nombreLider" ILIKE $1 LIMIT 1',
+        [name]
+      );
 
-    res.json({
-      message: "Conexión exitosa a la base de datos",
-      result: result.rows,
-    });
+      if (result.rows.length === 0) {
+        return res.status(404).json({ message: "No se encontró ningún registro" });
+      }
+
+      return res.json({
+        message: "Conexión exitosa a la base de datos",
+        result: result.rows,
+      });
+    } else {
+      // Si no se pasa name, podrías devolver una lista completa
+      const result = await db.query(
+        'SELECT * FROM coordinadoreslideres ORDER BY "nombreLider" ASC'
+      );
+
+      return res.json({
+        message: "Todos los coordinadores",
+        result: result.rows,
+      });
+    }
   } catch (error) {
     console.error("Error al conectar a la base de datos:", error);
-    res.status(500).json({ error: "Error al conectar a la base de datos" });
+    return res.status(500).json({ error: "Error al conectar a la base de datos" });
   }
 });
 
