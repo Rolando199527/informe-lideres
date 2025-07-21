@@ -207,6 +207,12 @@ input[type="checkbox"] {
     display: block;
 }
 
+#diaconoCoordinador {
+    font-weight: bold;
+    color: var(--primary-color);
+    margin-top: 10px;
+}
+
 /* Sección de informes */
 #seccionVer {
     margin-top: 30px;

@@ -19,16 +19,14 @@
         <form id="informeForm">
             <div class="form-section">
                 <div class="form-group">
-                    <label for="lider">Nombre del Líder:</label>
-                    <select id="lider" onchange="cargarDiscipulos()" required>
+                    <label for="lider"> Coordinador / Líder:</label>
+                    <select id="lider" required>
                     </select>
                 </div>
                 
                 <div class="form-group">
-                    <label for="coordinacion">Coordinación:</label>
-                    <select id="coordinacion" required>
-                        <option value="">Seleccione una coordinación</option>
-                    </select>
+                    <label for="diaconoCoordinador">Diacono / Coordinador:</label>
+                    <p id="diaconoCoordinador"></p>
                 </div>
                 
                 <div class="form-group">
@@ -99,7 +97,7 @@
         </div>
     </div>
 
-    <script src="script.js"></script>
+    <script src="app.js"></script>
     <script>
     function mostrarSeccion(seccion) {
         document.getElementById("informeForm").style.display = (seccion === 'llenar') ? "block" : "none";
