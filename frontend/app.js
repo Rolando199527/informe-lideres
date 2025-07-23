@@ -89,9 +89,9 @@
         nuevosDiscipulos = App.html.nuevosDiscipulos.value;
         ofrenda = App.html.ofrenda.value;
         nombreNuevosDiscipulos = App.html.nuevosDiscipulosNombre.value;
-        const nombreNuevosDiscipulosArray = nombreNuevosDiscipulos.split(",").map(
-          (nombre) => nombre.trim()
-        );
+        const nombreNuevosDiscipulosArray = nombreNuevosDiscipulos
+          .split(",")
+          .map((nombre) => nombre.trim());
 
         const informeData = {
           lideres,
@@ -122,23 +122,27 @@
           contactado: asistenciaCount["Contactado"] || 0,
         };
       },
-      guardarInforme(informeData) {
-        fetch("http://localhost:6543/api/informes/guardarInforme", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(informeData),
-        })
-          .then((response) => response.json())
-          .then((data) => {
-            console.log("Informe guardado exitosamente:", data);
-            // Aquí puedes agregar lógica para mostrar un mensaje de éxito
-          })
-          .catch((error) => {
-            console.error("Error al guardar el informe:", error);
-            // Aquí puedes agregar lógica para mostrar un mensaje de error
+      async guardarInforme(informeData) {
+        try {
+          const res = await fetch("http://localhost:6543/api/guardarInforme", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(informeData),
           });
+
+          const data = await res.json();
+          console.log("Código de estado:", res.status);
+
+          if (res.ok) {
+            console.log("Informe guardado exitosamente:", data);
+          } else {
+            console.error("Error desde el backend:", data);
+          }
+        } catch (error) {
+          console.error("Error en la solicitud:", error);
+        }
       },
     },
     renderNombreLideres(lideres) {
