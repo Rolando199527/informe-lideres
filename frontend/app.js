@@ -1,6 +1,7 @@
 (() => {
   const App = {
     html: {
+      datosInforme: document.getElementById("datosInforme"),
       lideres: document.getElementById("lider"),
       diaconoCoordinador: document.getElementById("diaconoCoordinador"),
       tablaDisciupulos: document.getElementById("tablaDiscipulos"),
@@ -11,6 +12,10 @@
       nuevosDiscipulos: document.getElementById("redNuevos"),
       ofrenda: document.getElementById("redOfrenda"),
       nuevosDiscipulosNombre: document.getElementById("nuevosDiscipulos"),
+      verInformes: document.getElementById("verInformes"),
+      llenarInforme: document.getElementById("llenarInforme"),
+      seccionVer: document.getElementById("seccionVer"),
+      contenedorInformes: document.getElementById("contenedorInformes"),
     },
     init() {
       App.bindEvents();
@@ -30,6 +35,9 @@
           e.preventDefault();
           // Aquí puedes agregar la lógica para guardar el informe
           App.methods.capturarDatosInforme();
+        });
+        App.html.verInformes.addEventListener("click", () => {
+          App.methods.cargarInformes();
         });
       },
     },
@@ -144,6 +152,22 @@
           console.error("Error en la solicitud:", error);
         }
       },
+      async cargarInformes() {
+        try {
+          const res = await fetch("http://localhost:6543/api/obtenerInforme");
+          let informes = await res.json();
+          informes = informes.result;
+          if (res.ok) {
+            console.log("Informes obtenidos exitosamente:", informes);
+            // Aquí puedes renderizar los informes en tu interfaz
+            App.renderInformes(informes);
+          } else {
+            console.error("Error al obtener informes:", informes);
+          }
+        } catch (error) {
+          console.error("Error en la solicitud de informes:", error);
+        }
+      }
     },
     renderNombreLideres(lideres) {
       App.html.lideres.innerHTML =
@@ -161,6 +185,7 @@
       ("No hay coordinador disponible");
     },
     renderTablaSubordinados(subordinados) {
+      App.html.
       tablaSubordinadosRow = App.html.tablaDisciupulos;
       tablaSubordinadosRow = tablaSubordinadosRow.querySelector("tbody");
       tablaSubordinadosRow.innerHTML = ""; // Limpiar la tabla antes de agregar nuevos datos
@@ -179,6 +204,29 @@
         tablaSubordinadosRow.appendChild(tr);
       });
     },
+    renderInformes(informes) {
+      App.html.datosInforme.style.display = "none";
+      App.html.seccionVer.style.display = "block";
+
+      contenedorInformes = App.html.contenedorInformes;
+      contenedorInformes.innerHTML = ""; // Limpiar el contenedor antes de agregar nuevos
+      informes.forEach((informe) =>{
+        const informeDiv = document.createElement("div");
+        informeDiv.classList.add("informe");
+        informeDiv.innerHTML = `
+          <h3>Líder: ${informe.nombre_lider}</h3>
+          <p>Coordinador/Díacono: ${informe.diacono_coordinador}</p>
+          <p>Fecha: ${informe.fecha}</p>
+          <p>Asistencia: Miercoles(${informe.asistencia_miercoles}), Viernes(${informe.asistencia_viernes}), Sabado(${informe.asistencia_sabado}), Domingo(${informe.asistencia_domingo}), Santa Cena(${informe.asistencia_santa_cena}), Doulos(${informe.asistencia_doulos}), Contactado(${informe.contactado})</p>
+          <p>Red de Discipulos: ${informe.red_discipulos}</p>
+          <p>Nuevos Discipulos: ${informe.nuevos_discipulos}</p>
+          <p>Ofrenda: ${informe.ofrenda}</p>
+          <p>Nombres Nuevos Discipulos: ${informe.nombre_nuevos_discipulos.join(", ")}</p>
+        `;
+        contenedorInformes.appendChild(informeDiv);
+      })
+
+    }
   };
   App.init();
 })();

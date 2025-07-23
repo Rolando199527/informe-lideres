@@ -8,8 +8,8 @@
 <body>
     <div class="container">
         <div class="button-group">
-            <button onclick="mostrarSeccion('llenar')"><i class="fas fa-edit"></i> Llenar Informe</button>
-            <button onclick="mostrarSeccion('ver')"><i class="fas fa-list"></i> Ver Informes</button>
+            <button id="llenarInforme" ><i class="fas fa-edit"></i> Llenar Informe</button>
+            <button id="verInformes"><i class="fas fa-list"></i> Ver Informes</button>
         </div>
         
         <h1>Informe Semanal de Líderes</h1>
@@ -86,7 +86,9 @@
                     <option value="sin_informe">Quién no llenó su informe</option>
                 </select>
             </div>
-            <div id="contenedorInformes"></div>
+            <div id="contenedorInformes">
+                
+            </div>
             <div id="totalesInformes" class="totales-container"></div>
             <div class="button-group">
                 <button onclick="exportarExcel()" class="btn-success"><i class="fas fa-file-excel"></i> Exportar a Excel</button>
@@ -96,9 +98,9 @@
     </div>
 
     <script src="app.js"></script>
-    <script>
+    <!-- <script>
     function mostrarSeccion(seccion) {
-        document.getElementById("informeForm").style.display = (seccion === 'llenar') ? "block" : "none";
+        document.getElementById("datosInforme").style.display = (seccion === 'llenar') ? "block" : "none";
         document.getElementById("seccionVer").style.display = (seccion === 'ver') ? "block" : "none";
         if (seccion === 'ver') cargarInformes();
     }
@@ -111,6 +113,6 @@
             this.classList.remove('button-touch');
         });
     });
-    </script>
+    </script> -->
 </body>
 </html>
