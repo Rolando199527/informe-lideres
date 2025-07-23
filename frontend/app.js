@@ -167,7 +167,7 @@
         } catch (error) {
           console.error("Error en la solicitud de informes:", error);
         }
-      }
+      },
     },
     renderNombreLideres(lideres) {
       App.html.lideres.innerHTML =
@@ -185,8 +185,7 @@
       ("No hay coordinador disponible");
     },
     renderTablaSubordinados(subordinados) {
-      App.html.
-      tablaSubordinadosRow = App.html.tablaDisciupulos;
+      App.html.tablaSubordinadosRow = App.html.tablaDisciupulos;
       tablaSubordinadosRow = tablaSubordinadosRow.querySelector("tbody");
       tablaSubordinadosRow.innerHTML = ""; // Limpiar la tabla antes de agregar nuevos datos
       subordinados.forEach((datosSubordinados) => {
@@ -209,24 +208,63 @@
       App.html.seccionVer.style.display = "block";
 
       contenedorInformes = App.html.contenedorInformes;
-      contenedorInformes.innerHTML = ""; // Limpiar el contenedor antes de agregar nuevos
-      informes.forEach((informe) =>{
+      contenedorInformes.innerHTML = "";
+      // Limpiar el contenedor antes de agregar nuevos
+      informes.forEach((informe) => {
         const informeDiv = document.createElement("div");
         informeDiv.classList.add("informe");
         informeDiv.innerHTML = `
-          <h3>Líder: ${informe.nombre_lider}</h3>
-          <p>Coordinador/Díacono: ${informe.diacono_coordinador}</p>
-          <p>Fecha: ${informe.fecha}</p>
-          <p>Asistencia: Miercoles(${informe.asistencia_miercoles}), Viernes(${informe.asistencia_viernes}), Sabado(${informe.asistencia_sabado}), Domingo(${informe.asistencia_domingo}), Santa Cena(${informe.asistencia_santa_cena}), Doulos(${informe.asistencia_doulos}), Contactado(${informe.contactado})</p>
-          <p>Red de Discipulos: ${informe.red_discipulos}</p>
-          <p>Nuevos Discipulos: ${informe.nuevos_discipulos}</p>
-          <p>Ofrenda: ${informe.ofrenda}</p>
-          <p>Nombres Nuevos Discipulos: ${informe.nombre_nuevos_discipulos.join(", ")}</p>
+        <div id="contenedorInformes__header">
+            <div>
+              <h2>Líder: ${informe.nombre_lider}</h2>
+              <h4>Coordinador/Díacono: ${informe.diacono_coordinador}</h4>
+            </div>
+            <p id="header__fecha">Fecha: ${informe.fecha}</p>
+          </div>
+        <table id="tablaAsistenciaInforme">
+        <h3>Seguimiento Semanal</h3>
+            <tr>
+                <th>Miercoles</th>
+                <th>Viernes</th>
+                <th>Sabado</th>
+                <th>Doulos</th>
+                <th>Domingo</th>
+                <th>Santa Cena</th>
+                <th>Contactado</th>
+            </tr>
+            <tr>
+                <td>${informe.asistencia_miercoles}</td>
+                <td>${informe.asistencia_viernes}</td>
+                <td>${informe.asistencia_sabado}</td>
+                <td>${informe.asistencia_domingo}</td>
+                <td>${informe.asistencia_santa_cena}</td>
+                <td>${informe.asistencia_doulos}</td>
+                <td>${informe.contactado}</td>
+            </tr>
+          </table>
+            <table id="tablaRedInforme">
+        <h3>Informe de Red</h3>
+
+            <tr>
+                <th>Discipulos</th>
+                <th>Nuevos</th>
+                <th>Ofrenda</th>
+            </tr>
+            <tr>
+                <td>${informe.red_discipulos}</td>
+                <td>${informe.nuevos_discipulos}</td>
+                <td>${informe.ofrenda}</td>
+            </tr>
+          </table>
+           <div>
+            <h4>Nombres Nuevos Discipulos</h4>
+            <p> ${informe.nombre_nuevos_discipulos.join(", ")}</p>
+          </div>
+      
         `;
         contenedorInformes.appendChild(informeDiv);
-      })
-
-    }
+      });
+    },
   };
   App.init();
 })();
