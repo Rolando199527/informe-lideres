@@ -8,19 +8,6 @@ app.use(cord());
 app.use(express.json());
 
 // ruta de prueba
-app.get("/diaconados", async (req, res) => {
-  try {
-    const result = await db.query("SELECT * FROM diaconado ORDER BY name ASC");
-    console.log("Conexión exitosa a la base de datos:", result.rows);
-    res.json({
-      message: "Conexión exitosa a la base de datos",
-      result: result.rows,
-    });
-  } catch (error) {
-    console.error("Error al conectar a la base de datos:", error);
-    res.status(500).json({ error: "Error al conectar a la base de datos" });
-  }
-});
 
 const superiorRoutes = require('./routes/superior');
 app.use('/api', superiorRoutes);
