@@ -19,10 +19,10 @@ const subordinadosRoutes = require('./routes/subordinados');
 app.use('/api', subordinadosRoutes);
 
 const guardarInformesRoutes = require('./routes/informes/guardarInformes');
-app.use('/api/guardarinformes', guardarInformesRoutes);
+app.use('/api', guardarInformesRoutes);
 
 const obtenerDatosInformesRoutes = require('./routes/informes/obtenerDatosInformes');
-app.use('/api/obtenerdatosinformes', obtenerDatosInformesRoutes);
+app.use('/api', obtenerDatosInformesRoutes);
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
