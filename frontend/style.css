@@ -191,6 +191,7 @@ td {
   padding: 12px 15px;
   text-align: left;
   border-bottom: 1px solid var(--border-color);
+  width: 100px;
 }
 
 th {
@@ -346,4 +347,11 @@ details summary {
     font-weight: bold;
     color: #555;
   }
+}
+
+#tablaRedInforme {
+  width: 100px;
+  border-collapse: collapse;
+  margin-top: 20px;
+  border: solid 1px var(--border-color);
 }

@@ -243,21 +243,25 @@
             </tr>
           </table>
             <table id="tablaRedInforme">
-        <h3>Informe de Red</h3>
+              <h3>Informe de Red</h3>
 
+   
             <tr>
-                <th>Discipulos</th>
-                <th>Nuevos</th>
-                <th>Ofrenda</th>
+              <th>Discipulos</th>
+              <td>${informe.red_discipulos}</td>
+            </tr>
+            
+            <tr>
+              <th>Nuevos</th>
+              <td>${informe.nuevos_discipulos}</td>
             </tr>
             <tr>
-                <td>${informe.red_discipulos}</td>
-                <td>${informe.nuevos_discipulos}</td>
-                <td>${informe.ofrenda}</td>
+              <th>Ofrenda</th>
+              <td>${informe.ofrenda}</td>
             </tr>
           </table>
            <div>
-            <h4>Nombres Nuevos Discipulos</h4>
+            <h3>Nombres Nuevos Discipulos</h3>
             <p> ${informe.nombre_nuevos_discipulos.join(", ")}</p>
           </div>
       
