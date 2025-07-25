@@ -15,6 +15,7 @@
       verInformes: document.getElementById("verInformes"),
       llenarInforme: document.getElementById("llenarInforme"),
       seccionVer: document.getElementById("seccionVer"),
+      llenarInforme: document.getElementById("llenarInforme"),
       contenedorInformes: document.getElementById("contenedorInformes"),
     },
     init() {
@@ -38,6 +39,11 @@
         });
         App.html.verInformes.addEventListener("click", () => {
           App.methods.cargarInformes();
+        });
+        App.html.llenarInforme.addEventListener("click", () => {
+          App.html.datosInforme.style.display = "block";
+          App.html.seccionVer.style.display = "none";
+          App.html.contenedorInformes.innerHTML = ""; // Limpiar informes previos
         });
       },
     },
