@@ -359,3 +359,17 @@ details summary {
   margin-top: 20px;
   border: solid 1px var(--border-color);
 }
+
+
+#form-group__redes{
+  flex: none;
+  min-width: none;
+  display: flex;
+  flex-direction: column;
+  padding: 8px;
+
+
+  input{
+    width: 40%;
+  }
+}
