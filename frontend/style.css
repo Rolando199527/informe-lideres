@@ -348,9 +348,13 @@ details summary {
     color: #555;
   }
 }
+#informe-red{
+  display: flex;
+  flex-direction: row;
+}
 
 #tablaRedInforme {
-  width: 100px;
+  width: 55px;
   border-collapse: collapse;
   margin-top: 20px;
   border: solid 1px var(--border-color);

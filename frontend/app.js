@@ -216,8 +216,8 @@
         informeDiv.innerHTML = `
         <div id="contenedorInformes__header">
             <div>
-              <h2>Líder: ${informe.nombre_lider}</h2>
-              <h4>Coordinador/Díacono: ${informe.diacono_coordinador}</h4>
+              <h2>${informe.nombre_lider}</h2>
+              <h4>${informe.diacono_coordinador}</h4>
             </div>
             <p id="header__fecha">Fecha: ${informe.fecha}</p>
           </div>
