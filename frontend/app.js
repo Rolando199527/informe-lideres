@@ -191,7 +191,7 @@
       ("No hay coordinador disponible");
     },
     renderTablaSubordinados(subordinados) {
-      App.html.tablaSubordinadosRow = App.html.tablaDisciupulos;
+      tablaSubordinadosRow = App.html.tablaDisciupulos;
       tablaSubordinadosRow = tablaSubordinadosRow.querySelector("tbody");
       tablaSubordinadosRow.innerHTML = ""; // Limpiar la tabla antes de agregar nuevos datos
       subordinados.forEach((datosSubordinados) => {

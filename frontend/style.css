@@ -1,11 +1,11 @@
 /* Estilos base */
 :root {
-  --primary-color: #3498db;
+  --primary-color: #d4073c;
   --primary-hover: #2980b9;
   --success-color: #2ecc71;
   --danger-color: #e74c3c;
-  --text-color: #333;
-  --light-gray: #f5f5f5;
+  --text-color: #510018;
+  --light-gray: #fff0f1;
   --border-color: #ddd;
 }
 
@@ -132,6 +132,17 @@ button i {
   color: white;
 }
 
+
+#llenarInforme {
+  background-color: #ffcad2;
+  color: #a80937;
+}
+
+#verInformes {
+  background-color: #a80937;
+  color: #fff0f1;
+}
+
 .btn-primary:hover {
   background-color: var(--primary-hover);
   transform: translateY(-2px);
@@ -176,7 +187,6 @@ button i {
   overflow-x: auto;
   margin: 20px 0;
   border-radius: 8px;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
   background: white;
 }
 
