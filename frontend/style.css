@@ -181,6 +181,12 @@ button i {
   opacity: 0.9;
 }
 
+#lider{
+  font-weight: bold;
+  color: var(--primary-color);
+  margin-top: 10px;
+}
+
 /* Tablas */
 .table-container {
   width: 100%;
@@ -313,10 +319,14 @@ details summary {
   input[type="text"],
   input[type="number"],
   input[type="date"],
-  select,
   textarea {
     padding: 10px;
-    font-size: 14px;
+    font-size: 16px;
+  }
+
+  select{
+    padding: 10px;
+    font-size: 16px;
   }
 
   th,
