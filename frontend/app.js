@@ -217,6 +217,12 @@
       contenedorInformes.innerHTML = "";
       // Limpiar el contenedor antes de agregar nuevos
       informes.forEach((informe) => {
+        const fecha = new Date(informe.fecha);
+        informe.fecha = fecha.toLocaleDateString("es-ES", {
+          year: "numeric",
+          month: "2-digit",
+          day: "2-digit",
+        });
         const informeDiv = document.createElement("div");
         informeDiv.classList.add("informe");
         informeDiv.innerHTML = `
@@ -225,7 +231,7 @@
               <h2>${informe.nombre_lider}</h2>
               <h4>${informe.diacono_coordinador}</h4>
             </div>
-            <p id="header__fecha">Fecha: ${informe.fecha}</p>
+            <p id="header__fecha">Publicado: ${informe.fecha}</p>
           </div>
         <table id="tablaAsistenciaInforme">
         <h3>Seguimiento Semanal</h3>
