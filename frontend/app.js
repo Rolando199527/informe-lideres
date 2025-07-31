@@ -18,6 +18,10 @@
       llenarInforme: document.getElementById("llenarInforme"),
       contenedorInformes: document.getElementById("contenedorInformes"),
     },
+    data:{
+      fechaDomingo: "2025-07-27",
+      fechaSabado:""
+    },
     init() {
       App.bindEvents();
     },
