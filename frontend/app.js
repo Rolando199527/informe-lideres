@@ -18,9 +18,9 @@
       llenarInforme: document.getElementById("llenarInforme"),
       contenedorInformes: document.getElementById("contenedorInformes"),
     },
-    data:{
-      fechaDomingo: "2025-07-27",
-      fechaSabado:""
+    data: {
+      fechaInicio: (fechaInicio = new Date()), // Fecha de inicio del informe, puedes cambiarla según sea necesario
+      fechaFiltrado: "", // Fecha filtrada para la consulta de informes, puedes cambiarla según sea necesario",
     },
     init() {
       App.bindEvents();
@@ -43,6 +43,7 @@
         });
         App.html.verInformes.addEventListener("click", () => {
           App.methods.cargarInformes();
+          App.methods.formatearFecha();
         });
         App.html.llenarInforme.addEventListener("click", () => {
           App.html.datosInforme.style.display = "block";
@@ -162,20 +163,40 @@
           console.error("Error en la solicitud:", error);
         }
       },
+      formatearFecha() {
+        fechaActual = new Date();
+        if (fechaActual.getDay() === 0) {
+          // Si es domingo, sumar un día
+          App.data.fechaInicio = fechaActual;
+          App.data.fechaFiltrado = fechaActual.toLocaleDateString("es-ES", {
+            year: "numeric",
+            month: "2-digit",
+            day: "2-digit",
+          });
+        }
+        // return fechaFormateada;
+      },
       async cargarInformes() {
         try {
-          const res = await fetch("http://localhost:6543/api/obtenerInforme");
+          const res = await fetch(
+            "http://localhost:6543/api/obtenerInforme?fecha=" +
+              App.data.fechaFiltrado
+          );
           let informes = await res.json();
           informes = informes.result;
           if (res.ok) {
             console.log("Informes obtenidos exitosamente:", informes);
             // Aquí puedes renderizar los informes en tu interfaz
             App.renderInformes(informes);
-          } else {
-            console.error("Error al obtener informes:", informes);
+          } else if (res.status === 404) {
+            App.renderSinInformes();
+          } else if (res.status === 500) {
+            console.error("Error al obtener informes:", informes.error);
+            App.renderSinInformes();
           }
         } catch (error) {
           console.error("Error en la solicitud de informes:", error);
+          App.renderSinInformes();
         }
       },
     },
@@ -284,6 +305,13 @@
         `;
         contenedorInformes.appendChild(informeDiv);
       });
+    },
+    renderSinInformes() {
+      App.html.datosInforme.style.display = "none";
+      App.html.seccionVer.style.display = "block";
+      App.html.contenedorInformes.innerHTML = `
+      <img id="iconoEmpty" src="https://api.iconify.design/line-md:alert-circle-twotone-loop.svg?color=%23888888" alt="">
+      <h3 class="mensajeVacio">No hay informes publicados</h3>`;
     },
   };
   App.init();

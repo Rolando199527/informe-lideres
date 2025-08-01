@@ -238,6 +238,16 @@ input[type="checkbox"] {
   margin-top: 30px;
 }
 
+#contenedorInformes {
+  flex-direction: column;
+  gap: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-items: center;
+  align-items: center;
+  animation: fadeIn 0.3s ease-out forwards;
+}
+
 #contenedorInformes > div {
   background: white;
   border-radius: 8px;
@@ -392,4 +402,13 @@ details summary {
   input{
     width: 40%;
   }
+}
+
+.mensajeVacio{
+  color:#2c3e50 ;
+}
+
+#iconoEmpty{
+  width: 80px;
+  height: 80px;
 }
