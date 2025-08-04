@@ -20,7 +20,7 @@
     },
     data: {
       fechaInicio: (fechaInicio = new Date()), // Fecha de inicio del informe, puedes cambiarla según sea necesario
-      fechaFiltrado: "", // Fecha filtrada para la consulta de informes, puedes cambiarla según sea necesario",
+      fechaFiltrado: null, // Fecha filtrada para la consulta de informes, puedes cambiarla según sea necesario",
     },
     init() {
       App.bindEvents();
@@ -179,8 +179,7 @@
       async cargarInformes() {
         try {
           const res = await fetch(
-            "http://localhost:6543/api/obtenerInforme?fecha=" +
-              App.data.fechaFiltrado
+            "http://localhost:6543/api/obtenerInforme"
           );
           let informes = await res.json();
           informes = informes.result;
