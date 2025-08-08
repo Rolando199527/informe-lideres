@@ -215,7 +215,8 @@
         selects.forEach(select => select.selectedIndex = 0);
 
 
-        setTimeout (() => {location.reload(true);}, 1000);
+        // setTimeout (() => {location.reload(true);}, 1000);
+        App.renderSuccessMessage();
         
 
         window.scrollTo({
@@ -340,6 +341,9 @@
     renderSuccessMessage() {
       App.html.buttonGuardar.style.display = "none";
       App.html.successContainer.style.display = "block";
+       setTimeout(() => {
+          location.reload(true);
+       }, 3000); // Ocultar el mensaje después de 3 segundos
     }
   };
   App.init();
