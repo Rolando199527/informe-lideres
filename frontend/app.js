@@ -17,6 +17,7 @@
       seccionVer: document.getElementById("seccionVer"),
       llenarInforme: document.getElementById("llenarInforme"),
       contenedorInformes: document.getElementById("contenedorInformes"),
+      inputsForm: document.querySelectorAll('input')
     },
     data: {
       fechaInicio: (fechaInicio = new Date()), // Fecha de inicio del informe, puedes cambiarla según sea necesario
@@ -156,6 +157,7 @@
 
           if (res.ok) {
             console.log("Informe guardado exitosamente:", data);
+            App.methods.limpiarCampos();
           } else {
             console.error("Error desde el backend:", data);
           }
@@ -198,6 +200,12 @@
           App.renderSinInformes();
         }
       },
+
+      limpiarCampos() {
+
+        const inputs = App.html.inputsForm;
+        inputs.forEach(input => input.value = "");
+      }
     },
     renderNombreLideres(lideres) {
       App.html.lideres.innerHTML =
