@@ -17,7 +17,8 @@
       seccionVer: document.getElementById("seccionVer"),
       llenarInforme: document.getElementById("llenarInforme"),
       contenedorInformes: document.getElementById("contenedorInformes"),
-      inputsForm: document.querySelectorAll('input')
+      inputsForm: document.querySelectorAll('input'),
+      selectForm: document.querySelectorAll('select')
     },
     data: {
       fechaInicio: (fechaInicio = new Date()), // Fecha de inicio del informe, puedes cambiarla según sea necesario
@@ -205,6 +206,14 @@
 
         const inputs = App.html.inputsForm;
         inputs.forEach(input => input.value = "");
+
+        const checkboxes = App.html.tablaDisciupulos.querySelectorAll("input[name='asistencia']");
+        checkboxes.forEach(checkbox => checkbox.checked = false);
+
+        const selects = App.html.selectForm;
+        selects.forEach(select => select.selectedIndex = 0);
+
+        location.reload(true);
       }
     },
     renderNombreLideres(lideres) {
