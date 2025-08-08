@@ -5,7 +5,6 @@
       lideres: document.getElementById("lider"),
       diaconoCoordinador: document.getElementById("diaconoCoordinador"),
       tablaDisciupulos: document.getElementById("tablaDiscipulos"),
-      datosInforme: document.getElementById("datosInforme"),
       // Datos del informe
       fecha: document.getElementById("fecha"),
       redDiscipulos: document.getElementById("redDiscipulos"),
@@ -18,7 +17,9 @@
       llenarInforme: document.getElementById("llenarInforme"),
       contenedorInformes: document.getElementById("contenedorInformes"),
       inputsForm: document.querySelectorAll('input'),
-      selectForm: document.querySelectorAll('select')
+      selectForm: document.querySelectorAll('select'),
+      buttonGuardar: document.getElementById("guardarInforme"),
+      successContainer: document.getElementById("success-container")
     },
     data: {
       fechaInicio: (fechaInicio = new Date()), // Fecha de inicio del informe, puedes cambiarla según sea necesario
@@ -213,7 +214,9 @@
         const selects = App.html.selectForm;
         selects.forEach(select => select.selectedIndex = 0);
 
-        location.reload(true);
+
+        setTimeout (() => {location.reload(true);}, 1000);
+        
 
         window.scrollTo({
           top:0,
@@ -334,6 +337,10 @@
       <img id="iconoEmpty" src="https://api.iconify.design/line-md:alert-circle-twotone-loop.svg?color=%23888888" alt="">
       <h3 class="mensajeVacio">No hay informes publicados</h3>`;
     },
+    renderSuccessMessage() {
+      App.html.buttonGuardar.style.display = "none";
+      App.html.successContainer.style.display = "block";
+    }
   };
   App.init();
 })();

@@ -68,7 +68,8 @@
             <label
               >Nuevos: <input id="redNuevos" required type="number" min="0"
             /></label>
-            <label>Ofrenda:
+            <label
+              >Ofrenda:
               <input
                 id="redOfrenda"
                 required
@@ -76,10 +77,9 @@
                 step="0.01"
                 min="0"
                 placeholder="0.00"
-                
-            />
-          $
-          </label>
+              />
+              $
+            </label>
           </div>
 
           <!-- <div class="form-group">
@@ -102,7 +102,19 @@
         <button type="submit" class="btn-primary" id="guardarInforme">
           <i class="fas fa-save"></i> Guardar Informe
         </button>
-        
+
+        <div id="success-container" style="display: none;">
+          <span class="success-message" id="mensajeExito">
+            Informe enviado correctamente. Gracias por su diligencia.
+            <dotlottie-wc
+            src="https://lottie.host/af7c544f-b72d-406b-987e-5d76436fd911/7Ux9IySvi1.lottie"
+            speed="1"
+            autoplay
+            loop
+            id="animacionExito"
+          ></dotlottie-wc>
+          <span/>
+        </div>
       </form>
 
       <div id="seccionVer" style="display: none">
@@ -128,6 +140,10 @@
     </div>
 
     <script src="app.js"></script>
+     <script
+            src="https://unpkg.com/@lottiefiles/dotlottie-wc@0.6.2/dist/dotlottie-wc.js"
+            type="module"
+          ></script>
     <!-- <script>
     function mostrarSeccion(seccion) {
         document.getElementById("datosInforme").style.display = (seccion === 'llenar') ? "block" : "none";
