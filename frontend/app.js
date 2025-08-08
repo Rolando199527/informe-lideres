@@ -340,7 +340,7 @@
     },
     renderSuccessMessage() {
       App.html.buttonGuardar.style.display = "none";
-      App.html.successContainer.style.display = "block";
+      App.html.successContainer.style.display = "inline-flex";
        setTimeout(() => {
           location.reload(true);
        }, 3000); // Ocultar el mensaje después de 3 segundos
