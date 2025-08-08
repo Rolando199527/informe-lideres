@@ -214,6 +214,11 @@
         selects.forEach(select => select.selectedIndex = 0);
 
         location.reload(true);
+
+        window.scrollTo({
+          top:0,
+          behavior: "smooth"
+        })
       }
     },
     renderNombreLideres(lideres) {
