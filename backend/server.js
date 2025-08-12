@@ -6,19 +6,19 @@ require("dotenv").config();
 const app = express();
 app.use(express.json());
 
-// ruta de prueba
-
 // Configuración de CORS
 app.use(
   cors({
-    origin: [
-      "https://https://informe-lideres.vercel.app/", // Cambia por tu dominio de Vercel
-      "http://localhost:3000", // Para pruebas locales
-    ],
+   origin: [
+      "https://informe-lideres.vercel.app", // URL corregida (sin https:// duplicado)
+      "http://localhost:5500", // Añadido para Live Server (puerto 5500)
+      "http://127.0.0.1:5500" // Añadido para la IP local
+    ], 
     methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
     allowedHeaders: ["Content-Type", "Authorization"],
   })
 );
+
 
 const superiorRoutes = require("./routes/superior");
 app.use("/api", superiorRoutes);
