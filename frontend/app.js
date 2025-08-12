@@ -46,6 +46,7 @@
         });
         App.html.verInformes.addEventListener("click", () => {
           App.methods.cargarInformes();
+          App.methods.obtenerTotales();
           App.methods.formatearFecha();
         });
         App.html.llenarInforme.addEventListener("click", () => {
@@ -188,7 +189,7 @@
           let informes = await res.json();
           informes = informes.result;
           if (res.ok) {
-            console.log("Informes obtenidos exitosamente:", informes);
+
             // Aquí puedes renderizar los informes en tu interfaz
             App.renderInformes(informes);
           } else if (res.status === 404) {
@@ -200,6 +201,24 @@
         } catch (error) {
           console.error("Error en la solicitud de informes:", error);
           App.renderSinInformes();
+        }
+      },
+
+      async obtenerTotales() {
+        try {
+          const res = await fetch("http://localhost:6543/api/obtenerTotales");
+          const totales = await res.json();
+          if (res.ok) {
+            console.log("Totales obtenidos exitosamente:", totales);
+            // Aquí puedes renderizar los totales en tu interfaz
+            App.renderTotales(totales.result);
+          } else if (res.status === 404) {
+            console.error("No se encontraron totales:", totales.message);
+          } else if (res.status === 500) {
+            console.error("Error al obtener totales:", totales.error);
+          }
+        } catch (error) {
+          console.error("Error al obtener totales:", error);
         }
       },
 
@@ -257,6 +276,38 @@
           <td><input type="checkbox" data-asistencia="Contactado" name="asistencia" value="Contactado"></td>
         `;
         tablaSubordinadosRow.appendChild(tr);
+      });
+    },
+    renderTotales(totales) {
+      App.html.datosInforme.style.display = "none";
+      App.html.seccionVer.style.display = "block";
+
+      const contenedorTotales = document.getElementById("contenedorTotales");
+      contenedorTotales.innerHTML = ""; // Limpiar el contenedor antes de agregar nuevos
+      totales.forEach((total) => {
+        const fecha = new Date(total.fecha);
+        total.fecha = fecha.toLocaleDateString("es-ES", {
+          year: "numeric",
+          month: "2-digit",
+          day: "2-digit",
+        });
+        const totalDiv = document.createElement("div");
+        totalDiv.classList.add("total");
+        totalDiv.innerHTML = `
+          <h2>Total de Informes</h2>
+          <p>Fecha: ${total.fecha}</p>
+          <p>Asistencia Miercoles: ${total.total_miercoles}</p>
+          <p>Asistencia Viernes: ${total.total_viernes}</p>
+          <p>Asistencia Sabado: ${total.total_sabado}</p>
+          <p>Asistencia Domingo: ${total.total_domingo}</p>
+          <p>Asistencia Santa Cena: ${total.total_santa_cena}</p>
+          <p>Asistencia Doulos: ${total.total_doulos}</p>
+          <p>Asistencia a redes (Discipulos): ${total.total_discipulos}</p>
+          <p>Total Nuevos Discipulos: ${total.total_nuevos_discipulos}</p>
+          <p>Total Ofrenda: ${total.total_ofrenda}</p>
+          `;
+          contenedorTotales.appendChild(totalDiv);
+
       });
     },
     renderInformes(informes) {
