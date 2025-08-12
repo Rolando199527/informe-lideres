@@ -60,7 +60,7 @@
     methods: {
       async cargarNombreLideres() {
         try {
-          const res = await fetch("https://informe-api.onrender.com/api/lideres/api/lideres");
+          const res = await fetch("https://informe-lideres-backend.onrender.com/api/lideres");
           let lideres = await res.json();
           lideres = lideres.result;
           // Función para cargar lideres en el select
