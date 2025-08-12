@@ -60,7 +60,7 @@
     methods: {
       async cargarNombreLideres() {
         try {
-          const res = await fetch("http://localhost:6543/api/lideres");
+          const res = await fetch("https://informe-api.onrender.com/api/lideres");
           let lideres = await res.json();
           lideres = lideres.result;
           // Función para cargar lideres en el select
@@ -68,7 +68,7 @@
         } catch (e) {
           console.error(
             "Error al cargar la estructura de coordinaciones y líderes:",
-            e
+            
           );
         }
       },
@@ -77,7 +77,7 @@
         let liderSelected = App.html.lideres.value;
         try {
           const res = await fetch(
-            "http://localhost:6543/api/superior?id=" + liderSelected
+            "https://informe-api.onrender.com/api/superior?id=" + liderSelected
           );
           let superior = await res.json();
           App.renderSuperior(superior);
@@ -89,7 +89,7 @@
         let liderSelected = App.html.lideres.value;
         try {
           const res = await fetch(
-            "http://localhost:6543/api/subordinados/" + liderSelected
+            "https://informe-api.onrender.com/api/subordinados/" + liderSelected
           );
           let subordinados = await res.json();
           subordinados = subordinados.result;
@@ -148,7 +148,7 @@
       },
       async guardarInforme(informeData) {
         try {
-          const res = await fetch("http://localhost:6543/api/guardarInforme", {
+          const res = await fetch("https://informe-api.onrender.com/api/guardarInforme", {
             method: "POST",
             headers: {
               "Content-Type": "application/json",
@@ -185,7 +185,7 @@
       async cargarInformes() {
         try {
           const res = await fetch(
-            "http://localhost:6543/api/obtenerInforme"
+            "https://informe-api.onrender.com/api/obtenerInforme"
           );
           let informes = await res.json();
           informes = informes.result;
@@ -207,7 +207,7 @@
 
       async obtenerTotales() {
         try {
-          const res = await fetch("http://localhost:6543/api/obtenerTotales");
+          const res = await fetch("https://informe-api.onrender.com/api/obtenerTotales");
           const totales = await res.json();
           if (res.ok) {
             console.log("Totales obtenidos exitosamente:", totales);
