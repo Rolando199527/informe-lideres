@@ -4,7 +4,6 @@ const db = require("./db/connection");
 require("dotenv").config();
 
 const app = express();
-app.use(cord());
 app.use(express.json());
 
 // ruta de prueba
