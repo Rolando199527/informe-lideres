@@ -291,21 +291,56 @@
           month: "2-digit",
           day: "2-digit",
         });
-        const totalDiv = document.createElement("div");
+        const totalDiv = document.createElement("table");
         totalDiv.classList.add("total");
         totalDiv.innerHTML = `
           <h2>Total de Informes</h2>
-          <p>Fecha: ${total.fecha}</p>
-          <p>Asistencia Miercoles: ${total.total_miercoles}</p>
-          <p>Asistencia Viernes: ${total.total_viernes}</p>
-          <p>Asistencia Sabado: ${total.total_sabado}</p>
-          <p>Asistencia Domingo: ${total.total_domingo}</p>
-          <p>Asistencia Santa Cena: ${total.total_santa_cena}</p>
-          <p>Asistencia Doulos: ${total.total_doulos}</p>
-          <p>Asistencia a redes (Discipulos): ${total.total_discipulos}</p>
-          <p>Total Nuevos Discipulos: ${total.total_nuevos_discipulos}</p>
-          <p>Total Ofrenda: ${total.total_ofrenda}</p>
-          `;
+
+     <tr>
+      <th>Asistencia Miercoles</th>
+      <td>${total.total_miercoles}</td>
+    </tr>
+
+     <tr>
+      <th>Asistencia Viernes</th>
+      <td>${total.total_viernes}</td>
+     </tr>
+
+     <tr>
+      <th>Asistencia Sabado</th>
+      <td>${total.total_sabado}</td>
+     </tr>
+
+     <tr>
+      <th>Asistencia Domingo</th>
+      <td>${total.total_domingo}</td>
+     </tr>
+
+     <tr>
+      <th>Asistencia Santa Cena</th>
+      <td>${total.total_santa_cena}</td>
+     </tr>
+
+     <tr>
+      <th>Asistencia Doulos</th>
+      <td>${total.total_doulos}</td>
+     </tr>
+
+     <tr>
+      <th>Asistencia a redes (Discipulos)</th>
+      <td>${total.total_red_discipulos}</td>
+     </tr>
+
+     <tr>
+      <th>Total Nuevos Discipulos</th>
+      <td>${total.total_nuevos_discipulos}</td>
+     </tr>
+
+     <tr>
+      <th>Total Ofrenda</th>
+      <td>${total.total_ofrenda}</td>
+     </tr>
+        `;
           contenedorTotales.appendChild(totalDiv);
 
       });
