@@ -15,7 +15,7 @@
   padding: 0;
 }
 
-body {
+.layout {
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   margin: 0;
   padding: 0;
@@ -25,12 +25,71 @@ body {
   font-size: 16px;
 }
 
-.container {
+.layout__container {
   width: 100%;
   max-width: 1200px;
   margin: 0 auto;
   padding: 15px;
 }
+
+.actions {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+}
+
+.actions__button {
+  padding: 0.5rem 1rem;
+  border: none;
+  background: #ccc;
+  cursor: pointer;
+}
+
+.actions__button--primary {
+  background: #007bff;
+  color: #fff;
+}
+
+.actions__icon {
+  margin-right: 0.5rem;
+}
+
+/* Bloque base */
+.alert {
+  display: flex;
+  align-items: center;
+  gap: .75rem;
+  padding: .75rem 1rem;
+  border-radius: .75rem;
+  border: 1px solid transparent;
+  background: #f6fdf8;
+  color: #134e2f;
+}
+
+/* Modificador de éxito */
+.alert--success {
+  background: #e8f8ef;
+  border-color: #bfead3;
+}
+
+/* Elementos */
+.alert__message {
+  font-size: .95rem;
+  line-height: 1.4;
+  font-weight: 500;
+}
+
+.alert__anim {
+  width: 40px;
+  height: 40px;
+  flex-shrink: 0;
+}
+
+/* Utilitaria para mostrar/ocultar */
+.is-hidden { display: none; }
+
+
 
 /* Tipografía */
 h1,
@@ -238,23 +297,11 @@ input[type="checkbox"] {
   margin-top: 30px;
 }
 
-#contenedorInformes {
-  flex-direction: column;
-  gap: 20px;
+.form-informe__section{
   display: flex;
-  flex-direction: column;
-  justify-items: center;
-  align-items: center;
-  animation: fadeIn 0.3s ease-out forwards;
-}
-
-#contenedorInformes > div {
-  background: white;
-  border-radius: 8px;
-  padding: 15px;
-  margin-bottom: 15px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-  border-left: 4px solid var(--primary-color);
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-between;
 }
 
 .totales-container {
