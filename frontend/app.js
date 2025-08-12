@@ -19,7 +19,8 @@
       inputsForm: document.querySelectorAll('input'),
       selectForm: document.querySelectorAll('select'),
       buttonGuardar: document.getElementById("guardarInforme"),
-      successContainer: document.getElementById("success-container")
+      successContainer: document.getElementById("success-container"),
+      isHidden: document.getElementById("isHidden")
     },
     data: {
       fechaInicio: (fechaInicio = new Date()), // Fecha de inicio del informe, puedes cambiarla según sea necesario
