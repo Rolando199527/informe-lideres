@@ -20,7 +20,11 @@
       selectForm: document.querySelectorAll('select'),
       buttonGuardar: document.getElementById("guardarInforme"),
       successContainer: document.getElementById("success-container"),
-      isHidden: document.getElementById("isHidden")
+      isHidden: document.getElementById("isHidden"),
+      total_miercoles: document.getElementById("asistenciaTotalMiercoles"),
+      total_viernes: document.getElementById("asistenciaTotalViernes"),
+      total_sabado: document.getElementById("asistenciaTotalSabado"),
+      total_domingo: document.getElementById("asistenciaTotalDomingo"),
     },
     data: {
       fechaInicio: (fechaInicio = new Date()), // Fecha de inicio del informe, puedes cambiarla según sea necesario
