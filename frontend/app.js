@@ -205,6 +205,7 @@
 
             // Aquí puedes renderizar los informes en tu interfaz
             App.renderInformes(informes);
+            console.log("Informes obtenidos exitosamente:", informes);
           } else if (res.status === 404) {
             App.renderSinInformes();
           } else if (res.status === 500) {
@@ -375,43 +376,49 @@
         const informeDiv = document.createElement("div");
         informeDiv.classList.add("informe");
         informeDiv.innerHTML = `
+        
         <div id="contenedorInformes__header">
-            <div>
-              <h2>${informe.nombre_lider}</h2>
-              <h4>${informe.diacono_coordinador}</h4>
-            </div>
-            <p id="header__fecha">Publicado: ${informe.fecha}</p>
+          <div>
+            <h2>${informe.nombre_lider}</h2>
+            <h4>${informe.diacono_coordinador}</h4>
           </div>
-        <table id="tablaAsistenciaInforme">
-        <h3>Seguimiento Semanal</h3>
-            <tr>
-                <th>Miercoles</th>
-                <th>Viernes</th>
-                <th>Sabado</th>
-                <th>Doulos</th>
-                <th>Domingo</th>
-                <th>Santa Cena</th>
-                <th>Contactado</th>
-            </tr>
-            <tr>
-                <td>${informe.asistencia_miercoles}</td>
-                <td>${informe.asistencia_viernes}</td>
-                <td>${informe.asistencia_sabado}</td>
-                <td>${informe.asistencia_domingo}</td>
-                <td>${informe.asistencia_santa_cena}</td>
-                <td>${informe.asistencia_doulos}</td>
-                <td>${informe.contactado}</td>
-            </tr>
-          </table>
-            <table id="tablaRedInforme">
-              <h3>Informe de Red</h3>
+          <p id="header__fecha">Publicado: ${informe.fecha}</p>
+        </div>
 
-   
+        <table id="tablaAsistenciaInforme">
+          <h3>Seguimiento Semanal</h3>
+          <tr>
+            <th>Miercoles</th>
+            <th>Viernes</th>
+            <th>Sabado</th>
+            <th>Doulos</th>
+            <th>Domingo</th>
+            <th>Santa Cena</th>
+            <th>Contactado</th>
+          </tr>
+          <tr>
+            <td>${informe.asistencia_miercoles}</td>
+            <td>${informe.asistencia_viernes}</td>
+            <td>${informe.asistencia_sabado}</td>
+            <td>${informe.asistencia_domingo}</td>
+            <td>${informe.asistencia_santa_cena}</td>
+            <td>${informe.asistencia_doulos}</td>
+            <td>${informe.contactado}</td>
+          </tr>
+        </table>
+
+        <div id="contenedorTablasInforme">
+          <table id="tablaRedInforme">
+            <tr>
+              <th colspan="2">
+                <h3 class="form-informe__subtitle">Asistencia a Redes</h3>
+              </th>
+            </tr>
             <tr>
               <th>Discipulos</th>
               <td>${informe.red_discipulos}</td>
             </tr>
-            
+
             <tr>
               <th>Nuevos</th>
               <td>${informe.nuevos_discipulos}</td>
@@ -421,29 +428,37 @@
               <td>${informe.ofrenda}</td>
             </tr>
           </table>
-          <table id="tablaRedInforme">
-              <h3>Informe de Red</h3>
 
-   
+          <table id="tablaAsistenciasTotalesInforme">
+            <tr>
+              <th colspan="2"><h3 class="form-informe__subtitle">Asistencias Totales <span
+                id="form-informe__subtitle--disabled">(invitados y Discípulos)</span></h3></th>
+            </tr>
+            
             <tr>
               <th>Miercoles</th>
               <td>${informe.total_miercoles}</td>
             </tr>
-            
+
             <tr>
-              <th>Nuevos</th>
-              <td>${informe.nuevos_discipulos}</td>
+              <th>Viernes</th>
+              <td>${informe.total_viernes}</td>
             </tr>
             <tr>
-              <th>Ofrenda</th>
-              <td>${informe.ofrenda}</td>
+              <th>Sabado</th>
+              <td>${informe.total_sabado}</td>
+            </tr>
+            <tr>
+              <th>Domingo</th>
+              <td>${informe.total_domingo}</td>
             </tr>
           </table>
-           <div>
-            <h3>Nombres Nuevos Discipulos</h3>
-            <p> ${informe.nombre_nuevos_discipulos.join(", ")}</p>
-          </div>
-      
+        </div>
+
+        <div>
+          <h3>Nombres Nuevos Discipulos</h3>
+          <p> ${informe.nombre_nuevos_discipulos.join(", ")}</p>
+        </div>
         `;
         contenedorInformes.appendChild(informeDiv);
       });

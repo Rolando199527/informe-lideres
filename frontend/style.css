@@ -80,6 +80,9 @@ h3 {
 .mensajeVacio {
   color: #2c3e50;
 }
+.form-informe__subtitle{
+  text-align: center;
+}
 
 #form-informe__subtitle--disabled{
   color: gray;
@@ -302,11 +305,20 @@ table {
   border-collapse: collapse;
 }
 
-#tablaRedInforme {
+#tablaRedInforme,
+#tablaAsistenciasTotalesInforme {
   width: 55px;
   border-collapse: collapse;
   margin-top: 20px;
   border: solid 1px var(--border-color);
+  
+}
+
+#contenedorTablasInforme{
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+
 }
 
 th, td {
