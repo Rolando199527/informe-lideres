@@ -133,11 +133,11 @@
           redDiscipulos,
           nuevosDiscipulos,
           ofrenda,
+          nombreNuevosDiscipulos: nombreNuevosDiscipulosArray,
           total_miercoles,
           total_viernes,
           total_sabado,
           total_domingo,
-          nombreNuevosDiscipulos: nombreNuevosDiscipulosArray,
         };
 
         App.methods.guardarInforme(informeData);
