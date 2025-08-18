@@ -20,7 +20,11 @@
       selectForm: document.querySelectorAll('select'),
       buttonGuardar: document.getElementById("guardarInforme"),
       successContainer: document.getElementById("success-container"),
-      isHidden: document.getElementById("isHidden")
+      isHidden: document.getElementById("isHidden"),
+      total_miercoles: document.getElementById("asistenciaTotalMiercoles"),
+      total_viernes: document.getElementById("asistenciaTotalViernes"),
+      total_sabado: document.getElementById("asistenciaTotalSabado"),
+      total_domingo: document.getElementById("asistenciaTotalDomingo"),
     },
     data: {
       fechaInicio: (fechaInicio = new Date()), // Fecha de inicio del informe, puedes cambiarla según sea necesario
@@ -113,6 +117,10 @@
         nuevosDiscipulos = App.html.nuevosDiscipulos.value;
         ofrenda = App.html.ofrenda.value;
         nombreNuevosDiscipulos = App.html.nuevosDiscipulosNombre.value;
+        total_miercoles = App.html.total_miercoles.value;
+        total_viernes = App.html.total_viernes.value;
+        total_sabado = App.html.total_sabado.value;
+        total_domingo = App.html.total_domingo.value;
         const nombreNuevosDiscipulosArray = nombreNuevosDiscipulos
           .split(",")
           .map((nombre) => nombre.trim());
@@ -126,6 +134,10 @@
           nuevosDiscipulos,
           ofrenda,
           nombreNuevosDiscipulos: nombreNuevosDiscipulosArray,
+          total_miercoles,
+          total_viernes,
+          total_sabado,
+          total_domingo,
         };
 
         App.methods.guardarInforme(informeData);
