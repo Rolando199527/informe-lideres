@@ -79,35 +79,40 @@
           <h3 class="form-informe__subtitle">Asistencia a Redes</h3>
           <label class="form-informe__label">
             Discípulos:
-            <input id="redDiscipulos" required type="number" min="0" class="form-informe__input" />
           </label>
+          <input id="redDiscipulos" required type="number" min="0" class="form-informe__input" />
           <label class="form-informe__label">
             Nuevos:
-            <input id="redNuevos" required type="number" min="0" class="form-informe__input" />
           </label>
+          <input id="redNuevos" required type="number" min="0" class="form-informe__input" />
           <label class="form-informe__label">
             Ofrenda:
             <input id="redOfrenda" required type="number" step="0.01" min="0" placeholder="0.00"
               class="form-informe__input" /> $
           </label>
         </div>
+
+        <div>
+          <h3 class="form-informe__subtitle">Asistencias Totales <span id="form-informe__subtitle--disabled">(invitados y Discípulos)</span></h3>
+
+        <label for="asistenciaTotalMiercoles">Miercoles</label>
+        <input id="asistenciaTotalMiercoles" required type="number" min="0" class="form-informe__input" />
+
+        <label for="asistenciaTotalViernes">Viernes</label>
+        <input id="asistenciaTotalViernes" required type="number" min="0" class="form-informe__input" />
+
+        <label for="asistenciaTotalSabado">Sabado</label>
+        <input id="asistenciaTotalSabado" required type="number" min="0" class="form-informe__input" />
+
+        <label for="asistenciaTotalDomingo">Domingo</label>
+        <input id="asistenciaTotalDomingo" required type="number" min="0" class="form-informe__input" />
+
+      </div>
+
       </div>
 
       <!-- Asistencias Totales, nuevos y discípulos -->
-      <div>
-        <label for="">Asistencias total Miercoles (invitados y Discípulos)</label>
-        <input type="text">
-
-        <label for="">Asistencias total Viernes (invitados y Discípulos)</label>
-        <input type="text">
-
-        <label for="">Asistencias total Sabado (invitados y Discípulos)</label>
-        <input type="text">
-
-        <label for="">Asistencias total Domingo (invitados y Discípulos)</label>
-        <input type="text">
-
-      </div>
+      
 
       <!-- Nuevos discípulos -->
       <div class="form-informe__group">
