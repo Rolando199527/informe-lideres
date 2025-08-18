@@ -117,6 +117,10 @@
         nuevosDiscipulos = App.html.nuevosDiscipulos.value;
         ofrenda = App.html.ofrenda.value;
         nombreNuevosDiscipulos = App.html.nuevosDiscipulosNombre.value;
+        total_miercoles = App.html.total_miercoles.value;
+        total_viernes = App.html.total_viernes.value;
+        total_sabado = App.html.total_sabado.value;
+        total_domingo = App.html.total_domingo.value;
         const nombreNuevosDiscipulosArray = nombreNuevosDiscipulos
           .split(",")
           .map((nombre) => nombre.trim());
@@ -129,6 +133,10 @@
           redDiscipulos,
           nuevosDiscipulos,
           ofrenda,
+          total_miercoles,
+          total_viernes,
+          total_sabado,
+          total_domingo,
           nombreNuevosDiscipulos: nombreNuevosDiscipulosArray,
         };
 
