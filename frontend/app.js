@@ -16,8 +16,8 @@
       seccionVer: document.getElementById("seccionVer"),
       llenarInforme: document.getElementById("llenarInforme"),
       contenedorInformes: document.getElementById("contenedorInformes"),
-      inputsForm: document.querySelectorAll('input'),
-      selectForm: document.querySelectorAll('select'),
+      inputsForm: document.querySelectorAll("input"),
+      selectForm: document.querySelectorAll("select"),
       buttonGuardar: document.getElementById("guardarInforme"),
       successContainer: document.getElementById("success-container"),
       isHidden: document.getElementById("isHidden"),
@@ -25,6 +25,9 @@
       total_viernes: document.getElementById("asistenciaTotalViernes"),
       total_sabado: document.getElementById("asistenciaTotalSabado"),
       total_domingo: document.getElementById("asistenciaTotalDomingo"),
+      loader: document.querySelector(".lider__loader"),
+      diaconoCoordinadorLoader: document.querySelector(".diaconocordinador__loader"),
+      discipulosLoader: document.querySelector(".discipulos__loader"),
     },
     data: {
       fechaInicio: (fechaInicio = new Date()), // Fecha de inicio del informe, puedes cambiarla según sea necesario
@@ -64,7 +67,8 @@
     methods: {
       async cargarNombreLideres() {
         try {
-          const res = await fetch("https://informe-lideres-backend.onrender.com/api/lideres");
+          // const res = await fetch("https://informe-lideres-backend.onrender.com/api/lideres");
+          const res = await fetch("http://localhost:6543/api/lideres");
           let lideres = await res.json();
           lideres = lideres.result;
           // Función para cargar lideres en el select
@@ -81,7 +85,8 @@
         let liderSelected = App.html.lideres.value;
         try {
           const res = await fetch(
-            "https://informe-lideres-backend.onrender.com/api/superior?id=" + liderSelected
+            "https://informe-lideres-backend.onrender.com/api/superior?id=" +
+              liderSelected
           );
           let superior = await res.json();
           App.renderSuperior(superior);
@@ -93,7 +98,8 @@
         let liderSelected = App.html.lideres.value;
         try {
           const res = await fetch(
-            "https://informe-lideres-backend.onrender.com/api/subordinados/" + liderSelected
+            "https://informe-lideres-backend.onrender.com/api/subordinados/" +
+              liderSelected
           );
           let subordinados = await res.json();
           subordinados = subordinados.result;
@@ -160,13 +166,16 @@
       },
       async guardarInforme(informeData) {
         try {
-          const res = await fetch("https://informe-lideres-backend.onrender.com/api/guardarInforme", {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify(informeData),
-          });
+          const res = await fetch(
+            "https://informe-lideres-backend.onrender.com/api/guardarInforme",
+            {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify(informeData),
+            }
+          );
 
           const data = await res.json();
           console.log("Código de estado:", res.status);
@@ -202,9 +211,9 @@
           let informes = await res.json();
           informes = informes.result;
           if (res.ok) {
-
             // Aquí puedes renderizar los informes en tu interfaz
             App.renderInformes(informes);
+            console.log("Informes obtenidos exitosamente:", informes);
           } else if (res.status === 404) {
             App.renderSinInformes();
           } else if (res.status === 500) {
@@ -219,7 +228,9 @@
 
       async obtenerTotales() {
         try {
-          const res = await fetch("https://informe-lideres-backend.onrender.com/api/obtenerTotales");
+          const res = await fetch(
+            "https://informe-lideres-backend.onrender.com/api/obtenerTotales"
+          );
           const totales = await res.json();
           if (res.ok) {
             console.log("Totales obtenidos exitosamente:", totales);
@@ -236,43 +247,47 @@
       },
 
       limpiarCampos() {
-
         const inputs = App.html.inputsForm;
-        inputs.forEach(input => input.value = "");
+        inputs.forEach((input) => (input.value = ""));
 
-        const checkboxes = App.html.tablaDisciupulos.querySelectorAll("input[name='asistencia']");
-        checkboxes.forEach(checkbox => checkbox.checked = false);
+        const checkboxes = App.html.tablaDisciupulos.querySelectorAll(
+          "input[name='asistencia']"
+        );
+        checkboxes.forEach((checkbox) => (checkbox.checked = false));
 
         const selects = App.html.selectForm;
-        selects.forEach(select => select.selectedIndex = 0);
-
+        selects.forEach((select) => (select.selectedIndex = 0));
 
         // setTimeout (() => {location.reload(true);}, 1000);
         App.renderSuccessMessage();
-        
 
         window.scrollTo({
-          top:0,
-          behavior: "smooth"
-        })
-      }
+          top: 0,
+          behavior: "smooth",
+        });
+      },
     },
     renderNombreLideres(lideres) {
-      App.html.lideres.innerHTML =
-        '<option value="">Seleccione un lider</option>';
       lideres.forEach((lider) => {
         const option = document.createElement("option");
         option.value = lider.id;
         option.textContent = lider.nombre;
         App.html.lideres.appendChild(option);
       });
+
+      App.html.lideres.style.display = "block";
+      App.html.loader.style.display = "none"; // Ocultar el loader una vez que se cargan los líderes
+      
     },
     renderSuperior(superiorNombre) {
-      App.html.diaconoCoordinador.textContent =
-        superiorNombre.result.nombre_superior;
-      ("No hay coordinador disponible");
+      // TODO: agregar un loader para el diacono coordinador
+      App.html.diaconoCoordinadorLoader.style.display = "block"; // Ocultar el loader una vez que se carga el diacono coordinador
+      App.html.diaconoCoordinador.textContent = superiorNombre.result.nombre_superior;
+      App.html.diaconoCoordinador.style.display = "block";
+      App.html.diaconoCoordinadorLoader.style.display = "none"; // Ocultar el loader una vez que se carga el diacono coordinador
     },
     renderTablaSubordinados(subordinados) {
+      App.html.discipulosLoader.style.display = "block"; // Mostrar el loader mientras se cargan los subordinados
       tablaSubordinadosRow = App.html.tablaDisciupulos;
       tablaSubordinadosRow = tablaSubordinadosRow.querySelector("tbody");
       tablaSubordinadosRow.innerHTML = ""; // Limpiar la tabla antes de agregar nuevos datos
@@ -289,6 +304,8 @@
           <td><input type="checkbox" data-asistencia="Contactado" name="asistencia" value="Contactado"></td>
         `;
         tablaSubordinadosRow.appendChild(tr);
+      App.html.discipulosLoader.style.display = "none"; // Mostrar el loader mientras se cargan los subordinados
+
       });
     },
     renderTotales(totales) {
@@ -354,8 +371,7 @@
       <td>${total.total_ofrenda}</td>
      </tr>
         `;
-          contenedorTotales.appendChild(totalDiv);
-
+        contenedorTotales.appendChild(totalDiv);
       });
     },
     renderInformes(informes) {
@@ -375,43 +391,49 @@
         const informeDiv = document.createElement("div");
         informeDiv.classList.add("informe");
         informeDiv.innerHTML = `
+        
         <div id="contenedorInformes__header">
-            <div>
-              <h2>${informe.nombre_lider}</h2>
-              <h4>${informe.diacono_coordinador}</h4>
-            </div>
-            <p id="header__fecha">Publicado: ${informe.fecha}</p>
+          <div>
+            <h2>${informe.nombre_lider}</h2>
+            <h4>${informe.diacono_coordinador}</h4>
           </div>
-        <table id="tablaAsistenciaInforme">
-        <h3>Seguimiento Semanal</h3>
-            <tr>
-                <th>Miercoles</th>
-                <th>Viernes</th>
-                <th>Sabado</th>
-                <th>Doulos</th>
-                <th>Domingo</th>
-                <th>Santa Cena</th>
-                <th>Contactado</th>
-            </tr>
-            <tr>
-                <td>${informe.asistencia_miercoles}</td>
-                <td>${informe.asistencia_viernes}</td>
-                <td>${informe.asistencia_sabado}</td>
-                <td>${informe.asistencia_domingo}</td>
-                <td>${informe.asistencia_santa_cena}</td>
-                <td>${informe.asistencia_doulos}</td>
-                <td>${informe.contactado}</td>
-            </tr>
-          </table>
-            <table id="tablaRedInforme">
-              <h3>Informe de Red</h3>
+          <p id="header__fecha">Publicado: ${informe.fecha}</p>
+        </div>
 
-   
+        <table id="tablaAsistenciaInforme">
+          <h3>Seguimiento Semanal</h3>
+          <tr>
+            <th>Miercoles</th>
+            <th>Viernes</th>
+            <th>Sabado</th>
+            <th>Doulos</th>
+            <th>Domingo</th>
+            <th>Santa Cena</th>
+            <th>Contactado</th>
+          </tr>
+          <tr>
+            <td>${informe.asistencia_miercoles}</td>
+            <td>${informe.asistencia_viernes}</td>
+            <td>${informe.asistencia_sabado}</td>
+            <td>${informe.asistencia_domingo}</td>
+            <td>${informe.asistencia_santa_cena}</td>
+            <td>${informe.asistencia_doulos}</td>
+            <td>${informe.contactado}</td>
+          </tr>
+        </table>
+
+        <div id="contenedorTablasInforme">
+          <table id="tablaRedInforme">
+            <tr>
+              <th colspan="2">
+                <h3 class="form-informe__subtitle">Asistencia a Redes</h3>
+              </th>
+            </tr>
             <tr>
               <th>Discipulos</th>
               <td>${informe.red_discipulos}</td>
             </tr>
-            
+
             <tr>
               <th>Nuevos</th>
               <td>${informe.nuevos_discipulos}</td>
@@ -421,11 +443,37 @@
               <td>${informe.ofrenda}</td>
             </tr>
           </table>
-           <div>
-            <h3>Nombres Nuevos Discipulos</h3>
-            <p> ${informe.nombre_nuevos_discipulos.join(", ")}</p>
-          </div>
-      
+
+          <table id="tablaAsistenciasTotalesInforme">
+            <tr>
+              <th colspan="2"><h3 class="form-informe__subtitle">Asistencias Totales <span
+                id="form-informe__subtitle--disabled">(invitados y Discípulos)</span></h3></th>
+            </tr>
+            
+            <tr>
+              <th>Miercoles</th>
+              <td>${informe.total_miercoles}</td>
+            </tr>
+
+            <tr>
+              <th>Viernes</th>
+              <td>${informe.total_viernes}</td>
+            </tr>
+            <tr>
+              <th>Sabado</th>
+              <td>${informe.total_sabado}</td>
+            </tr>
+            <tr>
+              <th>Domingo</th>
+              <td>${informe.total_domingo}</td>
+            </tr>
+          </table>
+        </div>
+
+        <div>
+          <h3>Nombres Nuevos Discipulos</h3>
+          <p> ${informe.nombre_nuevos_discipulos.join(", ")}</p>
+        </div>
         `;
         contenedorInformes.appendChild(informeDiv);
       });
@@ -440,10 +488,10 @@
     renderSuccessMessage() {
       App.html.buttonGuardar.style.display = "none";
       App.html.successContainer.style.display = "inline-flex";
-       setTimeout(() => {
-          location.reload(true);
-       }, 3000); // Ocultar el mensaje después de 3 segundos
-    }
+      setTimeout(() => {
+        location.reload(true);
+      }, 3000); // Ocultar el mensaje después de 3 segundos
+    },
   };
   App.init();
 })();

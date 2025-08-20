@@ -11,7 +11,7 @@ app.use(
   cors({
    origin: [
       "https://informe-lideres.vercel.app", // URL corregida (sin https:// duplicado)
-      "http://localhost:5500", // Añadido para Live Server (puerto 5500)
+      "http://localhost:6543", // Añadido para Live Server (puerto 5500)
       "http://127.0.0.1:5500" // Añadido para la IP local
     ], 
     methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
