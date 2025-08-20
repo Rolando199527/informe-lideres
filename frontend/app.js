@@ -278,8 +278,12 @@
       App.html.loader.style.display = "none"; // Ocultar el loader una vez que se cargan los líderes
       
     },
-    async renderSuperior(superiorNombre) {
+    renderSuperior(superiorNombre) {
+      // TODO: agregar un loader para el diacono coordinador
+      App.html.diaconoCoordinadorLoader.style.display = "block"; // Ocultar el loader una vez que se carga el diacono coordinador
       App.html.diaconoCoordinador.textContent = superiorNombre.result.nombre_superior;
+      App.html.diaconoCoordinador.style.display = "block";
+      App.html.diaconoCoordinadorLoader.style.display = "none"; // Ocultar el loader una vez que se carga el diacono coordinador
     },
     renderTablaSubordinados(subordinados) {
       tablaSubordinadosRow = App.html.tablaDisciupulos;
