@@ -16,8 +16,8 @@
       seccionVer: document.getElementById("seccionVer"),
       llenarInforme: document.getElementById("llenarInforme"),
       contenedorInformes: document.getElementById("contenedorInformes"),
-      inputsForm: document.querySelectorAll('input'),
-      selectForm: document.querySelectorAll('select'),
+      inputsForm: document.querySelectorAll("input"),
+      selectForm: document.querySelectorAll("select"),
       buttonGuardar: document.getElementById("guardarInforme"),
       successContainer: document.getElementById("success-container"),
       isHidden: document.getElementById("isHidden"),
@@ -25,6 +25,7 @@
       total_viernes: document.getElementById("asistenciaTotalViernes"),
       total_sabado: document.getElementById("asistenciaTotalSabado"),
       total_domingo: document.getElementById("asistenciaTotalDomingo"),
+      loader: document.querySelector(".loader"),
     },
     data: {
       fechaInicio: (fechaInicio = new Date()), // Fecha de inicio del informe, puedes cambiarla según sea necesario
@@ -64,7 +65,8 @@
     methods: {
       async cargarNombreLideres() {
         try {
-          const res = await fetch("https://informe-lideres-backend.onrender.com/api/lideres");
+          // const res = await fetch("https://informe-lideres-backend.onrender.com/api/lideres");
+          const res = await fetch("http://localhost:6543/api/lideres");
           let lideres = await res.json();
           lideres = lideres.result;
           // Función para cargar lideres en el select
@@ -81,7 +83,8 @@
         let liderSelected = App.html.lideres.value;
         try {
           const res = await fetch(
-            "https://informe-lideres-backend.onrender.com/api/superior?id=" + liderSelected
+            "https://informe-lideres-backend.onrender.com/api/superior?id=" +
+              liderSelected
           );
           let superior = await res.json();
           App.renderSuperior(superior);
@@ -93,7 +96,8 @@
         let liderSelected = App.html.lideres.value;
         try {
           const res = await fetch(
-            "https://informe-lideres-backend.onrender.com/api/subordinados/" + liderSelected
+            "https://informe-lideres-backend.onrender.com/api/subordinados/" +
+              liderSelected
           );
           let subordinados = await res.json();
           subordinados = subordinados.result;
@@ -160,13 +164,16 @@
       },
       async guardarInforme(informeData) {
         try {
-          const res = await fetch("https://informe-lideres-backend.onrender.com/api/guardarInforme", {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify(informeData),
-          });
+          const res = await fetch(
+            "https://informe-lideres-backend.onrender.com/api/guardarInforme",
+            {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify(informeData),
+            }
+          );
 
           const data = await res.json();
           console.log("Código de estado:", res.status);
@@ -202,7 +209,6 @@
           let informes = await res.json();
           informes = informes.result;
           if (res.ok) {
-
             // Aquí puedes renderizar los informes en tu interfaz
             App.renderInformes(informes);
             console.log("Informes obtenidos exitosamente:", informes);
@@ -220,7 +226,9 @@
 
       async obtenerTotales() {
         try {
-          const res = await fetch("https://informe-lideres-backend.onrender.com/api/obtenerTotales");
+          const res = await fetch(
+            "https://informe-lideres-backend.onrender.com/api/obtenerTotales"
+          );
           const totales = await res.json();
           if (res.ok) {
             console.log("Totales obtenidos exitosamente:", totales);
@@ -237,36 +245,37 @@
       },
 
       limpiarCampos() {
-
         const inputs = App.html.inputsForm;
-        inputs.forEach(input => input.value = "");
+        inputs.forEach((input) => (input.value = ""));
 
-        const checkboxes = App.html.tablaDisciupulos.querySelectorAll("input[name='asistencia']");
-        checkboxes.forEach(checkbox => checkbox.checked = false);
+        const checkboxes = App.html.tablaDisciupulos.querySelectorAll(
+          "input[name='asistencia']"
+        );
+        checkboxes.forEach((checkbox) => (checkbox.checked = false));
 
         const selects = App.html.selectForm;
-        selects.forEach(select => select.selectedIndex = 0);
-
+        selects.forEach((select) => (select.selectedIndex = 0));
 
         // setTimeout (() => {location.reload(true);}, 1000);
         App.renderSuccessMessage();
-        
 
         window.scrollTo({
-          top:0,
-          behavior: "smooth"
-        })
-      }
+          top: 0,
+          behavior: "smooth",
+        });
+      },
     },
     renderNombreLideres(lideres) {
-      App.html.lideres.innerHTML =
-        '<option value="">Seleccione un lider</option>';
       lideres.forEach((lider) => {
         const option = document.createElement("option");
         option.value = lider.id;
         option.textContent = lider.nombre;
         App.html.lideres.appendChild(option);
       });
+
+      App.html.lideres.style.display = "block";
+      App.html.loader.style.display = "none"; // Ocultar el loader una vez que se cargan los líderes
+      
     },
     renderSuperior(superiorNombre) {
       App.html.diaconoCoordinador.textContent =
@@ -355,8 +364,7 @@
       <td>${total.total_ofrenda}</td>
      </tr>
         `;
-          contenedorTotales.appendChild(totalDiv);
-
+        contenedorTotales.appendChild(totalDiv);
       });
     },
     renderInformes(informes) {
@@ -473,10 +481,10 @@
     renderSuccessMessage() {
       App.html.buttonGuardar.style.display = "none";
       App.html.successContainer.style.display = "inline-flex";
-       setTimeout(() => {
-          location.reload(true);
-       }, 3000); // Ocultar el mensaje después de 3 segundos
-    }
+      setTimeout(() => {
+        location.reload(true);
+      }, 3000); // Ocultar el mensaje después de 3 segundos
+    },
   };
   App.init();
 })();

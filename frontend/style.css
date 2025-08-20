@@ -37,12 +37,16 @@
   padding: 15px;
 }
 
-.is-hidden { display: none; }
+.is-hidden {
+  display: none;
+}
 
 /* ==================== */
 /* TIPOGRAFÍA */
 /* ==================== */
-h1, h2, h3 {
+h1,
+h2,
+h3 {
   color: #2c3e50;
   margin: 15px 0;
   word-wrap: break-word;
@@ -69,6 +73,7 @@ h3 {
   font-weight: bold;
   color: var(--primary-color);
   margin-top: 10px;
+  display: none;
 }
 
 #diaconoCoordinador {
@@ -80,11 +85,11 @@ h3 {
 .mensajeVacio {
   color: #2c3e50;
 }
-.form-informe__subtitle{
+.form-informe__subtitle {
   text-align: center;
 }
 
-#form-informe__subtitle--disabled{
+#form-informe__subtitle--disabled {
   color: gray;
   font-weight: bold;
   font-size: 0.9rem;
@@ -97,9 +102,9 @@ h3 {
 .alert {
   display: flex;
   align-items: center;
-  gap: .75rem;
-  padding: .75rem 1rem;
-  border-radius: .75rem;
+  gap: 0.75rem;
+  padding: 0.75rem 1rem;
+  border-radius: 0.75rem;
   border: 1px solid transparent;
   background: #f6fdf8;
   color: #134e2f;
@@ -110,7 +115,7 @@ h3 {
 }
 
 .alert__message {
-  font-size: .95rem;
+  font-size: 0.95rem;
   line-height: 1.4;
   font-weight: 500;
 }
@@ -241,6 +246,15 @@ button i {
   width: 40%;
 }
 
+.form-informe__group {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 15px;
+}
+
 label {
   display: block;
   margin: 10px 0 5px;
@@ -311,17 +325,16 @@ table {
   border-collapse: collapse;
   margin-top: 20px;
   border: solid 1px var(--border-color);
-  
 }
 
-#contenedorTablasInforme{
+#contenedorTablasInforme {
   display: flex;
   flex-direction: row;
   gap: 20px;
-
 }
 
-th, td {
+th,
+td {
   padding: 12px 15px;
   text-align: left;
   border-bottom: 1px solid var(--border-color);
@@ -433,6 +446,33 @@ details summary {
 #iconoEmpty {
   width: 80px;
   height: 80px;
+}
+
+/* HTML: <div class="loader"></div> */
+.loader {
+  display: block;
+  width: 15px;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  animation: l5 1s infinite linear alternate;
+}
+@keyframes l5 {
+  0% {
+    box-shadow: 20px 0 #d4073c, -20px 0 #d4073c22;
+    background: #d4073c;
+  }
+  33% {
+    box-shadow: 20px 0 #d4073c, -20px 0 #d4073c22;
+    background: #d4073c22;
+  }
+  66% {
+    box-shadow: 20px 0 #d4073c22, -20px 0 #d4073c;
+    background: #d4073c22;
+  }
+  100% {
+    box-shadow: 20px 0 #d4073c22, -20px 0 #d4073c;
+    background: #d4073c;
+  }
 }
 
 /* ==================== */
