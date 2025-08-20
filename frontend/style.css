@@ -449,8 +449,22 @@ details summary {
 }
 
 /* HTML: <div class="loader"></div> */
-.loader {
+.lider__loader {
   display: block;
+  width: 15px;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  animation: l5 1s infinite linear alternate;
+}
+.diaconocordinador__loader {
+  display: none;
+  width: 15px;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  animation: l5 1s infinite linear alternate;
+}
+.discipulos__loader {
+  display: none;
   width: 15px;
   aspect-ratio: 1;
   border-radius: 50%;

@@ -25,7 +25,8 @@
       total_viernes: document.getElementById("asistenciaTotalViernes"),
       total_sabado: document.getElementById("asistenciaTotalSabado"),
       total_domingo: document.getElementById("asistenciaTotalDomingo"),
-      loader: document.querySelector(".loader"),
+      loader: document.querySelector(".lider__loader"),
+      diaconoCoordinadorLoader: document.querySelector(".diaconocordinador__loader"),
     },
     data: {
       fechaInicio: (fechaInicio = new Date()), // Fecha de inicio del informe, puedes cambiarla según sea necesario
@@ -277,10 +278,8 @@
       App.html.loader.style.display = "none"; // Ocultar el loader una vez que se cargan los líderes
       
     },
-    renderSuperior(superiorNombre) {
-      App.html.diaconoCoordinador.textContent =
-        superiorNombre.result.nombre_superior;
-      ("No hay coordinador disponible");
+    async renderSuperior(superiorNombre) {
+      App.html.diaconoCoordinador.textContent = superiorNombre.result.nombre_superior;
     },
     renderTablaSubordinados(subordinados) {
       tablaSubordinadosRow = App.html.tablaDisciupulos;
