@@ -27,6 +27,7 @@
       total_domingo: document.getElementById("asistenciaTotalDomingo"),
       loader: document.querySelector(".lider__loader"),
       diaconoCoordinadorLoader: document.querySelector(".diaconocordinador__loader"),
+      discipulosLoader: document.querySelector(".discipulos__loader"),
     },
     data: {
       fechaInicio: (fechaInicio = new Date()), // Fecha de inicio del informe, puedes cambiarla según sea necesario
@@ -286,6 +287,7 @@
       App.html.diaconoCoordinadorLoader.style.display = "none"; // Ocultar el loader una vez que se carga el diacono coordinador
     },
     renderTablaSubordinados(subordinados) {
+      App.html.discipulosLoader.style.display = "block"; // Mostrar el loader mientras se cargan los subordinados
       tablaSubordinadosRow = App.html.tablaDisciupulos;
       tablaSubordinadosRow = tablaSubordinadosRow.querySelector("tbody");
       tablaSubordinadosRow.innerHTML = ""; // Limpiar la tabla antes de agregar nuevos datos
@@ -302,6 +304,8 @@
           <td><input type="checkbox" data-asistencia="Contactado" name="asistencia" value="Contactado"></td>
         `;
         tablaSubordinadosRow.appendChild(tr);
+      App.html.discipulosLoader.style.display = "none"; // Mostrar el loader mientras se cargan los subordinados
+
       });
     },
     renderTotales(totales) {
