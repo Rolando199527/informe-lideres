@@ -689,51 +689,35 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 });
 
+
 // === Toggle Tabla ↔ Tarjetas for #tablaDiscipulos ===
 (function(){
   const TABLE_ID = 'tablaDiscipulos';
-  const table = document.getElementById(TABLE_ID);
-  if (!table) return;
-  const container = table.closest('.form-informe__table-container');
-  const toggle = document.getElementById('toggleCards');
 
   function ensureDataLabels(){
+    const table = document.getElementById(TABLE_ID);
+    if (!table) return;
     const ths = Array.from(table.querySelectorAll('thead th'));
     const rows = table.querySelectorAll('tbody tr');
     rows.forEach(row => {
       Array.from(row.children).forEach((td, idx) => {
         const th = ths[idx];
         const full = th ? (th.dataset.full || th.textContent.trim()) : '';
-        td.setAttribute('data-label', full);
+        if (full) td.setAttribute('data-label', full);
       });
     });
   }
 
   function applyToggle(){
+    const table = document.getElementById(TABLE_ID);
+    if (!table) return;
+    const container = table.closest('.form-informe__table-container');
+    const toggle = document.getElementById('toggleCards');
     if (!container || !toggle) return;
     container.classList.toggle('as-cards', toggle.checked);
     ensureDataLabels();
   }
 
-  document.addEventListener('DOMContentLoaded', function(){
-    ensureDataLabels();
-    if (toggle){
-      applyToggle();
-      toggle.addEventListener('change', applyToggle);
-    }
-  });
-
-  // Refresh labels whenever rows change
-  document.addEventListener('DOMContentLoaded', function(){
-    const target = table.tBodies[0] || table;
-    const mo = new MutationObserver(ensureDataLabels);
-    mo.observe(target, { childList:true, subtree:true });
-  });
-})();
-
-// === Auto-reset cards view when leaving mobile ===
-(function(){
-  const TABLE_ID = 'tablaDiscipulos';
   function resetOnDesktop(){
     const isMobile = window.matchMedia('(max-width: 768px)').matches;
     const table = document.getElementById(TABLE_ID);
@@ -745,13 +729,28 @@ document.addEventListener("DOMContentLoaded", function () {
       if (toggle) toggle.checked = false;
     }
   }
+
+  document.addEventListener('DOMContentLoaded', function(){
+    applyToggle();
+    const toggle = document.getElementById('toggleCards');
+    if (toggle){
+      toggle.addEventListener('change', applyToggle);
+    }
+    const table = document.getElementById(TABLE_ID);
+    if (table){
+      const target = table.tBodies[0] || table;
+      const mo = new MutationObserver(ensureDataLabels);
+      mo.observe(target, { childList:true, subtree:true });
+    }
+    resetOnDesktop();
+  });
+
   window.addEventListener('resize', function(){
     clearTimeout(window.__cardsResetRaf);
     window.__cardsResetRaf = setTimeout(resetOnDesktop, 150);
   });
-  document.addEventListener('DOMContentLoaded', resetOnDesktop);
-  try{ resetOnDesktop(); }catch(e){}
 })();
+
 
 // === Abreviaturas de encabezados en móvil (Miér., Vie., Sáb., Dom., Sta. Cena, Contact.) ===
 (function(){
@@ -774,7 +773,7 @@ document.addEventListener("DOMContentLoaded", function () {
     if (isMobile && !applied){
       ths.forEach(th => {
         const full = th.textContent.trim();
-        th.dataset.full = th.dataset.full || full;
+        if (!th.dataset.full) th.dataset.full = full;
         const key = full.normalize('NFD').replace(/[\u0300-\u036f]/g,'');
         const mapped = MAP[full] || MAP[key] || full;
         th.textContent = mapped;
