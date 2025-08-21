@@ -254,10 +254,7 @@ button i {
 .form-informe__group {
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
   gap: 10px;
-  margin-bottom: 15px;
 }
 
 label {
