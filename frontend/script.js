@@ -688,3 +688,31 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   }
 });
+
+
+// === Stacked-cards support: add data-label to #tablaDiscipulos cells ===
+(function(){
+  const TABLE_ID = 'tablaDiscipulos';
+  function applyDataLabels(){
+    const table = document.getElementById(TABLE_ID);
+    if (!table) return;
+    const ths = Array.from(table.querySelectorAll('thead th'));
+    const rows = table.querySelectorAll('tbody tr');
+    if (!ths.length || !rows.length) return;
+    rows.forEach(row => {
+      Array.from(row.children).forEach((td, idx) => {
+        // Use the full label if available, falling back to current th text
+        const th = ths[idx];
+        const full = th ? (th.dataset.full || th.textContent.trim()) : '';
+        td.setAttribute('data-label', full);
+      });
+    });
+  }
+  document.addEventListener('DOMContentLoaded', applyDataLabels);
+  // Also run after any render that could add rows (simple debounce)
+  const ro = new MutationObserver(() => { applyDataLabels(); });
+  document.addEventListener('DOMContentLoaded', () => {
+    const table = document.getElementById(TABLE_ID);
+    if (table) ro.observe(table.tBodies[0] || table, {childList:true, subtree:true});
+  });
+})();
