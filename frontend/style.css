@@ -575,3 +575,33 @@ details summary {
     padding: 20px;
   }
 }
+
+
+/* === Correction: subtitles aligned to left instead of center === */
+.form-informe__subtitle { 
+  text-align: left !important; 
+}
+
+
+/* === Correction: align form labels to left (Discípulos:, Nuevos:, Ofrenda:) === */
+.form-informe__label {
+  text-align: left !important;
+  display: block;
+}
+\n
+/* === Labels and groups left-aligned (desktop + mobile) === */
+.form-informe__group{
+  align-items: stretch !important;
+}
+.form-informe__label{
+  text-align: left !important;
+  display: block;
+  width: 100%;
+}
+/* ensure inputs/selects fill width consistently */
+.form-informe__input,
+.form-informe__textarea,
+.form-informe__select{
+  width: 100%;
+  box-sizing: border-box;
+}
