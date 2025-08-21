@@ -575,3 +575,47 @@ details summary {
     padding: 20px;
   }
 }
+
+/* Cards mode: only affects the Discipulos table inside its container */
+
+/* === Mobile/desktop: subtítulos alineados a la izquierda === */
+.form-informe__subtitle{ text-align: left !important; }
+
+/* === Hacer scroll horizontal suave en el contenedor de la tabla === */
+.form-informe__table-container{
+  align-items: stretch;
+  width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* === Asegurar ancho mínimo de tabla pero adaptable === */
+.form-informe__table{
+  min-width: 600px;
+  width: 100%;
+}
+
+/* === Evitar ancho fijo minúsculo en tablas de resumen === */
+#tablaRedInforme,
+#tablaAsistenciasTotalesInforme{
+  width: auto;
+  max-width: 100%;
+}
+
+/* === Apilar tablas en móvil === */
+@media (max-width: 768px){
+  #contenedorTablasInforme{ flex-direction: column; }
+  #informe-red{ flex-direction: column; }
+}
+
+/* === Evitar cortes del encabezado sticky en móvil === */
+@media (max-width: 768px){
+  th{ position: static; top: auto; }
+  body{ padding-left: 10px; padding-right: 10px; }
+  .layout__container{ padding-left: 12px; padding-right: 12px; }
+}
+
+/* === Alineación izquierda en labels e inputs del formulario === */
+.form-informe__group{ align-items: stretch !important; }
+.form-informe__label{ text-align: left !important; display: block; width: 100%; }
+.form-informe__input, .form-informe__textarea, .form-informe__select{ width: 100%; box-sizing: border-box; }
