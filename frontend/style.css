@@ -636,4 +636,29 @@ details summary {
   color: var(--text);
 }
 /* Hide the box if no nombre yet */
-#diaconoCoordinador:empty{ display: none; }
+
+
+
+/* === Box for Diácono/Coordinador: visible even when empty, aligned with selects === */
+#diaconoCoordinador{
+  display: flex;
+  align-items: center;
+  width: 100%;
+  height: 44px;                /* match typical input/select height */
+  padding: 0 12px;
+  background: #fff;
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  box-sizing: border-box;
+  font-weight: 600;
+  color: var(--text);
+}
+
+/* keep spacing consistent under the label */
+.form-informe__group > #diaconoCoordinador{ margin-top: 4px; }
+
+/* Optional subtle placeholder look when empty */
+#diaconoCoordinador:empty{
+  /* still visible, just lighter text if any content is injected later */
+  color: var(--text);
+}
