@@ -639,12 +639,24 @@ details summary {
 
 
 
-/* === Box for Diácono/Coordinador: visible even when empty, aligned with selects === */
+/* === Box for Diácono/Coordinador: normalized to input/select styles === */
 #diaconoCoordinador{
   display: flex;
   align-items: center;
   width: 100%;
-  height: 44px;                /* match typical input/select height */
+  padding: 12px;                     /* same as inputs/select */
+  margin-bottom: 15px;               /* same rhythm as inputs/select */
+  background: #fff;
+  border: 1px solid var(--border-color);
+  border-radius: 6px;                /* same radius as inputs/select */
+  font-size: 16px;
+  line-height: 1.2;
+  box-sizing: border-box;
+  color: var(--text);
+}
+/* spacing under the label (both controls) */
+.form-informe__group > .form-informe__select,
+.form-informe__group > #diaconoCoordinador{ margin-top: 6px; }/* match typical input/select height */
   padding: 0 12px;
   background: #fff;
   border: 1px solid var(--border-color);
