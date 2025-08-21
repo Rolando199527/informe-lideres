@@ -575,3 +575,72 @@ details summary {
     padding: 20px;
   }
 }
+
+
+/* === Mobile responsiveness enhancements (non-breaking) === */
+.form-informe__table-container{max-width:100%;overflow-x:auto}
+.form-informe__table{min-width:600px}
+
+@media (max-width: 768px){
+  .layout__container{padding:12px}
+  .actions{flex-direction:column;gap:10px}
+  .actions__button{width:100%}
+  .form-informe__section{flex-direction:column;gap:12px}
+  #contenedorTablasInforme{flex-direction:column}
+  #tablaRedInforme,
+  #tablaAsistenciasTotalesInforme{width:100%; max-width:100%}
+  #informe-red{flex-direction:column}
+  table{min-width:520px}
+}
+
+/* Tablet adjustments */
+@media (min-width: 769px) and (max-width: 1024px){
+  .layout__container{padding:20px}
+}
+
+
+/* === Fix Asistencia de Discípulos table cut + add margins === */
+.form-informe__table-container {
+  max-width: 100%;
+  overflow-x: auto;
+  margin-bottom: 16px;
+}
+
+.form-informe__table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+body {
+  padding: 12px;
+}
+
+@media (max-width: 768px){
+  body { padding: 8px; }
+  .form-informe__table { font-size: 14px; }
+}
+
+
+/* === Mobile visual fix for clipped table header & page margins === */
+@media (max-width: 768px){
+  /* Add comfortable margins to page edges */
+  body { padding-left: 12px; padding-right: 12px; }
+  .layout__container{ padding-left: 16px; padding-right: 16px; }
+
+  /* Prevent sticky headers from getting clipped on small screens */
+  th { position: static; top: auto; }
+
+  /* Make the disciples table fully visible and smoothly scrollable */
+  .form-informe__table-container{
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    padding-top: 8px;
+    padding-bottom: 10px;
+  }
+  .form-informe__table{
+    width: max(600px, 100%);
+  }
+
+  /* Extra space between sections */
+  .form-informe__subtitle{ margin-top: 18px; margin-bottom: 10px; }
+}
