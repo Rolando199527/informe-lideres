@@ -730,3 +730,65 @@ document.addEventListener("DOMContentLoaded", function () {
     mo.observe(target, { childList:true, subtree:true });
   });
 })();
+
+// === Auto-reset cards view when leaving mobile ===
+(function(){
+  const TABLE_ID = 'tablaDiscipulos';
+  function resetOnDesktop(){
+    const isMobile = window.matchMedia('(max-width: 768px)').matches;
+    const table = document.getElementById(TABLE_ID);
+    if (!table) return;
+    const container = table.closest('.form-informe__table-container');
+    const toggle = document.getElementById('toggleCards');
+    if (!isMobile && container){
+      container.classList.remove('as-cards');
+      if (toggle) toggle.checked = false;
+    }
+  }
+  window.addEventListener('resize', function(){
+    clearTimeout(window.__cardsResetRaf);
+    window.__cardsResetRaf = setTimeout(resetOnDesktop, 150);
+  });
+  document.addEventListener('DOMContentLoaded', resetOnDesktop);
+  try{ resetOnDesktop(); }catch(e){}
+})();
+
+// === Abreviaturas de encabezados en móvil (Miér., Vie., Sáb., Dom., Sta. Cena, Contact.) ===
+(function(){
+  const TABLE_ID = 'tablaDiscipulos';
+  const MAP = {
+    'Miércoles':'Miér.','Miercoles':'Miér.',
+    'Viernes':'Vie.',
+    'Sábado':'Sáb.','Sabado':'Sáb.',
+    'Domingo':'Dom.',
+    'Santa Cena':'Sta. Cena',
+    'Contactado':'Contact.'
+  };
+  let applied = false;
+  function updateHeaders(){
+    const table = document.getElementById(TABLE_ID);
+    if (!table) return;
+    const ths = table.querySelectorAll('thead th');
+    if (!ths.length) return;
+    const isMobile = window.matchMedia('(max-width: 768px)').matches;
+    if (isMobile && !applied){
+      ths.forEach(th => {
+        const full = th.textContent.trim();
+        th.dataset.full = th.dataset.full || full;
+        const key = full.normalize('NFD').replace(/[\u0300-\u036f]/g,'');
+        const mapped = MAP[full] || MAP[key] || full;
+        th.textContent = mapped;
+      });
+      applied = true;
+    } else if (!isMobile && applied){
+      ths.forEach(th => { if (th.dataset.full) th.textContent = th.dataset.full; });
+      applied = false;
+    }
+  }
+  document.addEventListener('DOMContentLoaded', updateHeaders);
+  window.addEventListener('resize', function(){
+    clearTimeout(window.__hdrAbbrRaf);
+    window.__hdrAbbrRaf = setTimeout(updateHeaders, 120);
+  });
+  try{ updateHeaders(); }catch(e){}
+})();
