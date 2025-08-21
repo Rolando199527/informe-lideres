@@ -688,3 +688,45 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   }
 });
+
+// === Toggle Tabla ↔ Tarjetas for #tablaDiscipulos ===
+(function(){
+  const TABLE_ID = 'tablaDiscipulos';
+  const table = document.getElementById(TABLE_ID);
+  if (!table) return;
+  const container = table.closest('.form-informe__table-container');
+  const toggle = document.getElementById('toggleCards');
+
+  function ensureDataLabels(){
+    const ths = Array.from(table.querySelectorAll('thead th'));
+    const rows = table.querySelectorAll('tbody tr');
+    rows.forEach(row => {
+      Array.from(row.children).forEach((td, idx) => {
+        const th = ths[idx];
+        const full = th ? (th.dataset.full || th.textContent.trim()) : '';
+        td.setAttribute('data-label', full);
+      });
+    });
+  }
+
+  function applyToggle(){
+    if (!container || !toggle) return;
+    container.classList.toggle('as-cards', toggle.checked);
+    ensureDataLabels();
+  }
+
+  document.addEventListener('DOMContentLoaded', function(){
+    ensureDataLabels();
+    if (toggle){
+      applyToggle();
+      toggle.addEventListener('change', applyToggle);
+    }
+  });
+
+  // Refresh labels whenever rows change
+  document.addEventListener('DOMContentLoaded', function(){
+    const target = table.tBodies[0] || table;
+    const mo = new MutationObserver(ensureDataLabels);
+    mo.observe(target, { childList:true, subtree:true });
+  });
+})();

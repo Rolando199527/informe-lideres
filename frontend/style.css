@@ -576,32 +576,44 @@ details summary {
   }
 }
 
-
-/* === Correction: subtitles aligned to left instead of center === */
-.form-informe__subtitle { 
-  text-align: left !important; 
+/* === Toggle Tabla ↔ Tarjetas for Asistencia de Discípulos === */
+.table-controls{
+  margin: 6px 0 10px 0;
 }
-
-
-/* === Correction: align form labels to left (Discípulos:, Nuevos:, Ofrenda:) === */
-.form-informe__label {
-  text-align: left !important;
-  display: block;
+.table-controls label{
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 600;
 }
-\n
-/* === Labels and groups left-aligned (desktop + mobile) === */
-.form-informe__group{
-  align-items: stretch !important;
+/* Cards mode: only affects the Discipulos table inside its container */
+.as-cards #tablaDiscipulos thead{ display:none; }
+.as-cards #tablaDiscipulos tr{
+  display:block;
+  background:#fff;
+  border:1px solid var(--border-color);
+  border-radius:8px;
+  margin-bottom:12px;
+  box-shadow:0 1px 2px rgba(0,0,0,.04);
+  overflow:hidden;
 }
-.form-informe__label{
-  text-align: left !important;
-  display: block;
-  width: 100%;
+.as-cards #tablaDiscipulos td{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:10px;
+  padding:10px 12px;
+  border:0;
+  border-bottom:1px solid var(--border-color);
 }
-/* ensure inputs/selects fill width consistently */
-.form-informe__input,
-.form-informe__textarea,
-.form-informe__select{
-  width: 100%;
-  box-sizing: border-box;
+.as-cards #tablaDiscipulos td:last-child{ border-bottom:0; }
+.as-cards #tablaDiscipulos td::before{
+  content: attr(data-label);
+  font-weight:600;
+  opacity:.9;
+  flex:0 0 46%;
+  text-align:left;
+}
+.as-cards #tablaDiscipulos td > *{
+  max-width:54%;
 }
