@@ -619,3 +619,21 @@ details summary {
 .form-informe__group{ align-items: stretch !important; }
 .form-informe__label{ text-align: left !important; display: block; width: 100%; }
 .form-informe__input, .form-informe__textarea, .form-informe__select{ width: 100%; box-sizing: border-box; }
+
+
+/* === Read-only box style for Diácono/Coordinador name === */
+#diaconoCoordinador{
+  display: block;
+  width: 100%;
+  min-height: 42px;
+  padding: 10px 12px;
+  background: #fff;
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  box-sizing: border-box;
+  line-height: 20px;
+  font-weight: 600;
+  color: var(--text);
+}
+/* Hide the box if no nombre yet */
+#diaconoCoordinador:empty{ display: none; }
