@@ -606,6 +606,10 @@ details summary {
 @media (max-width: 768px){
   #contenedorTablasInforme{ flex-direction: column; }
   #informe-red{ flex-direction: column; }
+  .form-informe__section{
+    flex-direction: column;
+    gap: 12px;
+  }
 }
 
 /* === Evitar cortes del encabezado sticky en móvil === */
@@ -621,56 +625,6 @@ details summary {
 .form-informe__input, .form-informe__textarea, .form-informe__select{ width: 100%; box-sizing: border-box; }
 
 
-/* === Read-only box style for Diácono/Coordinador name === */
-#diaconoCoordinador{
-  display: block;
-  width: 100%;
-  min-height: 42px;
-  padding: 10px 12px;
-  background: #fff;
-  border: 1px solid var(--border-color);
-  border-radius: 8px;
-  box-sizing: border-box;
-  line-height: 20px;
-  font-weight: 600;
-  color: var(--text);
-}
-/* Hide the box if no nombre yet */
-
-
-
-/* === Box for Diácono/Coordinador: normalized to input/select styles === */
-#diaconoCoordinador{
-  display: flex;
-  align-items: center;
-  width: 100%;
-  padding: 12px;                     /* same as inputs/select */
-  margin-bottom: 15px;               /* same rhythm as inputs/select */
-  background: #fff;
-  border: 1px solid var(--border-color);
-  border-radius: 6px;                /* same radius as inputs/select */
-  font-size: 16px;
-  line-height: 1.2;
-  box-sizing: border-box;
-  color: var(--text);
-}
-/* spacing under the label (both controls) */
-.form-informe__group > .form-informe__select,
-.form-informe__group > #diaconoCoordinador{ margin-top: 6px; }/* match typical input/select height */
-  padding: 0 12px;
-  background: #fff;
-  border: 1px solid var(--border-color);
-  border-radius: 8px;
-  box-sizing: border-box;
-  font-weight: 600;
-  color: var(--text);
-}
-
 /* keep spacing consistent under the label */
 .form-informe__group > #diaconoCoordinador{ margin-top: 4px; }
 
-/* Optional subtle placeholder look when empty */
-#diaconoCoordinador:empty{
-  /* still visible, just lighter text if any content is injected later */
-  color: var(--text);
-}

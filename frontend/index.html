@@ -1,137 +1,149 @@
 <!DOCTYPE html>
 
 <html lang="es">
+
 <head>
-<meta charset="utf-8"/><meta content="width=device-width, initial-scale=1" name="viewport"/>
-<link href="style.css" rel="stylesheet"/>
-<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet"/>
+  <meta charset="utf-8" />
+  <meta content="width=device-width, initial-scale=1" name="viewport" />
+  <link href="style.css" rel="stylesheet" />
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet" />
 </head>
+
 <body class="layout layout--default">
-<div class="layout__container">
-<div class="actions">
-<button class="actions__button" id="llenarInforme">
-<i class="fas fa-edit actions__icon"></i>
-          Llenar Informe
+  <div class="layout__container">
+    <div class="actions">
+      <button class="actions__button" id="llenarInforme">
+        <i class="fas fa-edit actions__icon"></i>
+        Llenar Informe
+      </button>
+      <button class="actions__button actions__button--primary" id="verInformes">
+        <i class="fas fa-list actions__icon"></i>
+        Ver Informes
+      </button>
+    </div>
+    <div aria-live="polite" class="alert alert--success is-hidden" id="success-container" role="status">
+      <span class="alert__message" id="mensajeExito">
+        Informe enviado correctamente. Gracias por su diligencia.
+      </span>
+      <dotlottie-wc autoplay="" class="alert__anim" id="animacionExito" loop="" speed="1"
+        src="https://lottie.host/af7c544f-b72d-406b-987e-5d76436fd911/7Ux9IySvi1.lottie">
+      </dotlottie-wc>
+    </div>
+    <h1 class="form-informe__title">Informe Semanal de Líderes</h1>
+    <form class="form-informe" id="datosInforme">
+      <!-- Sección de encabezado del formulario -->
+      <div class="form-informe__section">
+
+        <div class="form-informe__group">
+          <label class="form-informe__label" for="lider">Coordinador / Líder:</label>
+          <p class="lider__loader"></p>
+          <select class="form-informe__select" id="lider" required="">
+            <option disabled="" selected="">Seleccione un Líder</option>
+          </select>
+        </div>
+
+        <div class="form-informe__group">
+          <label class="form-informe__label" for="diaconoCoordinador">Diácono / Coordinador:</label>
+          <p class="diaconocordinador__loader"></p>
+          <p class="form-informe__text" id="diaconoCoordinador"></p>
+        </div>
+
+        <div class="form-informe__group">
+          <label class="form-informe__label" for="fecha">Fecha de Registro:</label>
+          <input class="form-informe__input" id="fecha" required="" type="date" />
+        </div>
+        
+      </div>
+      <!-- Tabla de asistencia -->
+      <h3 class="form-informe__subtitle">Asistencia de Discípulos</h3>
+      <div class="form-informe__table-container">
+        <table class="form-informe__table" id="tablaDiscipulos">
+          <thead class="form-informe__table-head">
+            <tr>
+              <th>Nombre</th>
+              <th>Doulos</th>
+              <th>Miércoles</th>
+              <th>Viernes</th>
+              <th>Sábado</th>
+              <th>Domingo</th>
+              <th>Santa Cena</th>
+              <th>Contactado</th>
+            </tr>
+          </thead>
+          <tbody class="form-informe__table-body"></tbody>
+        </table>
+        <p class="discipulos__loader"></p>
+      </div>
+      <!-- Asistencia a redes -->
+      <div class="form-informe__section">
+        <div class="form-informe__group form-informe__group--redes">
+          <h3 class="form-informe__subtitle">Asistencia a Redes</h3>
+          <label class="form-informe__label"> Discípulos: </label>
+          <input class="form-informe__input" id="redDiscipulos" min="0" required="" type="number" />
+          <label class="form-informe__label"> Nuevos: </label>
+          <input class="form-informe__input" id="redNuevos" min="0" required="" type="number" />
+          <label class="form-informe__label">
+            Ofrenda:
+            <input class="form-informe__input" id="redOfrenda" min="0" placeholder="0.00" required="" step="0.01"
+              type="number" />
+          </label>
+        </div>
+        <div>
+          <h3 class="form-informe__subtitle">
+            Asistencias Totales
+            <span id="form-informe__subtitle--disabled">(invitados y Discípulos)</span>
+          </h3>
+          <label for="asistenciaTotalMiercoles">Miercoles</label>
+          <input class="form-informe__input" id="asistenciaTotalMiercoles" min="0" required="" type="number" />
+          <label for="asistenciaTotalViernes">Viernes</label>
+          <input class="form-informe__input" id="asistenciaTotalViernes" min="0" required="" type="number" />
+          <label for="asistenciaTotalSabado">Sabado</label>
+          <input class="form-informe__input" id="asistenciaTotalSabado" min="0" required="" type="number" />
+          <label for="asistenciaTotalDomingo">Domingo</label>
+          <input class="form-informe__input" id="asistenciaTotalDomingo" min="0" required="" type="number" />
+        </div>
+      </div>
+      <!-- Asistencias Totales, nuevos y discípulos -->
+      <!-- Nuevos discípulos -->
+      <div class="form-informe__group">
+        <h3 class="form-informe__subtitle">Nuevos Discípulos</h3>
+        <textarea class="form-informe__textarea" id="nuevosDiscipulos"
+          placeholder="Ingrese nombres separados por coma"></textarea>
+      </div>
+      <!-- Botón de guardar -->
+      <button class="btn btn-primary form-informe__submit" id="guardarInforme" type="submit">
+        <i class="fas fa-save"></i> Guardar Informe
+      </button>
+    </form>
+    <section class="reports-view is-hidden" id="seccionVer">
+      <h2 class="reports-view__title">
+        <i aria-hidden="true" class="fas fa-list-alt reports-view__icon"></i>
+        Ver Informes
+      </h2>
+      <div class="reports-view__filters">
+        <label class="reports-view__label" for="filtroCoordinacion">Filtrar por Coordinación:</label>
+        <select class="reports-view__select" id="filtroCoordinacion">
+          <option value="todas">Todas</option>
+          <option value="sin_informe">Quién no llenó su informe</option>
+        </select>
+      </div>
+      <div class="reports-view__totals" id="contenedorTotales"></div>
+      <div class="reports-view__list" id="contenedorInformes"></div>
+      <div class="actions">
+        <button class="btn btn--success actions__button" id="btnExportExcel">
+          <i aria-hidden="true" class="fas fa-file-excel actions__icon"></i>
+          Exportar a Excel
         </button>
-<button class="actions__button actions__button--primary" id="verInformes">
-<i class="fas fa-list actions__icon"></i>
-          Ver Informes
+        <button class="btn btn--danger actions__button" id="btnBorrarInformes">
+          <i aria-hidden="true" class="fas fa-trash-alt actions__icon"></i>
+          Borrar Todos
         </button>
-</div>
-<div aria-live="polite" class="alert alert--success is-hidden" id="success-container" role="status">
-<span class="alert__message" id="mensajeExito">
-          Informe enviado correctamente. Gracias por su diligencia.
-        </span>
-<dotlottie-wc autoplay="" class="alert__anim" id="animacionExito" loop="" speed="1" src="https://lottie.host/af7c544f-b72d-406b-987e-5d76436fd911/7Ux9IySvi1.lottie">
-</dotlottie-wc>
-</div>
-<h1 class="form-informe__title">Informe Semanal de Líderes</h1>
-<form class="form-informe" id="datosInforme">
-<!-- Sección de encabezado del formulario -->
-<div class="form-informe__section">
-<div class="form-informe__group">
-<label class="form-informe__label" for="lider">Coordinador / Líder:</label>
-<p class="lider__loader"></p>
-<select class="form-informe__select" id="lider" required="">
-<option disabled="" selected="">Seleccione un Líder</option>
-</select>
-</div>
-<div class="form-informe__group">
-<label class="form-informe__label" for="diaconoCoordinador">Diácono / Coordinador:</label>
-<p class="diaconocordinador__loader"></p>
-<p class="form-informe__text" id="diaconoCoordinador"></p>
-</div>
-<div class="form-informe__group">
-<label class="form-informe__label" for="fecha">Fecha de Registro:</label>
-<input class="form-informe__input" id="fecha" required="" type="date"/>
-</div>
-</div>
-<!-- Tabla de asistencia -->
-<h3 class="form-informe__subtitle">Asistencia de Discípulos</h3>
-<div class="form-informe__table-container">
-<table class="form-informe__table" id="tablaDiscipulos">
-<thead class="form-informe__table-head">
-<tr>
-<th>Nombre</th>
-<th>Doulos</th>
-<th>Miércoles</th>
-<th>Viernes</th>
-<th>Sábado</th>
-<th>Domingo</th>
-<th>Santa Cena</th>
-<th>Contactado</th>
-</tr>
-</thead>
-<tbody class="form-informe__table-body"></tbody>
-</table>
-<p class="discipulos__loader"></p>
-</div>
-<!-- Asistencia a redes -->
-<div class="form-informe__section">
-<div class="form-informe__group form-informe__group--redes">
-<h3 class="form-informe__subtitle">Asistencia a Redes</h3>
-<label class="form-informe__label"> Discípulos: </label>
-<input class="form-informe__input" id="redDiscipulos" min="0" required="" type="number"/>
-<label class="form-informe__label"> Nuevos: </label>
-<input class="form-informe__input" id="redNuevos" min="0" required="" type="number"/>
-<label class="form-informe__label">
-              Ofrenda:
-              <input class="form-informe__input" id="redOfrenda" min="0" placeholder="0.00" required="" step="0.01" type="number"/>
-</label>
-</div>
-<div>
-<h3 class="form-informe__subtitle">
-              Asistencias Totales
-              <span id="form-informe__subtitle--disabled">(invitados y Discípulos)</span>
-</h3>
-<label for="asistenciaTotalMiercoles">Miercoles</label>
-<input class="form-informe__input" id="asistenciaTotalMiercoles" min="0" required="" type="number"/>
-<label for="asistenciaTotalViernes">Viernes</label>
-<input class="form-informe__input" id="asistenciaTotalViernes" min="0" required="" type="number"/>
-<label for="asistenciaTotalSabado">Sabado</label>
-<input class="form-informe__input" id="asistenciaTotalSabado" min="0" required="" type="number"/>
-<label for="asistenciaTotalDomingo">Domingo</label>
-<input class="form-informe__input" id="asistenciaTotalDomingo" min="0" required="" type="number"/>
-</div>
-</div>
-<!-- Asistencias Totales, nuevos y discípulos -->
-<!-- Nuevos discípulos -->
-<div class="form-informe__group">
-<h3 class="form-informe__subtitle">Nuevos Discípulos</h3>
-<textarea class="form-informe__textarea" id="nuevosDiscipulos" placeholder="Ingrese nombres separados por coma"></textarea>
-</div>
-<!-- Botón de guardar -->
-<button class="btn btn-primary form-informe__submit" id="guardarInforme" type="submit">
-<i class="fas fa-save"></i> Guardar Informe
-        </button>
-</form>
-<section class="reports-view is-hidden" id="seccionVer">
-<h2 class="reports-view__title">
-<i aria-hidden="true" class="fas fa-list-alt reports-view__icon"></i>
-          Ver Informes
-        </h2>
-<div class="reports-view__filters">
-<label class="reports-view__label" for="filtroCoordinacion">Filtrar por Coordinación:</label>
-<select class="reports-view__select" id="filtroCoordinacion">
-<option value="todas">Todas</option>
-<option value="sin_informe">Quién no llenó su informe</option>
-</select>
-</div>
-<div class="reports-view__totals" id="contenedorTotales"></div>
-<div class="reports-view__list" id="contenedorInformes"></div>
-<div class="actions">
-<button class="btn btn--success actions__button" id="btnExportExcel">
-<i aria-hidden="true" class="fas fa-file-excel actions__icon"></i>
-            Exportar a Excel
-          </button>
-<button class="btn btn--danger actions__button" id="btnBorrarInformes">
-<i aria-hidden="true" class="fas fa-trash-alt actions__icon"></i>
-            Borrar Todos
-          </button>
-</div>
-</section>
-</div>
-<script src="app.js"></script><script src="script.js"></script>
-<script src="https://unpkg.com/@lottiefiles/dotlottie-wc@0.6.2/dist/dotlottie-wc.js" type="module"></script>
+      </div>
+    </section>
+  </div>
+  <script src="app.js"></script>
+  <script src="script.js"></script>
+  <script src="https://unpkg.com/@lottiefiles/dotlottie-wc@0.6.2/dist/dotlottie-wc.js" type="module"></script>
 </body>
+
 </html>
