@@ -28,6 +28,7 @@
       loader: document.querySelector(".lider__loader"),
       diaconoCoordinadorLoader: document.querySelector(".diaconocordinador__loader"),
       discipulosLoader: document.querySelector(".discipulos__loader"),
+      filtroCoordinacion: document.getElementById("filtroCoordinacion"),
     },
     data: {
       fechaInicio: (fechaInicio = new Date()), // Fecha de inicio del informe, puedes cambiarla según sea necesario
@@ -148,22 +149,7 @@
 
         App.methods.guardarInforme(informeData);
       },
-      sumarAsistencia(asistencia) {
-        const asistenciaCount = asistencia.reduce((acumulador, value) => {
-          acumulador[value] = (acumulador[value] || 0) + 1;
-          return acumulador;
-        }, {});
 
-        return {
-          miercoles: asistenciaCount["Miercoles"] || 0,
-          viernes: asistenciaCount["Viernes"] || 0,
-          sabado: asistenciaCount["Sabado"] || 0,
-          domingo: asistenciaCount["Domingo"] || 0,
-          santa_cena: asistenciaCount["Santa Cena"] || 0,
-          doulos: asistenciaCount["Doulos"] || 0,
-          contactado: asistenciaCount["Contactado"] || 0,
-        };
-      },
       async guardarInforme(informeData) {
         try {
           const res = await fetch(
@@ -213,6 +199,7 @@
           if (res.ok) {
             // Aquí puedes renderizar los informes en tu interfaz
             App.renderInformes(informes);
+            App.renderFiltroCoordinacion(informes);
             console.log("Informes obtenidos exitosamente:", informes);
           } else if (res.status === 404) {
             App.renderSinInformes();
@@ -477,6 +464,16 @@
         `;
         contenedorInformes.appendChild(informeDiv);
       });
+    },
+    renderFiltroCoordinacion(informe) {
+
+      informe.forEach((datos_informe) => {
+        const option = document.createElement("option")
+        option.value = datos_informe.lider_id;
+        option.textContent = datos_informe.nombre_lider;
+        App.html.filtroCoordinacion.appendChild(option);
+      
+      })
     },
     renderSinInformes() {
       App.html.datosInforme.style.display = "none";
