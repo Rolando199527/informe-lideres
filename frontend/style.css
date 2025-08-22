@@ -620,7 +620,7 @@ details summary {
 }
 
 /* === Alineación izquierda en labels e inputs del formulario === */
-.form-informe__group{ align-items: stretch !important; }
+.form-informe__group{ align-items:center !important; }
 .form-informe__label{ text-align: left !important; display: block; width: 100%; }
 .form-informe__input, .form-informe__textarea, .form-informe__select{ width: 100%; box-sizing: border-box; }
 
