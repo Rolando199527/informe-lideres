@@ -63,6 +63,16 @@
           App.html.seccionVer.style.display = "none";
           App.html.contenedorInformes.innerHTML = ""; // Limpiar informes previos
         });
+
+        App.html.filtroCoordinacion.addEventListener("change", () => {
+          const liderSelected = App.html.filtroCoordinacion.value;
+          if (liderSelected) {
+            App.methods.cargarInformePorLider(liderSelected);
+          } else {
+            App.html.contenedorInformes.innerHTML = ""; // Limpiar informes previos si no hay selección
+          }
+
+        })
       },
     },
     methods: {
@@ -211,6 +221,10 @@
           console.error("Error en la solicitud de informes:", error);
           App.renderSinInformes();
         }
+      },
+
+      async cargarInformePorLider(){
+        console.log("Cargando informes por líder...");
       },
 
       async obtenerTotales() {
