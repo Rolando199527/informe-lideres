@@ -26,7 +26,9 @@
       total_sabado: document.getElementById("asistenciaTotalSabado"),
       total_domingo: document.getElementById("asistenciaTotalDomingo"),
       loader: document.querySelector(".lider__loader"),
-      diaconoCoordinadorLoader: document.querySelector(".diaconocordinador__loader"),
+      diaconoCoordinadorLoader: document.querySelector(
+        ".diaconocordinador__loader"
+      ),
       discipulosLoader: document.querySelector(".discipulos__loader"),
       filtroCoordinacion: document.getElementById("filtroCoordinacion"),
     },
@@ -70,14 +72,15 @@
           } else {
             App.html.contenedorInformes.innerHTML = ""; // Limpiar informes previos si no hay selección
           }
-
-        })
+        });
       },
     },
     methods: {
       async cargarNombreLideres() {
         try {
-          const res = await fetch("https://informe-lideres-backend.onrender.com/api/lideres");
+          const res = await fetch(
+            "https://informe-lideres-backend.onrender.com/api/lideres"
+          );
           // const res = await fetch("http://localhost:6543/api/lideres");
           let lideres = await res.json();
           lideres = lideres.result;
@@ -161,13 +164,13 @@
 
       sumarAsistencia(asistenciaArray) {
         const asistenciaCount = {
-          Miercoles: 0,
-          Viernes: 0,
-          Sabado: 0,
-          Domingo: 0,
-          "Santa Cena": 0,
-          Doulos: 0,
-          Contactado: 0,
+          miercoles: 0,
+          viernes: 0,
+          sabado: 0,
+          domingo: 0,
+          santa_cena: 0,
+          doulos: 0,
+          contactado: 0,
         };
 
         asistenciaArray.forEach((asistencia) => {
@@ -182,8 +185,8 @@
       async guardarInforme(informeData) {
         try {
           const res = await fetch(
-            "https://informe-lideres-backend.onrender.com/api/guardarInforme",
-            // "http://localhost:6543/api/guardarInforme",
+            // "https://informe-lideres-backend.onrender.com/api/guardarInforme",
+            "http://localhost:6543/api/guardarInforme",
             {
               method: "POST",
               headers: {
@@ -241,18 +244,20 @@
         }
       },
 
-      async cargarInformePorLider(liderSelected){
+      async cargarInformePorLider(liderSelected) {
         console.log("Cargando informes por líder...");
         console.log("Líder seleccionado:", liderSelected);
-        try{
-          const res = await fetch('https://informe-lideres-backend.onrender.com/api/obtenerInformePorlider?id=' + liderSelected);
+        try {
+          const res = await fetch(
+            "https://informe-lideres-backend.onrender.com/api/obtenerInformePorlider?id=" +
+              liderSelected
+          );
           const informe = await res.json();
           informe = informe.result;
           console.log("Respuesta del servidor:", informe);
           App.methods.renderInformes(informe);
-
-        }catch(e){
-          console.log('Error al cargar informes por líder:', e);
+        } catch (e) {
+          console.log("Error al cargar informes por líder:", e);
         }
       },
 
@@ -307,12 +312,12 @@
 
       App.html.lideres.style.display = "block";
       App.html.loader.style.display = "none"; // Ocultar el loader una vez que se cargan los líderes
-      
     },
     renderSuperior(superiorNombre) {
       // TODO: agregar un loader para el diacono coordinador
       App.html.diaconoCoordinadorLoader.style.display = "block"; // Ocultar el loader una vez que se carga el diacono coordinador
-      App.html.diaconoCoordinador.textContent = superiorNombre.result.nombre_superior;
+      App.html.diaconoCoordinador.textContent =
+        superiorNombre.result.nombre_superior;
       App.html.diaconoCoordinador.style.display = "block";
       App.html.diaconoCoordinadorLoader.style.display = "none"; // Ocultar el loader una vez que se carga el diacono coordinador
     },
@@ -334,8 +339,7 @@
           <td><input type="checkbox" data-asistencia="Contactado" name="asistencia" value="Contactado"></td>
         `;
         tablaSubordinadosRow.appendChild(tr);
-      App.html.discipulosLoader.style.display = "none"; // Mostrar el loader mientras se cargan los subordinados
-
+        App.html.discipulosLoader.style.display = "none"; // Mostrar el loader mientras se cargan los subordinados
       });
     },
     renderTotales(totales) {
@@ -509,14 +513,12 @@
       });
     },
     renderFiltroCoordinacion(informe) {
-
       informe.forEach((datos_informe) => {
-        const option = document.createElement("option")
+        const option = document.createElement("option");
         option.value = datos_informe.lider_id;
         option.textContent = datos_informe.nombre_lider;
         App.html.filtroCoordinacion.appendChild(option);
-      
-      })
+      });
     },
     renderSinInformes() {
       App.html.datosInforme.style.display = "none";
