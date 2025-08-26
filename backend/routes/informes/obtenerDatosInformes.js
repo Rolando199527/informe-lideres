@@ -5,7 +5,7 @@ const db = require('../../db/connection');
 router.get("/obtenerInforme", async (req, res) => {
     const idLiderSelected = req.query.id;
     try{
-        const result = await db.query("SELECT * FROM obtener_informes_desde(NULL, NULL)",
+        const result = await db.query("SELECT * FROM obtener_informes_ultima_fecha(NULL, NULL, NULL))",
             [idLiderSelected] 
         );
         if (result.rows.length === 0) {

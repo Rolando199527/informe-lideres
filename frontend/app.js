@@ -201,9 +201,7 @@
       },
       async cargarInformes() {
         try {
-          const res = await fetch(
-            "https://informe-lideres-backend.onrender.com/api/obtenerInforme"
-          );
+          const res = await fetch("https://informe-lideres-backend.onrender.com/api/obtenerInforme");
           let informes = await res.json();
           informes = informes.result;
           if (res.ok) {
