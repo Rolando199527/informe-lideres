@@ -223,8 +223,19 @@
         }
       },
 
-      async cargarInformePorLider(){
+      async cargarInformePorLider(liderSelected){
         console.log("Cargando informes por líder...");
+        console.log("Líder seleccionado:", liderSelected);
+        try{
+          const res = await fetch('https://informe-lideres-backend.onrender.com/api/obtenerInforme?id=' + liderSelected);
+          const informe = await res.json();
+          informe = informe.result;
+          console.log("Respuesta del servidor:", informe);
+          App.methods.renderInformes(informe);
+
+        }catch(e){
+          console.log('Error al cargar informes por líder:', e);
+        }
       },
 
       async obtenerTotales() {
