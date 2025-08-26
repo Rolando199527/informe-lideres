@@ -13,6 +13,10 @@ router.post("/guardarInforme", async (req, res) => {
       nuevosDiscipulos,
       ofrenda,
       nombreNuevosDiscipulos,
+      total_miercoles,
+      total_viernes,
+      total_sabado,
+      total_domingo,
     } = req.body;
 
     const {

@@ -48,8 +48,7 @@
           App.methods.cargarSuperior();
           App.methods.cargarSubordinados();
         });
-        App.html.datosInforme.addEventListener("submit", (e) => {
-          e.preventDefault();
+        App.html.buttonGuardar.addEventListener("click", (e) => {
           // Aquí puedes agregar la lógica para guardar el informe
           App.methods.capturarDatosInforme();
         });
@@ -160,10 +159,31 @@
         App.methods.guardarInforme(informeData);
       },
 
+      sumarAsistencia(asistenciaArray) {
+        const asistenciaCount = {
+          Miercoles: 0,
+          Viernes: 0,
+          Sabado: 0,
+          Domingo: 0,
+          "Santa Cena": 0,
+          Doulos: 0,
+          Contactado: 0,
+        };
+
+        asistenciaArray.forEach((asistencia) => {
+          if (asistenciaCount.hasOwnProperty(asistencia)) {
+            asistenciaCount[asistencia]++;
+          }
+        });
+
+        return asistenciaCount;
+      },
+
       async guardarInforme(informeData) {
         try {
           const res = await fetch(
             "https://informe-lideres-backend.onrender.com/api/guardarInforme",
+            // "http://localhost:6543/api/guardarInforme",
             {
               method: "POST",
               headers: {
@@ -172,7 +192,6 @@
               body: JSON.stringify(informeData),
             }
           );
-
           const data = await res.json();
           console.log("Código de estado:", res.status);
 
