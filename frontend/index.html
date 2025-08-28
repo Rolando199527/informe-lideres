@@ -170,7 +170,7 @@
       <div class="reports-view__filters mb-3">
         <label class="reports-view__label form-label" for="filtroCoordinacion">Filtrar por Coordinación:</label>
         <select class="reports-view__select form-select" id="filtroCoordinacion">
-          <option value="todas">Todas</option>
+          <option value="0">Todas</option>
           <option value="sin_informe">Quién no llenó su informe</option>
         </select>
       </div>
@@ -178,13 +178,7 @@
         <!-- <canvas class="w-100 h-auto" id="graficoAsistencias">Hola</canvas> -->
       </div>
       <div class="reports-view__list" id="contenedorInformes">
-        <div class="d-flex justify-content-center align-items-center" id="contenedorInformes__header">
-          <div>
-            <h2>${informe.nombre_lider}</h2>
-            <h4>${informe.diacono_coordinador}</h4>
-          </div>
-          <p id="header__fecha">Publicado: ${informe.fecha}</p>
-        </div>
+
       </div>
       <div class="actions d-flex gap-2 mt-3">
         <button class="btn btn--success actions__button btn btn-outline-success" id="btnExportExcel">
