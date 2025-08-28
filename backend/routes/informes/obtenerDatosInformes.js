@@ -21,7 +21,7 @@ router.get("/obtenerInforme", async (req, res) => {
 router.get("/obtenerInformePorlider", async (req, res) => {
     const idLiderSelected = req.query.id;
     try{
-        const result = await db.query("SELECT * FROM obtener_informes_ultima_fecha(NULL, NULL, NULL)",
+        const result = await db.query("SELECT * FROM obtener_informes_ultima_fecha(NULL, NULL, $1)",
             [idLiderSelected]
             
         );
