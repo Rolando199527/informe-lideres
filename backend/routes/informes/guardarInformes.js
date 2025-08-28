@@ -13,6 +13,10 @@ router.post("/guardarInforme", async (req, res) => {
       nuevosDiscipulos,
       ofrenda,
       nombreNuevosDiscipulos,
+      total_miercoles,
+      total_viernes,
+      total_sabado,
+      total_domingo,
     } = req.body;
 
     const {
@@ -24,8 +28,11 @@ router.post("/guardarInforme", async (req, res) => {
       doulos,
       contactado,
     } = asistencia;
+    console.log(req.body);
+    console.log(asistencia)
     const query = `
-    INSERT INTO informes (lider_id, diacono_coordinador, fecha, asistencia_miercoles,asistencia_viernes,asistencia_sabado,asistencia_domingo,asistencia_santa_cena,asistencia_doulos,contactado,red_discipulos,nuevos_discipulos, ofrenda, nombre_nuevos_discipulos, total_miercoles, total_viernes, total_sabado, total_domingo)
+    INSERT INTO informes (lider_id, diacono_coordinador, fecha, asistencia_miercoles, asistencia_viernes, asistencia_sabado, asistencia_domingo, asistencia_santa_cena, asistencia_doulos, contactado, r
+                          ed_discipulos, nuevos_discipulos, ofrenda, nombre_nuevos_discipulos, total_miercoles, total_viernes, total_sabado, total_domingo)
     VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17, $18)
     RETURNING *
     `;

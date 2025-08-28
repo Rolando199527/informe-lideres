@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-
 <html lang="es">
 
 <head>
@@ -7,58 +6,73 @@
   <meta content="width=device-width, initial-scale=1" name="viewport" />
   <link href="style.css" rel="stylesheet" />
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
 </head>
 
-<body class="layout layout--default">
-  <div class="layout__container">
-    <div class="actions">
-      <button class="actions__button" id="llenarInforme">
-        <i class="fas fa-edit actions__icon"></i>
-        Llenar Informe
+<body class="layout layout--default bg-light py-4">
+  <div class="layout__container container">
+
+    <!-- Botones superiores -->
+    <div class="actions d-flex justify-content-center gap-2 mb-4">
+      <button class="actions__button btn btn-outline-primary" id="llenarInforme">
+        <i class="fas fa-edit actions__icon"></i> Llenar Informe
       </button>
-      <button class="actions__button actions__button--primary" id="verInformes">
-        <i class="fas fa-list actions__icon"></i>
-        Ver Informes
+      <button class="actions__button actions__button--primary btn btn-primary" id="verInformes">
+        <i class="fas fa-list actions__icon"></i> Ver Informes
       </button>
     </div>
-    <div aria-live="polite" class="alert alert--success is-hidden" id="success-container" role="status">
-      <span class="alert__message" id="mensajeExito">
+
+    <!-- Mensaje de éxito -->
+    <div class="alert alert--success alert-success d-none align-items-center" id="success-container" role="status">
+      <span class="alert__message me-3" id="mensajeExito">
         Informe enviado correctamente. Gracias por su diligencia.
       </span>
-      <dotlottie-wc autoplay="" class="alert__anim" id="animacionExito" loop="" speed="1"
-        src="https://lottie.host/af7c544f-b72d-406b-987e-5d76436fd911/7Ux9IySvi1.lottie">
-      </dotlottie-wc>
+      <dotlottie-wc autoplay class="alert__anim" id="animacionExito" loop speed="1"
+        src="https://lottie.host/af7c544f-b72d-406b-987e-5d76436fd911/7Ux9IySvi1.lottie"></dotlottie-wc>
     </div>
-    <h1 class="form-informe__title">Informe Semanal de Líderes</h1>
+
+    <h1 class="form-informe__title h3 mb-4 text-center">Informe Semanal de Líderes</h1>
+
+    <!-- Formulario -->
     <form class="form-informe" id="datosInforme">
-      <!-- Sección de encabezado del formulario -->
-      <div class="form-informe__section">
+      <!-- Sección 1 -->
+      <div class="container-sm d-flex flex-column g-3 mb-4 p-3">
+        <div class="row w-100 g-3">
+          <div class="form-informe__group col">
+            <label class="form-informe__label form-label fw-bold" for="lider">Coordinador / Líder:</label>
+            <p class="lider__loader text-muted small"></p>
+            <!-- <select class="form-informe__select form-select p-3" id="lider" required>
+              <option disabled selected>Seleccione un Líder</option>
+            </select> -->
+            <div class="form-floating">
+              <select class="form-select" id="lider" aria-label="Floating label select example">
+                <option selected disabled>--Seleciona un lider--</option>
+              </select>
+              <label for="lider">seleciona el nombre del lider</label>
+            </div>
+          </div>
 
-        <div class="form-informe__group">
-          <label class="form-informe__label" for="lider">Coordinador / Líder:</label>
-          <p class="lider__loader"></p>
-          <select class="form-informe__select" id="lider" required="">
-            <option disabled="" selected="">Seleccione un Líder</option>
-          </select>
+          <div class="form-informe__group col">
+            <label class="form-informe__label form-label fw-bold" for="diaconoCoordinador">Diácono /
+              Coordinador:</label>
+            <p class="diaconocordinador__loader text-muted small"></p>
+            <p class="form-informe__text form-control-plaintext p-3" id="diaconoCoordinador"></p>
+          </div>
+
+          <div class="form-informe__group col">
+            <label class="form-informe__label form-label fw-bold" for="fecha">Fecha de Registro:</label>
+            <input class="form-informe__input form-control p-3" id="fecha" required type="date" />
+          </div>
         </div>
 
-        <div class="form-informe__group">
-          <label class="form-informe__label" for="diaconoCoordinador">Diácono / Coordinador:</label>
-          <p class="diaconocordinador__loader"></p>
-          <p class="form-informe__text" id="diaconoCoordinador"></p>
-        </div>
-
-        <div class="form-informe__group">
-          <label class="form-informe__label" for="fecha">Fecha de Registro:</label>
-          <input class="form-informe__input" id="fecha" required="" type="date" />
-        </div>
-        
       </div>
+
       <!-- Tabla de asistencia -->
-      <h3 class="form-informe__subtitle">Asistencia de Discípulos</h3>
-      <div class="form-informe__table-container">
-        <table class="form-informe__table" id="tablaDiscipulos">
-          <thead class="form-informe__table-head">
+      <h3 class="form-informe__subtitle h5 text-center mb-3">Asistencia de Discípulos</h3>
+      <div class="form-informe__table-container table-responsive mb-4">
+        <table class="table table-striped table-bordered" id="tablaDiscipulos">
+          <thead class="form-informe__table-head table-light">
             <tr>
               <th>Nombre</th>
               <th>Doulos</th>
@@ -72,77 +86,109 @@
           </thead>
           <tbody class="form-informe__table-body"></tbody>
         </table>
-        <p class="discipulos__loader"></p>
+        <p class="discipulos__loader text-muted"></p>
       </div>
+
       <!-- Asistencia a redes -->
-      <div class="form-informe__section">
-        <div class="form-informe__group form-informe__group--redes">
-          <h3 class="form-informe__subtitle">Asistencia a Redes</h3>
-          <label class="form-informe__label"> Discípulos: </label>
-          <input class="form-informe__input" id="redDiscipulos" min="0" required="" type="number" />
-          <label class="form-informe__label"> Nuevos: </label>
-          <input class="form-informe__input" id="redNuevos" min="0" required="" type="number" />
-          <label class="form-informe__label">
-            Ofrenda:
-            <input class="form-informe__input" id="redOfrenda" min="0" placeholder="0.00" required="" step="0.01"
-              type="number" />
-          </label>
+      <div class="form-informe__section d-flex flex-column g-3 mb-4">
+        <h3 class="form-informe__subtitle h5">Asistencia a Redes</h3>
+
+        <div class="d-flex flex-row gap-3 flex-wrap">
+          <div class="form-floating mb-3">
+            <input type="number" class="form-control" id="redDiscipulos" placeholder="#" required min="0" />
+            <label for="redDiscipulos">Discípulos</label>
+          </div>
+
+          <div class="form-floating mb-3">
+            <input type="number" class="form-control" id="redNuevos" placeholder="#" required min="0" />
+            <label for="redNuevos">Invitados</label>
+          </div>
+          <div class="form-floating mb-3">
+            <input type="number" class="form-control" id="redOfrenda" placeholder="#" required min="0" />
+            <label for="redOfrenda">Ofrenda</label>
+          </div>
         </div>
-        <div>
-          <h3 class="form-informe__subtitle">
-            Asistencias Totales
-            <span id="form-informe__subtitle--disabled">(invitados y Discípulos)</span>
+
+        <div class="d-flex flex-column gap-3 flex-wrap">
+          <h3 class="form-informe__subtitle h5">
+            Asistencias Totales <span id="form-informe__subtitle--disabled" class="text-muted small">(invitados y
+              Discípulos)</span>
           </h3>
-          <label for="asistenciaTotalMiercoles">Miercoles</label>
-          <input class="form-informe__input" id="asistenciaTotalMiercoles" min="0" required="" type="number" />
-          <label for="asistenciaTotalViernes">Viernes</label>
-          <input class="form-informe__input" id="asistenciaTotalViernes" min="0" required="" type="number" />
-          <label for="asistenciaTotalSabado">Sabado</label>
-          <input class="form-informe__input" id="asistenciaTotalSabado" min="0" required="" type="number" />
-          <label for="asistenciaTotalDomingo">Domingo</label>
-          <input class="form-informe__input" id="asistenciaTotalDomingo" min="0" required="" type="number" />
+          <div class="d-flex flex-row gap-3 flex-wrap">
+            <div class="form-floating mb-3">
+              <input type="number" class="form-informe__input form-control" id="asistenciaTotalMiercoles"
+                placeholder="Miércoles" min="0" required />
+              <label for="asistenciaTotalMiercoles">Miércoles</label>
+            </div>
+
+            <div class="form-floating mb-3">
+              <input type="number" class="form-informe__input form-control" id="asistenciaTotalViernes"
+                placeholder="Viernes" min="0" required />
+              <label for="asistenciaTotalViernes">Viernes</label>
+            </div>
+
+            <div class="form-floating mb-3">
+              <input type="number" class="form-informe__input form-control" id="asistenciaTotalSabado"
+                placeholder="Sábado" min="0" required />
+              <label for="asistenciaTotalSabado">Sábado</label>
+            </div>
+
+            <div class="form-floating mb-3">
+              <input type="number" class="form-informe__input form-control" id="asistenciaTotalDomingo"
+                placeholder="Domingo" min="0" required />
+              <label for="asistenciaTotalDomingo">Domingo</label>
+            </div>
+
+          </div>
+
+
         </div>
       </div>
-      <!-- Asistencias Totales, nuevos y discípulos -->
+
       <!-- Nuevos discípulos -->
-      <div class="form-informe__group">
-        <h3 class="form-informe__subtitle">Nuevos Discípulos</h3>
-        <textarea class="form-informe__textarea" id="nuevosDiscipulos"
-          placeholder="Ingrese nombres separados por coma"></textarea>
+
+      <div class="form-informe__group mb-4">
+        <h3 class="form-informe__subtitle h5">Nuevos Discípulos</h3>
+        <div class="form-floating">
+          <textarea class="form-control" placeholder="Leave a comment here" id="nuevosDiscipulos"></textarea>
+          <label for="nuevosDiscipulos">Escribe los nombre separado por comas</label>
+        </div>
       </div>
-      <!-- Botón de guardar -->
-      <button class="btn btn-primary form-informe__submit" id="guardarInforme" type="submit">
+
+      <button class="btn btn-primary form-informe__submit" id="guardarInforme" type="button">
         <i class="fas fa-save"></i> Guardar Informe
       </button>
     </form>
-    <section class="reports-view is-hidden" id="seccionVer">
-      <h2 class="reports-view__title">
-        <i aria-hidden="true" class="fas fa-list-alt reports-view__icon"></i>
-        Ver Informes
+
+    <!-- Vista de informes -->
+    <section class="reports-view is-hidden mt-5" id="seccionVer">
+      <h2 class="reports-view__title h4">
+        <i class="fas fa-list-alt reports-view__icon me-2" aria-hidden="true"></i> Ver Informes
       </h2>
-      <div class="reports-view__filters">
-        <label class="reports-view__label" for="filtroCoordinacion">Filtrar por Coordinación:</label>
-        <select class="reports-view__select" id="filtroCoordinacion">
+      <div class="reports-view__filters mb-3">
+        <label class="reports-view__label form-label" for="filtroCoordinacion">Filtrar por Coordinación:</label>
+        <select class="reports-view__select form-select" id="filtroCoordinacion">
           <option value="todas">Todas</option>
           <option value="sin_informe">Quién no llenó su informe</option>
         </select>
       </div>
       <div class="reports-view__totals" id="contenedorTotales"></div>
       <div class="reports-view__list" id="contenedorInformes"></div>
-      <div class="actions">
-        <button class="btn btn--success actions__button" id="btnExportExcel">
-          <i aria-hidden="true" class="fas fa-file-excel actions__icon"></i>
-          Exportar a Excel
+      <div class="actions d-flex gap-2 mt-3">
+        <button class="btn btn--success actions__button btn btn-outline-success" id="btnExportExcel">
+          <i class="fas fa-file-excel actions__icon me-1" aria-hidden="true"></i> Exportar a Excel
         </button>
-        <button class="btn btn--danger actions__button" id="btnBorrarInformes">
-          <i aria-hidden="true" class="fas fa-trash-alt actions__icon"></i>
-          Borrar Todos
+        <button class="btn btn--danger actions__button btn btn-outline-danger" id="btnBorrarInformes">
+          <i class="fas fa-trash-alt actions__icon me-1" aria-hidden="true"></i> Borrar Todos
         </button>
       </div>
     </section>
   </div>
+
   <script src="app.js"></script>
   <script src="https://unpkg.com/@lottiefiles/dotlottie-wc@0.6.2/dist/dotlottie-wc.js" type="module"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+    crossorigin="anonymous"></script>
 </body>
 
 </html>
