@@ -25,6 +25,7 @@
       total_viernes: document.getElementById("asistenciaTotalViernes"),
       total_sabado: document.getElementById("asistenciaTotalSabado"),
       total_domingo: document.getElementById("asistenciaTotalDomingo"),
+      grafficoTotales: document.getElementById("graficoAsistencias"),
       loader: document.querySelector(".lider__loader"),
       diaconoCoordinadorLoader: document.querySelector(
         ".diaconocordinador__loader"
@@ -345,9 +346,9 @@
     renderTotales(totales) {
       App.html.datosInforme.style.display = "none";
       App.html.seccionVer.style.display = "block";
+      document.getElementById("contenedorTotales").innerHTML = "";
 
-      const contenedorTotales = document.getElementById("contenedorTotales");
-      contenedorTotales.innerHTML = ""; // Limpiar el contenedor antes de agregar nuevos
+      const contenedorTotales = document.getElementById("contenedorTotales"); // Limpiar el contenedor antes de agregar nuevos
       totales.forEach((total) => {
         const fecha = new Date(total.fecha);
         total.fecha = fecha.toLocaleDateString("es-ES", {
@@ -358,55 +359,114 @@
         const totalDiv = document.createElement("table");
         totalDiv.classList.add("total");
         totalDiv.innerHTML = `
-          <h2>Total de Informes</h2>
+    
+          <h2 class="mb-4">Informe Conglomerado</h2>
 
-     <tr>
-      <th>Asistencia Miercoles</th>
-      <td>${total.total_miercoles}</td>
-    </tr>
+<div class="row row-cols-1 row-cols-md-3 g-4">
+  <div class="col w-auto">
+    <div class="form-floating">
+      <input type="text" class="form-control" id="totalViernes" placeholder="Viernes" value="${total.total_viernes}" disabled>
+      <label for="totalViernes">Viernes</label>
+    </div>
+  </div>
 
-     <tr>
-      <th>Asistencia Viernes</th>
-      <td>${total.total_viernes}</td>
-     </tr>
+  <div class="col w-auto">
+    <div class="form-floating">
+      <input type="text" class="form-control" id="totalSabado" placeholder="Sábado" value="${total.total_sabado}" disabled>
+      <label for="totalSabado">Sábado</label>
+    </div>
+  </div>
 
-     <tr>
-      <th>Asistencia Sabado</th>
-      <td>${total.total_sabado}</td>
-     </tr>
+  <div class="col w-auto">
+    <div class="form-floating">
+      <input type="text" class="form-control" id="totalDomingo" placeholder="Domingo" value="${total.total_domingo}" disabled>
+      <label for="totalDomingo">Domingo</label>
+    </div>
+  </div>
 
-     <tr>
-      <th>Asistencia Domingo</th>
-      <td>${total.total_domingo}</td>
-     </tr>
+  <div class="col w-auto">
+    <div class="form-floating">
+      <input type="text" class="form-control" id="totalSantaCena" placeholder="Santa Cena" value="${total.total_santa_cena}" disabled>
+      <label for="totalSantaCena">Santa Cena</label>
+    </div>
+  </div>
 
-     <tr>
-      <th>Asistencia Santa Cena</th>
-      <td>${total.total_santa_cena}</td>
-     </tr>
+  <div class="col w-auto">
+    <div class="form-floating">
+      <input type="text" class="form-control" id="totalDoulos" placeholder="Doulos" value="${total.total_doulos}" disabled>
+      <label for="totalDoulos">Doulos</label>
+    </div>
+  </div>
 
-     <tr>
-      <th>Asistencia Doulos</th>
-      <td>${total.total_doulos}</td>
-     </tr>
+  <div class="col w-auto">
+    <div class="form-floating">
+      <input type="text" class="form-control" id="totalRedDiscipulos" placeholder="Redes (Discípulos)" value="${total.total_red_discipulos}" disabled>
+      <label for="totalRedDiscipulos">Redes (Discípulos)</label>
+    </div>
+  </div>
 
-     <tr>
-      <th>Asistencia a redes (Discipulos)</th>
-      <td>${total.total_red_discipulos}</td>
-     </tr>
+  <div class="col w-auto">
+    <div class="form-floating">
+      <input type="text" class="form-control" id="totalNuevosDiscipulos" placeholder="Nuevos Discípulos" value="${total.total_nuevos_discipulos}" disabled>
+      <label for="totalNuevosDiscipulos">Nuevos Discípulos</label>
+    </div>
+  </div>
 
-     <tr>
-      <th>Total Nuevos Discipulos</th>
-      <td>${total.total_nuevos_discipulos}</td>
-     </tr>
+  <div class="col w-auto">
+    <div class="form-floating">
+      <input type="text" class="form-control" id="totalOfrenda" placeholder="Ofrenda" value="${total.total_ofrenda}" disabled>
+      <label for="totalOfrenda">Ofrenda</label>
+    </div>
+  </div>
+</div>
 
-     <tr>
-      <th>Total Ofrenda</th>
-      <td>${total.total_ofrenda}</td>
-     </tr>
+
+     
         `;
         contenedorTotales.appendChild(totalDiv);
       });
+
+      // // Renderizar gráfico de barras con Chart.js
+      // const ctx = App.html.grafficoTotales.getContext("2d");
+      // new Chart(ctx, {
+      //   type: "bar",
+      //   data: {
+      //     labels: [
+      //       "Miércoles",
+      //       "Viernes",
+      //       "Sábado",
+      //       "Domingo",
+      //       "Santa Cena",
+      //       "Doulos",
+      //       "Redes (Discípulos)",
+      //     ],
+      //     datasets: [
+      //       {
+      //         label: "Totales",
+      //         data: [
+      //           totales[0].total_miercoles,
+      //           totales[0].total_viernes,
+      //           totales[0].total_sabado,
+      //           totales[0].total_domingo,
+      //           totales[0].total_santa_cena,
+      //           totales[0].total_doulos,
+      //           totales[0].total_red_discipulos,
+      //           totales[0].total_nuevos_discipulos,
+      //         ],
+      //         backgroundColor: "rgba(54, 162, 235, 0.6)",
+      //         borderColor: "rgba(54, 162, 235, 1)",
+      //         borderWidth: 1,
+      //       },
+      //     ],
+      //   },
+      //   options: {
+      //     scales: {
+      //       y: {
+      //         beginAtZero: true,
+      //       },
+      //     },
+      //   },
+      // });
     },
     renderInformes(informes) {
       App.html.datosInforme.style.display = "none";
@@ -426,88 +486,100 @@
         informeDiv.classList.add("informe");
         informeDiv.innerHTML = `
         
-        <div id="contenedorInformes__header">
-          <div>
-            <h2>${informe.nombre_lider}</h2>
-            <h4>${informe.diacono_coordinador}</h4>
-          </div>
-          <p id="header__fecha">Publicado: ${informe.fecha}</p>
-        </div>
+        <div class="d-flex flex-wrap align-items-end justify-content-between gap-3 mb-4 bg-secondary px-3 text-light rounded" id="contenedorInformes__header">
+  <div>
+    <label class="form-label fw-semibold mt-1">Líder</label>
+    <p class="fs-5">${informe.nombre_lider}</p>
+  </div>
+  <div>
+    <label class="form-label fw-semibold mb-1">Coordinador</label>
+    <p class="fs-5">${informe.diacono_coordinador}</p>
+  </div>
+  <div>
+    <label class="form-label fw-semibold mb-1">Fecha de publicación</label>
+    <p class="fs-5">${informe.fecha}</p>
+  </div>
+</div>
 
-        <table id="tablaAsistenciaInforme">
-          <h3>Seguimiento Semanal</h3>
-          <tr>
-            <th>Miercoles</th>
-            <th>Viernes</th>
-            <th>Sabado</th>
-            <th>Doulos</th>
-            <th>Domingo</th>
-            <th>Santa Cena</th>
-            <th>Contactado</th>
-          </tr>
-          <tr>
-            <td>${informe.asistencia_miercoles}</td>
-            <td>${informe.asistencia_viernes}</td>
-            <td>${informe.asistencia_sabado}</td>
-            <td>${informe.asistencia_domingo}</td>
-            <td>${informe.asistencia_santa_cena}</td>
-            <td>${informe.asistencia_doulos}</td>
-            <td>${informe.contactado}</td>
-          </tr>
-        </table>
 
-        <div id="contenedorTablasInforme">
-          <table id="tablaRedInforme">
-            <tr>
-              <th colspan="2">
-                <h3 class="form-informe__subtitle">Asistencia a Redes</h3>
-              </th>
-            </tr>
-            <tr>
-              <th>Discipulos</th>
-              <td>${informe.red_discipulos}</td>
-            </tr>
+        <p class="mb-4">Seguimiento Semanal</p>
 
-            <tr>
-              <th>Nuevos</th>
-              <td>${informe.nuevos_discipulos}</td>
-            </tr>
-            <tr>
-              <th>Ofrenda</th>
-              <td>${informe.ofrenda}</td>
-            </tr>
-          </table>
+<div class="d-flex flex-wrap gap-2 rounded mb-4">
+  <div class="form-floating" style="width: 110px;">
+    <input type="text" class="form-control form-control-sm" id="asistenciaMiercoles" placeholder="Miércoles" value="${informe.asistencia_miercoles}" disabled>
+    <label for="asistenciaMiercoles">Miércoles</label>
+  </div>
 
-          <table id="tablaAsistenciasTotalesInforme">
-            <tr>
-              <th colspan="2"><h3 class="form-informe__subtitle">Asistencias Totales <span
-                id="form-informe__subtitle--disabled">(invitados y Discípulos)</span></h3></th>
-            </tr>
-            
-            <tr>
-              <th>Miercoles</th>
-              <td>${informe.total_miercoles}</td>
-            </tr>
+  <div class="form-floating" style="width: 110px;">
+    <input type="text" class="form-control form-control-sm" id="asistenciaViernes" placeholder="Viernes" value="${informe.asistencia_viernes}" disabled>
+    <label for="asistenciaViernes">Viernes</label>
+  </div>
 
-            <tr>
-              <th>Viernes</th>
-              <td>${informe.total_viernes}</td>
-            </tr>
-            <tr>
-              <th>Sabado</th>
-              <td>${informe.total_sabado}</td>
-            </tr>
-            <tr>
-              <th>Domingo</th>
-              <td>${informe.total_domingo}</td>
-            </tr>
-          </table>
-        </div>
+  <div class="form-floating" style="width: 110px;">
+    <input type="text" class="form-control form-control-sm" id="asistenciaSabado" placeholder="Sábado" value="${informe.asistencia_sabado}" disabled>
+    <label for="asistenciaSabado">Sábado</label>
+  </div>
 
-        <div>
-          <h3>Nombres Nuevos Discipulos</h3>
-          <p> ${informe.nombre_nuevos_discipulos.join(", ")}</p>
-        </div>
+  <div class="form-floating" style="width: 110px;">
+    <input type="text" class="form-control form-control-sm" id="asistenciaDomingo" placeholder="Domingo" value="${informe.asistencia_domingo}" disabled>
+    <label for="asistenciaDomingo">Domingo</label>
+  </div>
+
+  <div class="form-floating" style="width: 110px;">
+    <input type="text" class="form-control form-control-sm" id="asistenciaSantaCena" placeholder="Santa Cena" value="${informe.asistencia_santa_cena}" disabled>
+    <label for="asistenciaSantaCena">Santa Cena</label>
+  </div>
+
+  <div class="form-floating" style="width: 110px;">
+    <input type="text" class="form-control form-control-sm" id="asistenciaDoulos" placeholder="Doulos" value="${informe.asistencia_doulos}" disabled>
+    <label for="asistenciaDoulos">Doulos</label>
+  </div>
+
+  <div class="form-floating" style="width: 110px;">
+    <input type="text" class="form-control form-control-sm" id="asistenciaContactado" placeholder="Contactado" value="${informe.contactado}" disabled>
+    <label for="asistenciaContactado">Contactado</label>
+  </div>
+</div>
+
+
+        <!-- Asistencia a Redes -->
+<p class="mb-3">Asistencia a Redes</p>
+<div class="d-flex flex-wrap gap-2 mb-4">
+  <div class="form-floating" style="width: 160px;">
+    <input type="text" class="form-control form-control-sm" id="redDiscipulos" placeholder="Discípulos" value="${informe.red_discipulos}" disabled>
+    <label for="redDiscipulos">Discípulos</label>
+  </div>
+  <div class="form-floating" style="width: 160px;">
+    <input type="text" class="form-control form-control-sm" id="nuevosDiscipulos" placeholder="Nuevos" value="${informe.nuevos_discipulos}" disabled>
+    <label for="nuevosDiscipulos">Nuevos</label>
+  </div>
+  <div class="form-floating" style="width: 160px;">
+    <input type="text" class="form-control form-control-sm" id="ofrenda" placeholder="Ofrenda" value="${informe.ofrenda}" disabled>
+    <label for="ofrenda">Ofrenda</label>
+  </div>
+</div>
+
+<!-- Asistencias Totales -->
+<p class="mb-3">Asistencias Totales <span class="text-muted small">(invitados y Discípulos)</span></p>
+<div class="d-flex flex-wrap gap-2 mb-4">
+  <div class="form-floating" style="width: 160px;">
+    <input type="text" class="form-control form-control-sm" id="totalMiercoles" placeholder="Miércoles" value="${informe.total_miercoles}" disabled>
+    <label for="totalMiercoles">Miércoles</label>
+  </div>
+  <div class="form-floating" style="width: 160px;">
+    <input type="text" class="form-control form-control-sm" id="totalViernes" placeholder="Viernes" value="${informe.total_viernes}" disabled>
+    <label for="totalViernes">Viernes</label>
+  </div>
+  <div class="form-floating" style="width: 160px;">
+    <input type="text" class="form-control form-control-sm" id="totalSabado" placeholder="Sábado" value="${informe.total_sabado}" disabled>
+    <label for="totalSabado">Sábado</label>
+  </div>
+  <div class="form-floating" style="width: 160px;">
+    <input type="text" class="form-control form-control-sm" id="totalDomingo" placeholder="Domingo" value="${informe.total_domingo}" disabled>
+    <label for="totalDomingo">Domingo</label>
+  </div>
+</div>
+
         `;
         contenedorInformes.appendChild(informeDiv);
       });
