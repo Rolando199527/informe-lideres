@@ -250,7 +250,10 @@
         console.log("Líder seleccionado:", liderSelected);
         try {
           // const res = await fetch("https://informe-lideres-backend.onrender.com/api/obtenerInformePorlider?id=" + liderSelected);
-          const res = await fetch("http://localhost:6543/api/obtenerInformePorlider?id=" + liderSelected);
+          const res = await fetch(
+            "http://localhost:6543/api/obtenerInformePorlider?id=" +
+              liderSelected
+          );
 
           const informe = await res.json();
           informeData = informe.result;
@@ -426,46 +429,46 @@
       });
 
       // // Renderizar gráfico de barras con Chart.js
-      // const ctx = App.html.grafficoTotales.getContext("2d");
-      // new Chart(ctx, {
-      //   type: "bar",
-      //   data: {
-      //     labels: [
-      //       "Miércoles",
-      //       "Viernes",
-      //       "Sábado",
-      //       "Domingo",
-      //       "Santa Cena",
-      //       "Doulos",
-      //       "Redes (Discípulos)",
-      //     ],
-      //     datasets: [
-      //       {
-      //         label: "Totales",
-      //         data: [
-      //           totales[0].total_miercoles,
-      //           totales[0].total_viernes,
-      //           totales[0].total_sabado,
-      //           totales[0].total_domingo,
-      //           totales[0].total_santa_cena,
-      //           totales[0].total_doulos,
-      //           totales[0].total_red_discipulos,
-      //           totales[0].total_nuevos_discipulos,
-      //         ],
-      //         backgroundColor: "rgba(54, 162, 235, 0.6)",
-      //         borderColor: "rgba(54, 162, 235, 1)",
-      //         borderWidth: 1,
-      //       },
-      //     ],
-      //   },
-      //   options: {
-      //     scales: {
-      //       y: {
-      //         beginAtZero: true,
-      //       },
-      //     },
-      //   },
-      // });
+      const ctx = App.html.grafficoTotales.getContext("2d");
+      new Chart(ctx, {
+        type: "bar",
+        data: {
+          labels: [
+            "Miércoles",
+            "Viernes",
+            "Sábado",
+            "Domingo",
+            "Santa Cena",
+            "Doulos",
+            "Redes (Discípulos)",
+          ],
+          datasets: [
+            {
+              label: "Totales",
+              data: [
+                totales[0].total_miercoles,
+                totales[0].total_viernes,
+                totales[0].total_sabado,
+                totales[0].total_domingo,
+                totales[0].total_santa_cena,
+                totales[0].total_doulos,
+                totales[0].total_red_discipulos,
+                totales[0].total_nuevos_discipulos,
+              ],
+              backgroundColor: "rgba(54, 162, 235, 0.6)",
+              borderColor: "rgba(54, 162, 235, 1)",
+              borderWidth: 1,
+            },
+          ],
+        },
+        options: {
+          scales: {
+            y: {
+              beginAtZero: true,
+            },
+          },
+        },
+      });
     },
     renderInformes(informes) {
       App.html.datosInforme.style.display = "none";
