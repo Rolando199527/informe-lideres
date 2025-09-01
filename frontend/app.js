@@ -55,10 +55,16 @@
           // Aquí puedes agregar la lógica para guardar el informe
           App.methods.capturarDatosInforme();
         });
+      
         App.html.verInformes.addEventListener("click", () => {
-          App.methods.cargarInformes();
-          App.methods.obtenerTotales();
-          App.methods.formatearFecha();
+          display = window.getComputedStyle(App.html.seccionVer).display
+          console.log(display)
+          if(display == "none"){
+            App.methods.cargarInformes();
+            App.methods.obtenerTotales();
+            App.methods.formatearFecha();
+          }
+          
         });
         App.html.llenarInforme.addEventListener("click", () => {
           App.html.datosInforme.style.display = "block";
@@ -471,6 +477,7 @@
       });
     },
     renderInformes(informes) {
+      
       App.html.datosInforme.style.display = "none";
       App.html.seccionVer.style.display = "block";
 
