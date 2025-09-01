@@ -14,7 +14,6 @@
       verInformes: document.getElementById("verInformes"),
       llenarInforme: document.getElementById("llenarInforme"),
       seccionVer: document.getElementById("seccionVer"),
-      llenarInforme: document.getElementById("llenarInforme"),
       contenedorInformes: document.getElementById("contenedorInformes"),
       inputsForm: document.querySelectorAll("input"),
       selectForm: document.querySelectorAll("select"),
@@ -67,6 +66,7 @@
           
         });
         App.html.llenarInforme.addEventListener("click", () => {
+          location.reload(true);
           App.html.datosInforme.style.display = "block";
           App.html.seccionVer.style.display = "none";
           App.html.contenedorInformes.innerHTML = ""; // Limpiar informes previos
@@ -594,6 +594,7 @@
       });
     },
     renderFiltroCoordinacion(informe) {
+
       informe.forEach((datos_informe) => {
         const option = document.createElement("option");
         option.value = datos_informe.lider_id;
