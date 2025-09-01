@@ -14,7 +14,6 @@
       verInformes: document.getElementById("verInformes"),
       llenarInforme: document.getElementById("llenarInforme"),
       seccionVer: document.getElementById("seccionVer"),
-      llenarInforme: document.getElementById("llenarInforme"),
       contenedorInformes: document.getElementById("contenedorInformes"),
       inputsForm: document.querySelectorAll("input"),
       selectForm: document.querySelectorAll("select"),
@@ -55,12 +54,19 @@
           // Aquí puedes agregar la lógica para guardar el informe
           App.methods.capturarDatosInforme();
         });
+      
         App.html.verInformes.addEventListener("click", () => {
-          App.methods.cargarInformes();
-          App.methods.obtenerTotales();
-          App.methods.formatearFecha();
+          display = window.getComputedStyle(App.html.seccionVer).display
+          console.log(display)
+          if(display == "none"){
+            App.methods.cargarInformes();
+            App.methods.obtenerTotales();
+            App.methods.formatearFecha();
+          }
+          
         });
         App.html.llenarInforme.addEventListener("click", () => {
+          location.reload(true);
           App.html.datosInforme.style.display = "block";
           App.html.seccionVer.style.display = "none";
           App.html.contenedorInformes.innerHTML = ""; // Limpiar informes previos
@@ -471,6 +477,7 @@
       });
     },
     renderInformes(informes) {
+      
       App.html.datosInforme.style.display = "none";
       App.html.seccionVer.style.display = "block";
 
@@ -587,6 +594,7 @@
       });
     },
     renderFiltroCoordinacion(informe) {
+
       informe.forEach((datos_informe) => {
         const option = document.createElement("option");
         option.value = datos_informe.lider_id;
