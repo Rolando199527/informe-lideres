@@ -608,7 +608,7 @@
         <!-- informe de lideres de la coodrinacion -->
         <div class="mb-4">
           <p class="d-inline-flex gap-1">
-            <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample"
+            <button class="btn btn-primary" type="button p-2" data-bs-toggle="collapse" data-bs-target="#collapseExample"
               aria-expanded="false" aria-controls="collapseExample">
               <i class="fas fa-list actions__icon"></i> Informe de lideres
             </button>
