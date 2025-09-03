@@ -57,7 +57,6 @@
       
         App.html.verInformes.addEventListener("click", () => {
           display = window.getComputedStyle(App.html.seccionVer).display
-          console.log(display)
           if(display == "none"){
             App.methods.cargarInformes();
             App.methods.obtenerTotales();
@@ -273,7 +272,7 @@
       async obtenerTotales() {
         try {
           const res = await fetch(
-            "https://informe-lideres-backend.onrender.com/api/obtenerTotales"
+            "http://localhost:6543/api/obtenerTotales"
           );
           const totales = await res.json();
           if (res.ok) {
