@@ -4,7 +4,7 @@ const db = require('../../db/connection');
 
 router.get("/obtenerInforme", async (req, res) => {
     try{
-        const result = await db.query("SELECT * FROM obtener_informes_ultima_fecha(NULL, NULL, NULL)");
+        const result = await db.query("SELECT * FROM obtener_informes_todos(NULL, NULL, NULL)");
         if (result.rows.length === 0) {
             return res.status(404).json({ message: "No se encontraron informes" });
         }
@@ -23,7 +23,7 @@ router.get("/obtenerInformePorlider", async (req, res) => {
     console.log("ID Líder recibido en el backend:", idLiderSelected);
     if (idLiderSelected == 0){
         try{
-        const result = await db.query("SELECT * FROM obtener_informes_ultima_fecha(NULL, NULL, NULL)");
+        const result = await db.query("SELECT * FROM obtener_informes_todos(NULL, NULL, NULL)");
         if (result.rows.length === 0) {
             return res.status(404).json({ message: "No se encontraron informes" });
         }
@@ -37,7 +37,7 @@ router.get("/obtenerInformePorlider", async (req, res) => {
     }
     }
     try{
-        const result = await db.query("SELECT * FROM obtener_informes_ultima_fecha(NULL, NULL, $1)",
+        const result = await db.query("SELECT * FROM obtener_informes_todos(NULL, NULL, $1)",
             [idLiderSelected]
             
         );
