@@ -495,99 +495,238 @@
         informeDiv.classList.add("informe");
         informeDiv.innerHTML = `
         
-        <div class="d-flex flex-wrap align-items-end justify-content-between gap-3 mb-4 bg-secondary px-3 text-light rounded" id="contenedorInformes__header">
-  <div>
-    <label class="form-label fw-semibold mt-1">Líder</label>
-    <p class="fs-5">${informe.nombre_lider}</p>
-  </div>
-  <div>
-    <label class="form-label fw-semibold mb-1">Coordinador</label>
-    <p class="fs-5">${informe.diacono_coordinador}</p>
-  </div>
-  <div>
-    <label class="form-label fw-semibold mb-1">Fecha de publicación</label>
-    <p class="fs-5">${informe.fecha}</p>
-  </div>
-</div>
+        <div
+          class="d-flex flex-wrap align-items-end justify-content-between gap-3 mb-4 bg-secondary px-3 text-light rounded"
+          id="contenedorInformes__header">
+          <div>
+            <label class="form-label fw-semibold mt-1">Líder</label>
+            <p class="fs-5">${informe.nombre_lider}</p>
+          </div>
+          <div>
+            <label class="form-label fw-semibold mb-1">Coordinador</label>
+            <p class="fs-5">${informe.diacono_coordinador}</p>
+          </div>
+          <div>
+            <label class="form-label fw-semibold mb-1">Fecha de publicación</label>
+            <p class="fs-5">${informe.fecha}</p>
+          </div>
+        </div>
 
 
         <p class="mb-4">Seguimiento Semanal</p>
 
-<div class="d-flex flex-wrap gap-2 rounded mb-4">
-  <div class="form-floating" style="width: 110px;">
-    <input type="text" class="form-control form-control-sm" id="asistenciaMiercoles" placeholder="Miércoles" value="${informe.asistencia_miercoles}" disabled>
-    <label for="asistenciaMiercoles">Miércoles</label>
-  </div>
+        <div class="d-flex flex-wrap gap-2 rounded mb-4">
+          <div class="form-floating" style="width: 110px;">
+            <input type="text" class="form-control form-control-sm" id="asistenciaMiercoles" placeholder="Miércoles"
+              value="${informe.asistencia_miercoles}" disabled>
+            <label for="asistenciaMiercoles">Miércoles</label>
+          </div>
 
-  <div class="form-floating" style="width: 110px;">
-    <input type="text" class="form-control form-control-sm" id="asistenciaViernes" placeholder="Viernes" value="${informe.asistencia_viernes}" disabled>
-    <label for="asistenciaViernes">Viernes</label>
-  </div>
+          <div class="form-floating" style="width: 110px;">
+            <input type="text" class="form-control form-control-sm" id="asistenciaViernes" placeholder="Viernes"
+              value="${informe.asistencia_viernes}" disabled>
+            <label for="asistenciaViernes">Viernes</label>
+          </div>
 
-  <div class="form-floating" style="width: 110px;">
-    <input type="text" class="form-control form-control-sm" id="asistenciaSabado" placeholder="Sábado" value="${informe.asistencia_sabado}" disabled>
-    <label for="asistenciaSabado">Sábado</label>
-  </div>
+          <div class="form-floating" style="width: 110px;">
+            <input type="text" class="form-control form-control-sm" id="asistenciaSabado" placeholder="Sábado"
+              value="${informe.asistencia_sabado}" disabled>
+            <label for="asistenciaSabado">Sábado</label>
+          </div>
 
-  <div class="form-floating" style="width: 110px;">
-    <input type="text" class="form-control form-control-sm" id="asistenciaDomingo" placeholder="Domingo" value="${informe.asistencia_domingo}" disabled>
-    <label for="asistenciaDomingo">Domingo</label>
-  </div>
+          <div class="form-floating" style="width: 110px;">
+            <input type="text" class="form-control form-control-sm" id="asistenciaDomingo" placeholder="Domingo"
+              value="${informe.asistencia_domingo}" disabled>
+            <label for="asistenciaDomingo">Domingo</label>
+          </div>
 
-  <div class="form-floating" style="width: 110px;">
-    <input type="text" class="form-control form-control-sm" id="asistenciaSantaCena" placeholder="Santa Cena" value="${informe.asistencia_santa_cena}" disabled>
-    <label for="asistenciaSantaCena">Santa Cena</label>
-  </div>
+          <div class="form-floating" style="width: 110px;">
+            <input type="text" class="form-control form-control-sm" id="asistenciaSantaCena" placeholder="Santa Cena"
+              value="${informe.asistencia_santa_cena}" disabled>
+            <label for="asistenciaSantaCena">Santa Cena</label>
+          </div>
 
-  <div class="form-floating" style="width: 110px;">
-    <input type="text" class="form-control form-control-sm" id="asistenciaDoulos" placeholder="Doulos" value="${informe.asistencia_doulos}" disabled>
-    <label for="asistenciaDoulos">Doulos</label>
-  </div>
+          <div class="form-floating" style="width: 110px;">
+            <input type="text" class="form-control form-control-sm" id="asistenciaDoulos" placeholder="Doulos"
+              value="${informe.asistencia_doulos}" disabled>
+            <label for="asistenciaDoulos">Doulos</label>
+          </div>
 
-  <div class="form-floating" style="width: 110px;">
-    <input type="text" class="form-control form-control-sm" id="asistenciaContactado" placeholder="Contactado" value="${informe.contactado}" disabled>
-    <label for="asistenciaContactado">Contactado</label>
-  </div>
-</div>
+          <div class="form-floating" style="width: 110px;">
+            <input type="text" class="form-control form-control-sm" id="asistenciaContactado" placeholder="Contactado"
+              value="${informe.contactado}" disabled>
+            <label for="asistenciaContactado">Contactado</label>
+          </div>
+        </div>
 
 
         <!-- Asistencia a Redes -->
-<p class="mb-3">Asistencia a Redes</p>
-<div class="d-flex flex-wrap gap-2 mb-4">
-  <div class="form-floating" style="width: 160px;">
-    <input type="text" class="form-control form-control-sm" id="redDiscipulos" placeholder="Discípulos" value="${informe.red_discipulos}" disabled>
-    <label for="redDiscipulos">Discípulos</label>
-  </div>
-  <div class="form-floating" style="width: 160px;">
-    <input type="text" class="form-control form-control-sm" id="nuevosDiscipulos" placeholder="Nuevos" value="${informe.nuevos_discipulos}" disabled>
-    <label for="nuevosDiscipulos">Nuevos</label>
-  </div>
-  <div class="form-floating" style="width: 160px;">
-    <input type="text" class="form-control form-control-sm" id="ofrenda" placeholder="Ofrenda" value="${informe.ofrenda}" disabled>
-    <label for="ofrenda">Ofrenda</label>
-  </div>
-</div>
+        <p class="mb-3">Asistencia a Redes</p>
+        <div class="d-flex flex-wrap gap-2 mb-4">
+          <div class="form-floating" style="width: 160px;">
+            <input type="text" class="form-control form-control-sm" id="redDiscipulos" placeholder="Discípulos"
+              value="${informe.red_discipulos}" disabled>
+            <label for="redDiscipulos">Discípulos</label>
+          </div>
+          <div class="form-floating" style="width: 160px;">
+            <input type="text" class="form-control form-control-sm" id="nuevosDiscipulos" placeholder="Nuevos"
+              value="${informe.nuevos_discipulos}" disabled>
+            <label for="nuevosDiscipulos">Nuevos</label>
+          </div>
+          <div class="form-floating" style="width: 160px;">
+            <input type="text" class="form-control form-control-sm" id="ofrenda" placeholder="Ofrenda"
+              value="${informe.ofrenda}" disabled>
+            <label for="ofrenda">Ofrenda</label>
+          </div>
+        </div>
 
-<!-- Asistencias Totales -->
-<p class="mb-3">Asistencias Totales <span class="text-muted small">(invitados y Discípulos)</span></p>
-<div class="d-flex flex-wrap gap-2 mb-4">
-  <div class="form-floating" style="width: 160px;">
-    <input type="text" class="form-control form-control-sm" id="totalMiercoles" placeholder="Miércoles" value="${informe.total_miercoles}" disabled>
-    <label for="totalMiercoles">Miércoles</label>
-  </div>
-  <div class="form-floating" style="width: 160px;">
-    <input type="text" class="form-control form-control-sm" id="totalViernes" placeholder="Viernes" value="${informe.total_viernes}" disabled>
-    <label for="totalViernes">Viernes</label>
-  </div>
-  <div class="form-floating" style="width: 160px;">
-    <input type="text" class="form-control form-control-sm" id="totalSabado" placeholder="Sábado" value="${informe.total_sabado}" disabled>
-    <label for="totalSabado">Sábado</label>
-  </div>
-  <div class="form-floating" style="width: 160px;">
-    <input type="text" class="form-control form-control-sm" id="totalDomingo" placeholder="Domingo" value="${informe.total_domingo}" disabled>
-    <label for="totalDomingo">Domingo</label>
-  </div>
-</div>
+        <!-- Asistencias Totales -->
+        <p class="mb-3">Asistencias Totales <span class="text-muted small">(invitados y Discípulos)</span></p>
+        <div class="d-flex flex-wrap gap-2 mb-4">
+          <div class="form-floating" style="width: 160px;">
+            <input type="text" class="form-control form-control-sm" id="totalMiercoles" placeholder="Miércoles"
+              value="${informe.total_miercoles}" disabled>
+            <label for="totalMiercoles">Miércoles</label>
+          </div>
+          <div class="form-floating" style="width: 160px;">
+            <input type="text" class="form-control form-control-sm" id="totalViernes" placeholder="Viernes"
+              value="${informe.total_viernes}" disabled>
+            <label for="totalViernes">Viernes</label>
+          </div>
+          <div class="form-floating" style="width: 160px;">
+            <input type="text" class="form-control form-control-sm" id="totalSabado" placeholder="Sábado"
+              value="${informe.total_sabado}" disabled>
+            <label for="totalSabado">Sábado</label>
+          </div>
+          <div class="form-floating" style="width: 160px;">
+            <input type="text" class="form-control form-control-sm" id="totalDomingo" placeholder="Domingo"
+              value="${informe.total_domingo}" disabled>
+            <label for="totalDomingo">Domingo</label>
+          </div>
+        </div>
+
+        <!-- informe de lideres de la coodrinacion -->
+        <div class="mb-4">
+          <p class="d-inline-flex gap-1">
+            <button class="btn btn-primary" type="button p-2" data-bs-toggle="collapse" data-bs-target="#collapseExample"
+              aria-expanded="false" aria-controls="collapseExample">
+              <i class="fas fa-list actions__icon"></i> Informe de lideres
+            </button>
+          </p>
+          <div class="collapse" id="collapseExample">
+            <div class="card card-body">
+              <div
+          class="d-flex flex-wrap align-items-end justify-content-between gap-3 mb-4 bg-secondary-subtle px-3 text-secondary rounded"
+          id="contenedorInformes__header">
+          <div>
+            <label class="form-label fw-semibold mt-1">Líder</label>
+            <p class="fs-5">${informe.nombre_lider}</p>
+          </div>
+          <div>
+            <label class="form-label fw-semibold mb-1">Coordinador</label>
+            <p class="fs-5">${informe.diacono_coordinador}</p>
+          </div>
+          <div>
+            <label class="form-label fw-semibold mb-1">Fecha de publicación</label>
+            <p class="fs-5">${informe.fecha}</p>
+          </div>
+        </div>
+        <p class="mb-4">Seguimiento Semanal</p>
+
+        <div class="d-flex flex-wrap gap-2 rounded mb-4 text-primary">
+          <div class="form-floating text-primary-emphasis" style="width: 110px;">
+            <input type="text" class="form-control form-control-sm bg-secondary-subtle" id="asistenciaMiercoles" placeholder="Miércoles"
+              value="${informe.asistencia_miercoles}" disabled>
+            <label for="asistenciaMiercoles">Miércoles</label>
+          </div>
+
+          <div class="form-floating" style="width: 110px;">
+            <input type="text" class="form-control form-control-sm bg-secondary-subtle" id="asistenciaViernes" placeholder="Viernes"
+              value="${informe.asistencia_viernes}" disabled>
+            <label for="asistenciaViernes">Viernes</label>
+          </div>
+
+          <div class="form-floating" style="width: 110px;">
+            <input type="text" class="form-control form-control-sm bg-secondary-subtle" id="asistenciaSabado" placeholder="Sábado"
+              value="${informe.asistencia_sabado}" disabled>
+            <label for="asistenciaSabado">Sábado</label>
+          </div>
+
+          <div class="form-floating" style="width: 110px;">
+            <input type="text" class="form-control form-control-sm bg-secondary-subtle" id="asistenciaDomingo" placeholder="Domingo"
+              value="${informe.asistencia_domingo}" disabled>
+            <label for="asistenciaDomingo">Domingo</label>
+          </div>
+
+          <div class="form-floating" style="width: 110px;">
+            <input type="text" class="form-control form-control-sm bg-secondary-subtle" id="asistenciaSantaCena" placeholder="Santa Cena"
+              value="${informe.asistencia_santa_cena}" disabled>
+            <label for="asistenciaSantaCena">Santa Cena</label>
+          </div>
+
+          <div class="form-floating" style="width: 110px;">
+            <input type="text" class="form-control form-control-sm bg-secondary-subtle" id="asistenciaDoulos" placeholder="Doulos"
+              value="${informe.asistencia_doulos}" disabled>
+            <label for="asistenciaDoulos">Doulos</label>
+          </div>
+
+          <div class="form-floating" style="width: 110px;">
+            <input type="text" class="form-control form-control-sm bg-secondary-subtle" id="asistenciaContactado" placeholder="Contactado"
+              value="${informe.contactado}" disabled>
+            <label for="asistenciaContactado">Contactado</label>
+          </div>
+        </div>
+
+
+        <!-- Asistencia a Redes -->
+        <p class="mb-3">Asistencia a Redes</p>
+        <div class="d-flex flex-wrap gap-2 mb-4">
+          <div class="form-floating" style="width: 160px;">
+            <input type="text" class="form-control form-control-sm bg-secondary-subtle" id="redDiscipulos" placeholder="Discípulos"
+              value="${informe.red_discipulos}" disabled>
+            <label for="redDiscipulos">Discípulos</label>
+          </div>
+          <div class="form-floating" style="width: 160px;">
+            <input type="text" class="form-control form-control-sm bg-secondary-subtle" id="nuevosDiscipulos" placeholder="Nuevos"
+              value="${informe.nuevos_discipulos}" disabled>
+            <label for="nuevosDiscipulos">Nuevos</label>
+          </div>
+          <div class="form-floating" style="width: 160px;">
+            <input type="text" class="form-control form-control-sm bg-secondary-subtle" id="ofrenda" placeholder="Ofrenda"
+              value="${informe.ofrenda}" disabled>
+            <label for="ofrenda">Ofrenda</label>
+          </div>
+        </div>
+
+        <!-- Asistencias Totales -->
+        <p class="mb-3">Asistencias Totales <span class="text-muted small">(invitados y Discípulos)</span></p>
+        <div class="d-flex flex-wrap gap-2 mb-4">
+          <div class="form-floating" style="width: 160px;">
+            <input type="text" class="form-control form-control-sm bg-secondary-subtle" id="totalMiercoles" placeholder="Miércoles"
+              value="${informe.total_miercoles}" disabled>
+            <label for="totalMiercoles">Miércoles</label>
+          </div>
+          <div class="form-floating" style="width: 160px;">
+            <input type="text" class="form-control form-control-sm bg-secondary-subtle" id="totalViernes" placeholder="Viernes"
+              value="${informe.total_viernes}" disabled>
+            <label for="totalViernes">Viernes</label>
+          </div>
+          <div class="form-floating" style="width: 160px;">
+            <input type="text" class="form-control form-control-sm bg-secondary-subtle" id="totalSabado" placeholder="Sábado"
+              value="${informe.total_sabado}" disabled>
+            <label for="totalSabado">Sábado</label>
+          </div>
+          <div class="form-floating" style="width: 160px;">
+            <input type="text" class="form-control form-control-sm bg-secondary-subtle" id="totalDomingo" placeholder="Domingo"
+              value="${informe.total_domingo}" disabled>
+            <label for="totalDomingo">Domingo</label>
+          </div>
+        </div>
+            </div>
+            
+          </div>
+          
+        </div>
 
         `;
         contenedorInformes.appendChild(informeDiv);
