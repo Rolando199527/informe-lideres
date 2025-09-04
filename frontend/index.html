@@ -15,17 +15,17 @@
 
     <!-- Botones superiores -->
     <div class="actions d-flex justify-content-center gap-2 mb-4">
-      <button class="actions__button btn btn-outline-primary" id="llenarInforme">
+      <button class="actions__button btn btn-outline-primary" id="btn-fill-report">
         <i class="fas fa-edit actions__icon"></i> Llenar Informe
       </button>
-      <button class="actions__button actions__button--primary btn btn-primary" id="verInformes">
+      <button class="actions__button actions__button--primary btn btn-primary" id="btn-see-reports">
         <i class="fas fa-list actions__icon"></i> Ver Informes
       </button>
     </div>
 
     <!-- Mensaje de éxito -->
     <div class="alert alert--success alert-success d-none align-items-center" id="success-container" role="status">
-      <span class="alert__message me-3" id="mensajeExito">
+      <span class="alert__message me-3" id="msg-success">
         Informe enviado correctamente. Gracias por su diligencia.
       </span>
       <dotlottie-wc autoplay class="alert__anim" id="animacionExito" loop speed="1"
@@ -35,7 +35,7 @@
     <h1 class="form-informe__title h3 mb-4 text-center">Informe Semanal de Líderes</h1>
 
     <!-- Formulario -->
-    <form class="form-informe" id="datosInforme">
+    <form class="form-informe" id="form-report">
       <!-- Sección 1 -->
       <div class="container-sm d-flex flex-column g-3 mb-4">
         <div class="row w-100 g-3">
@@ -46,23 +46,23 @@
               <option disabled selected>Seleccione un Líder</option>
             </select> -->
             <div class="form-floating">
-              <select class="form-select" id="lider" aria-label="Floating label select example">
+              <select class="form-select" id="selector-leader" aria-label="Floating label select example">
                 <option selected disabled>--Seleciona un lider--</option>
               </select>
-              <label for="lider">seleciona el nombre del lider</label>
+              <label for="selector-leader"">seleciona el nombre del lider</label>
             </div>
           </div>
 
           <div class="form-informe__group col">
-            <label class="form-informe__label form-label fw-bold" for="diaconoCoordinador">Diácono /
+            <label class="form-informe__label form-label fw-bold" for="coordinating-deacon">Diácono /
               Coordinador:</label>
             <p class="diaconocordinador__loader text-muted small"></p>
-            <p class="form-informe__text form-control-plaintext p-3" id="diaconoCoordinador"></p>
+            <p class="form-informe__text form-control-plaintext p-3" id="coordinating-deacon"></p>
           </div>
 
           <div class="form-informe__group col">
-            <label class="form-informe__label form-label fw-bold" for="fecha">Fecha de Registro:</label>
-            <input class="form-informe__input form-control p-3" id="fecha" required type="date" />
+            <label class="form-informe__label form-label fw-bold" for="report-date">Fecha de Registro:</label>
+            <input class="form-informe__input form-control p-3" id="report-date" required type="date" />
           </div>
         </div>
 
@@ -71,7 +71,7 @@
       <!-- Tabla de asistencia -->
       <h5 class="form-informe__subtitle mb-3 text-secondary">Asistencia de Discípulos</h5>
       <div class="form-informe__table-container table-responsive mb-4">
-        <table class="table table-striped table-bordered" id="tablaDiscipulos">
+        <table class="table table-striped table-bordered" id="disciples-table">
           <thead class="form-informe__table-head table-light">
             <tr>
               <th>Nombre</th>
