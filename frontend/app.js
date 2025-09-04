@@ -367,40 +367,41 @@
         totalDiv.classList.add("total");
         totalDiv.innerHTML = `
     
-          <h2 class="mb-4">Informe Conglomerado</h2>
+          <h5 class="mb-4 mt-4">Resumen Informes <span class="text-muted small">(Redes)</span></h5>
+
 
 <div class="row row-cols-1 row-cols-md-3 g-4">
   <div class="col w-auto">
     <div class="form-floating">
-      <input type="text" class="form-control" id="totalViernes" placeholder="Viernes" value="${total.total_viernes}" disabled>
+      <input type="text" class="form-control" id="totalViernes" placeholder="Viernes" value="${total.total_asistencia_viernes}" disabled>
       <label for="totalViernes">Viernes</label>
     </div>
   </div>
 
   <div class="col w-auto">
     <div class="form-floating">
-      <input type="text" class="form-control" id="totalSabado" placeholder="Sábado" value="${total.total_sabado}" disabled>
+      <input type="text" class="form-control" id="totalSabado" placeholder="Sábado" value="${total.total_asistencia_sabado}" disabled>
       <label for="totalSabado">Sábado</label>
     </div>
   </div>
 
   <div class="col w-auto">
     <div class="form-floating">
-      <input type="text" class="form-control" id="totalDomingo" placeholder="Domingo" value="${total.total_domingo}" disabled>
+      <input type="text" class="form-control" id="totalDomingo" placeholder="Domingo" value="${total.total_asistencia_domingo}" disabled>
       <label for="totalDomingo">Domingo</label>
     </div>
   </div>
 
   <div class="col w-auto">
     <div class="form-floating">
-      <input type="text" class="form-control" id="totalSantaCena" placeholder="Santa Cena" value="${total.total_santa_cena}" disabled>
+      <input type="text" class="form-control" id="totalSantaCena" placeholder="Santa Cena" value="${total.total_asistencia_santa_cena}" disabled>
       <label for="totalSantaCena">Santa Cena</label>
     </div>
   </div>
 
   <div class="col w-auto">
     <div class="form-floating">
-      <input type="text" class="form-control" id="totalDoulos" placeholder="Doulos" value="${total.total_doulos}" disabled>
+      <input type="text" class="form-control" id="totalDoulos" placeholder="Doulos" value="${total.total_asistencia_doulos}" disabled>
       <label for="totalDoulos">Doulos</label>
     </div>
   </div>
@@ -418,6 +419,7 @@
       <label for="totalNuevosDiscipulos">Nuevos Discípulos</label>
     </div>
   </div>
+   
 
   <div class="col w-auto">
     <div class="form-floating">
@@ -426,9 +428,36 @@
     </div>
   </div>
 </div>
+<h5 class="mb-4 mt-4">Asistencias Totales <span class="text-muted small">(invitados y Discípulos)</span></h5>
+<div class="row row-cols-1 row-cols-md-3 g-4">
 
+<div class="col w-auto">
+    <div class="form-floating">
+      <input type="text" class="form-control" id="totalViernes" placeholder="Miercoles" value="${total.total_miercoles}" disabled>
+      <label for="totalViernes">Total Miercoles</label>
+    </div>
+  </div>
+  <div class="col w-auto">
+    <div class="form-floating">
+      <input type="text" class="form-control" id="totalViernes" placeholder="Viernes" value="${total.total_viernes}" disabled>
+      <label for="totalViernes">Total Viernes</label>
+    </div>
+  </div>
 
-     
+  <div class="col w-auto">
+    <div class="form-floating">
+      <input type="text" class="form-control" id="totalSabado" placeholder="Sábado" value="${total.total_sabado}" disabled>
+      <label for="totalSabado">Total Sábado</label>
+    </div>
+  </div>
+
+  <div class="col w-auto">
+    <div class="form-floating">
+      <input type="text" class="form-control" id="totalDomingo" placeholder="Domingo" value="${total.total_domingo}" disabled>
+      <label for="totalDomingo">Total Domingo</label>
+    </div>
+  </div>
+</div>
         `;
         contenedorTotales.appendChild(totalDiv);
       });
