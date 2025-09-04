@@ -1,24 +1,26 @@
 (() => {
   const App = {
     html: {
-      datosInforme: document.getElementById("datosInforme"),
-      lideres: document.getElementById("lider"),
-      diaconoCoordinador: document.getElementById("diaconoCoordinador"),
-      tablaDisciupulos: document.getElementById("tablaDiscipulos"),
+      buttonSeeReport: document.getElementById("btn-see-reports"),
+      buttonFillReport: document.getElementById("btn-fill-report"),
+      successContainer: document.getElementById("success-container"),
+      formReport: document.getElementById("form-report"),
+      leaderSelector: document.getElementById("selector-leader"),
+      coordinatingDeacon: document.getElementById("coordinating-deacon"),
+      disciplesTable: document.getElementById("disciples-table"),
       // Datos del informe
-      fecha: document.getElementById("fecha"),
+      reportDate: document.getElementById("report-date"),
       redDiscipulos: document.getElementById("redDiscipulos"),
       nuevosDiscipulos: document.getElementById("redNuevos"),
       ofrenda: document.getElementById("redOfrenda"),
       nuevosDiscipulosNombre: document.getElementById("nuevosDiscipulos"),
-      verInformes: document.getElementById("verInformes"),
-      llenarInforme: document.getElementById("llenarInforme"),
+
       seccionVer: document.getElementById("seccionVer"),
       contenedorInformes: document.getElementById("contenedorInformes"),
       inputsForm: document.querySelectorAll("input"),
       selectForm: document.querySelectorAll("select"),
       buttonGuardar: document.getElementById("guardarInforme"),
-      successContainer: document.getElementById("success-container"),
+      
       isHidden: document.getElementById("isHidden"),
       total_miercoles: document.getElementById("asistenciaTotalMiercoles"),
       total_viernes: document.getElementById("asistenciaTotalViernes"),
@@ -46,7 +48,7 @@
     handlers: {
       // Aquí puedes agregar más manejadores de eventos si es necesario
       cargarCoordinadoresDiaconoDiscipulos() {
-        App.html.lideres.addEventListener("change", () => {
+        App.html.leaderSelector.addEventListener("change", () => {
           App.methods.cargarSuperior();
           App.methods.cargarSubordinados();
         });
@@ -54,17 +56,16 @@
           // Aquí puedes agregar la lógica para guardar el informe
           App.methods.capturarDatosInforme();
         });
-      
-        App.html.verInformes.addEventListener("click", () => {
-          display = window.getComputedStyle(App.html.seccionVer).display
-          if(display == "none"){
+
+        App.html.buttonSeeReport.addEventListener("click", () => {
+          display = window.getComputedStyle(App.html.seccionVer).display;
+          if (display == "none") {
             App.methods.cargarInformes();
             App.methods.obtenerTotales();
             App.methods.formatearFecha();
           }
-          
         });
-        App.html.llenarInforme.addEventListener("click", () => {
+        App.html.buttonFillReport.addEventListener("click", () => {
           location.reload(true);
           App.html.datosInforme.style.display = "block";
           App.html.seccionVer.style.display = "none";
@@ -101,7 +102,7 @@
       },
 
       async cargarSuperior() {
-        let liderSelected = App.html.lideres.value;
+        let liderSelected = App.html.leaderSelector.value;
         try {
           const res = await fetch(
             "https://informe-lideres-backend.onrender.com/api/superior?id=" +
@@ -114,7 +115,7 @@
         }
       },
       async cargarSubordinados() {
-        let liderSelected = App.html.lideres.value;
+        let liderSelected = App.html.leaderSelector.value;
         try {
           const res = await fetch(
             "https://informe-lideres-backend.onrender.com/api/subordinados/" +
@@ -128,10 +129,10 @@
         }
       },
       capturarDatosInforme() {
-        lideres = App.html.lideres.value;
-        diaconoCoordinador = App.html.diaconoCoordinador.textContent;
-        fecha = App.html.fecha.value;
-        const checkboxes = App.html.tablaDisciupulos.querySelectorAll(
+        lideres = App.html.leaderSelector.value;
+        diaconoCoordinador = App.html.coordinatingDeacon.textContent;
+        fecha = App.html.reportDate.value;
+        const checkboxes = App.html.disciplesTable.querySelectorAll(
           "input[name='asistencia']:checked"
         );
         const asistencia = Array.from(checkboxes).map(
@@ -169,7 +170,7 @@
       },
 
       sumarAsistencia(asistenciaArray) {
-        const asistenciaCount = {
+        let asistenciaCount = {
           miercoles: 0,
           viernes: 0,
           sabado: 0,
@@ -180,8 +181,9 @@
         };
 
         asistenciaArray.forEach((asistencia) => {
-          if (asistenciaCount.hasOwnProperty(asistencia)) {
-            asistenciaCount[asistencia]++;
+          let key = asistencia.toLowerCase().replace(/\s+/g, "_");
+          if (asistenciaCount.hasOwnProperty(key)) {
+            asistenciaCount[key]++;
           }
         });
 
@@ -271,9 +273,7 @@
 
       async obtenerTotales() {
         try {
-          const res = await fetch(
-            "http://localhost:6543/api/obtenerTotales"
-          );
+          const res = await fetch("http://localhost:6543/api/obtenerTotales");
           const totales = await res.json();
           if (res.ok) {
             console.log("Totales obtenidos exitosamente:", totales);
@@ -293,7 +293,7 @@
         const inputs = App.html.inputsForm;
         inputs.forEach((input) => (input.value = ""));
 
-        const checkboxes = App.html.tablaDisciupulos.querySelectorAll(
+        const checkboxes = App.html.disciplesTable.querySelectorAll(
           "input[name='asistencia']"
         );
         checkboxes.forEach((checkbox) => (checkbox.checked = false));
@@ -315,23 +315,23 @@
         const option = document.createElement("option");
         option.value = lider.id;
         option.textContent = lider.nombre;
-        App.html.lideres.appendChild(option);
+        App.html.leaderSelector.appendChild(option);
       });
 
-      App.html.lideres.style.display = "block";
+      App.html.leaderSelector.style.display = "block";
       App.html.loader.style.display = "none"; // Ocultar el loader una vez que se cargan los líderes
     },
     renderSuperior(superiorNombre) {
       // TODO: agregar un loader para el diacono coordinador
-      App.html.diaconoCoordinadorLoader.style.display = "block"; // Ocultar el loader una vez que se carga el diacono coordinador
-      App.html.diaconoCoordinador.textContent =
+      App.html.coordinatingDeacon.style.display = "block"; // Ocultar el loader una vez que se carga el diacono coordinador
+      App.html.coordinatingDeacon.textContent =
         superiorNombre.result.nombre_superior;
-      App.html.diaconoCoordinador.style.display = "block";
+      App.html.coordinatingDeacon.style.display = "block";
       App.html.diaconoCoordinadorLoader.style.display = "none"; // Ocultar el loader una vez que se carga el diacono coordinador
     },
     renderTablaSubordinados(subordinados) {
       App.html.discipulosLoader.style.display = "block"; // Mostrar el loader mientras se cargan los subordinados
-      tablaSubordinadosRow = App.html.tablaDisciupulos;
+      tablaSubordinadosRow = App.html.disciplesTable;
       tablaSubordinadosRow = tablaSubordinadosRow.querySelector("tbody");
       tablaSubordinadosRow.innerHTML = ""; // Limpiar la tabla antes de agregar nuevos datos
       subordinados.forEach((datosSubordinados) => {
@@ -351,7 +351,7 @@
       });
     },
     renderTotales(totales) {
-      App.html.datosInforme.style.display = "none";
+      App.html.formReport.style.display = "none";
       App.html.seccionVer.style.display = "block";
       document.getElementById("contenedorTotales").innerHTML = "";
 
@@ -505,8 +505,7 @@
       });
     },
     renderInformes(informes) {
-      
-      App.html.datosInforme.style.display = "none";
+      App.html.formReport.style.display = "none";
       App.html.seccionVer.style.display = "block";
 
       contenedorInformes = App.html.contenedorInformes;
@@ -761,7 +760,6 @@
       });
     },
     renderFiltroCoordinacion(informe) {
-
       informe.forEach((datos_informe) => {
         const option = document.createElement("option");
         option.value = datos_informe.lider_id;
