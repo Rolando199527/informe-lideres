@@ -170,7 +170,7 @@
       },
 
       sumarAsistencia(asistenciaArray) {
-        const asistenciaCount = {
+        let asistenciaCount = {
           miercoles: 0,
           viernes: 0,
           sabado: 0,
@@ -181,8 +181,9 @@
         };
 
         asistenciaArray.forEach((asistencia) => {
-          if (asistenciaCount.hasOwnProperty(asistencia)) {
-            asistenciaCount[asistencia]++;
+          let key = asistencia.toLowerCase().replace(/\s+/g, "_");
+          if (asistenciaCount.hasOwnProperty(key)) {
+            asistenciaCount[key]++;
           }
         });
 
@@ -350,7 +351,7 @@
       });
     },
     renderTotales(totales) {
-      App.html.datosInforme.style.display = "none";
+      App.html.formReport.style.display = "none";
       App.html.seccionVer.style.display = "block";
       document.getElementById("contenedorTotales").innerHTML = "";
 
@@ -504,7 +505,7 @@
       });
     },
     renderInformes(informes) {
-      App.html.datosInforme.style.display = "none";
+      App.html.formReport.style.display = "none";
       App.html.seccionVer.style.display = "block";
 
       contenedorInformes = App.html.contenedorInformes;
