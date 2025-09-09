@@ -270,7 +270,18 @@
           console.log("Error al cargar informes por líder:", e);
         }
       },
-
+      async cargarInformePorCoordinacion(liderSelected) {
+        console.log("Cargando informes por coordinación...");
+        console.log("Líder seleccionado:", liderSelected);
+        try{
+          const res = await fetch("http://localhost:6543/api/obtenerInformePorCoordinacion?idLider=" + liderSelected);
+          const informe = await res.json();
+          informeData = informe.result;
+          console.log("Respuesta del servidor:", informeData);
+        } catch (e) {
+          console.log("Error al cargar informes por coordinación:", e);
+        }
+      },
       async obtenerTotales() {
         try {
           const res = await fetch("http://localhost:6543/api/obtenerTotales");
