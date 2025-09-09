@@ -266,6 +266,7 @@
           informeData = informe.result;
           console.log("Respuesta del servidor:", informeData);
           App.renderInformes(informeData);
+          App.methods.cargarInformePorCoordinacion(liderSelected);
         } catch (e) {
           console.log("Error al cargar informes por líder:", e);
         }
