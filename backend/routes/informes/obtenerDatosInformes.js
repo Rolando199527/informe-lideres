@@ -54,6 +54,26 @@ router.get("/obtenerInformePorlider", async (req, res) => {
     }
 })
 
+router.get("/obtenerInformePorCoordinacion", async (req, res) => {
+    const idLiderSelected = req.query.idLider;
+    console.log("ID Líder recibido en el backend:", idLiderSelected);
+    try{
+        const result = await db.query("SELECT * FROM obtener_informes_lideres_de_coordinador(3, NULL, NULL)",
+            [idLiderSelected]
+        );
+        if (result.rows.length === 0) {
+            return res.status(404).json({ message: "No se encontraron informes" });
+        }
+        return res.json({
+            message: "Informes obtenidos exitosamente",
+            result: result.rows
+        });
+    }catch (error) {
+        console.error("Error al obtener datos de informes:", error);
+        res.status(500).json({ error: "Error al obtener datos de informes" });
+    }
+})
+
 router
 
 module.exports = router;
