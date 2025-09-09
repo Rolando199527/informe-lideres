@@ -523,7 +523,7 @@
         informeDiv.innerHTML = `
         
         <div
-          class="d-flex flex-wrap align-items-end justify-content-between gap-3 mb-4 bg-secondary px-3 text-light rounded"
+          class="d-flex flex-wrap align-items-end justify-content-between gap-3 mb-4 bg-secondary px-3 text-light rounded shadow-sm"
           id="contenedorInformes__header">
           <div>
             <label class="form-label fw-semibold mt-1">Líder</label>
