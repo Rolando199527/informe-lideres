@@ -35,6 +35,9 @@ app.use("/api", guardarInformesRoutes);
 const obtenerDatosInformesRoutes = require("./routes/informes/obtenerDatosInformes");
 app.use("/api", obtenerDatosInformesRoutes);
 
+const obtenerLideresPorCoordinacionRoutes = require("./routes/informes/obtenerDatosInformes");
+app.use("/api", obtenerLideresPorCoordinacionRoutes);
+
 const obtenerTotalesRoutes = require("./routes/informes/obtenerTotales");
 app.use("/api", obtenerTotalesRoutes);
 
