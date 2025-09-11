@@ -74,8 +74,10 @@
 
         App.html.filtroCoordinacion.addEventListener("change", () => {
           const liderSelected = App.html.filtroCoordinacion.value;
+          console.log("Líder seleccionado para filtro:", liderSelected);
           if (liderSelected) {
             App.methods.cargarInformePorLider(liderSelected);
+            App.methods.obtenerTotales(liderSelected);
           } else {
             App.html.contenedorInformes.innerHTML = ""; // Limpiar informes previos si no hay selección
           }
@@ -270,9 +272,10 @@
           console.log("Error al cargar informes por líder:", e);
         }
       },
-      async obtenerTotales() {
+      async obtenerTotales(liderSelected = 0) {
         try {
-          const res = await fetch("http://localhost:6543/api/obtenerTotales");
+   
+          const res = await fetch("http://localhost:6543/api/obtenerTotales?id=" + liderSelected);
           const totales = await res.json();
           if (res.ok) {
             console.log("Totales obtenidos exitosamente:", totales);
