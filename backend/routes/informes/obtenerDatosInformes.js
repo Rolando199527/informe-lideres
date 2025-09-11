@@ -21,6 +21,7 @@ router.get("/obtenerInforme", async (req, res) => {
 router.get("/obtenerInformePorlider", async (req, res) => {
     const idLiderSelected = req.query.id;
     console.log("ID Líder recibido en el backend:", idLiderSelected);
+    
     if (idLiderSelected == 0){
         try{
         const result = await db.query("SELECT * FROM obtener_informes_todos(NULL, NULL, NULL)");
@@ -37,7 +38,7 @@ router.get("/obtenerInformePorlider", async (req, res) => {
     }
     }
     try{
-        const result = await db.query("SELECT * FROM obtener_informes_todos(NULL, NULL, $1)",
+        const result = await db.query("SELECT * FROM obtener_informes_coordinador($1)",
             [idLiderSelected]
             
         );

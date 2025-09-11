@@ -266,21 +266,8 @@
           informeData = informe.result;
           console.log("Respuesta del servidor:", informeData);
           App.renderInformes(informeData);
-          App.methods.cargarInformePorCoordinacion(liderSelected);
         } catch (e) {
           console.log("Error al cargar informes por líder:", e);
-        }
-      },
-      async cargarInformePorCoordinacion(liderSelected) {
-        console.log("Cargando informes por coordinación...");
-        console.log("Líder seleccionado:", liderSelected);
-        try{
-          const res = await fetch("http://localhost:6543/api/obtenerInformePorCoordinacion?idLider=" + liderSelected);
-          const informe = await res.json();
-          informeData = informe.result;
-          console.log("Respuesta del servidor:", informeData);
-        } catch (e) {
-          console.log("Error al cargar informes por coordinación:", e);
         }
       },
       async obtenerTotales() {
@@ -646,12 +633,6 @@
 
         <!-- informe de lideres de la coodrinacion -->
         <div class="mb-4">
-          <p class="d-inline-flex gap-1">
-            <button class="btn btn-primary" type="button p-2" data-bs-toggle="collapse" data-bs-target="#collapseExample"
-              aria-expanded="false" aria-controls="collapseExample">
-              <i class="fas fa-list actions__icon"></i> Informe de lideres
-            </button>
-          </p>
           <div class="collapse" id="collapseExample">
             <div class="card card-body">
               <div
